@@ -105,3 +105,16 @@ struct Movie: Decodable, Identifiable {
 }
 
 
+extension Movie: Hashable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        if lhs.id == rhs.id {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

@@ -7,25 +7,27 @@
 //
 
 import SwiftUI
-
+//import struct Kingfisher.KFImage
 
 struct MovieDetailView: View {
     
-    let movieId: Int
-    @ObservedObject private var movieDetailState = MovieDetailViewModel()
+    //@ObservedObject var movieDetailViewModel: MovieDetailViewModel
+    var movieDetailViewModel: MovieDetailViewModelInput
     
     var body: some View {
         ZStack {
-            LoadingView(isLoading: self.movieDetailState.isLoading, error: self.movieDetailState.error) {
-                self.movieDetailState.loadMovie(id: self.movieId)
-            }
-            if movieDetailState.movie != nil {
-                MovieDetailViewList(movie: self.movieDetailState.movie!)
+            
+            if movieDetailViewModel.movie != nil {
+                MovieDetailViewList(movie: self.movieDetailViewModel.movie!)
+            } else {
+                LoadingView(isLoading: self.movieDetailViewModel.isLoading, error: self.movieDetailViewModel.error) {
+                    self.movieDetailViewModel.loadMovie()
+                }
             }
         }
-        .navigationBarTitle(movieDetailState.movie?.title ?? "")
+        .navigationBarTitle(movieDetailViewModel.movie?.title ?? "")
         .onAppear() {
-            self.movieDetailState.loadMovie(id: self.movieId)
+            self.movieDetailViewModel.loadMovie()
         }
     }
 }
@@ -40,7 +42,7 @@ struct MovieDetailViewList: View {
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             HStack {
                 Text(movie.genreText)
-                Text("★")
+                Text("-")
                 Text(movie.yearText)
                 Text(movie.durationText)
             }
@@ -148,7 +150,7 @@ struct MovieDetailImage: View {
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MovieDetailView(movieId: Movie.localMovie.id)
+            MovieDetailView(movieDetailViewModel: MovieDetailViewModelMock(movieId:Movie.localMovie.id))
         }
     }
 }

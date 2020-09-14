@@ -11,14 +11,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            MoviesListView()
+            MovieGrid()
                 .tabItem {
                     VStack {
                         Image(systemName: "tv")
-                        Text("Movies")
+                        Text("Now Playing")
                     }
             }
-        .tag(0)
+            .tag(0)
             
             MovieSearchView()
                 .tabItem {
@@ -27,8 +27,18 @@ struct ContentView: View {
                         Text("Search")
                     }
             }
-        .tag(1)
+            .tag(1)
+            
+            GridView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "tv")
+                        Text("More")
+                    }
+            }
+            .tag(2)
         }
+        
     }
 }
 

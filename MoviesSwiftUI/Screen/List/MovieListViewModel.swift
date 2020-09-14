@@ -17,7 +17,7 @@ protocol MovieListViewModelInput {
 
 class MovieListViewModel: ObservableObject {
     
-    @Published var movies: [Movie]?
+    @Published var model: [Movie]?
     @Published var isLoading = false
     @Published var error: NSError?
     
@@ -28,7 +28,7 @@ class MovieListViewModel: ObservableObject {
     }
     
     func loadMovies(with endpoint: MovieListEndpoint) {
-        self.movies = nil
+        self.model = nil
         self.isLoading = false
         self.movieRepository.fetchMovies(from: endpoint) { [weak self] (result) in
             guard let self = self else { return }
@@ -36,11 +36,17 @@ class MovieListViewModel: ObservableObject {
             
             switch result {
             case .success(let response):
-                self.movies = response.results
+                self.model = response.results
             case .failure(let error):
                 self.error = error as NSError
                 
             }
         }
+    }
+}
+
+struct MovieListViewModel_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

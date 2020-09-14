@@ -23,7 +23,7 @@ struct MoviePosterCarouselView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(self.movies) { movie in
-                        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                               MoviePosterCard(movie: movie)
                                .frame(width:204, height:306)
                             }.buttonStyle(PlainButtonStyle())

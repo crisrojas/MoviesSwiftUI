@@ -15,21 +15,21 @@ protocol MovieSearchViewInput {
 
 struct MovieSearchView: View {
     
-    @ObservedObject var movieSearchState = MovieSearchViewModel()
+    @ObservedObject var movieSearchViewModel = MovieSearchViewModel()
     
     var body: some View {
         NavigationView {
             List {
-                SearchBarView(placeholder: "Search movies", text: self.$movieSearchState.query)
+                SearchBarView(placeholder: "Search movies", text: self.$movieSearchViewModel.query)
                     .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                 
-                LoadingView(isLoading: self.movieSearchState.isLoading, error: self.movieSearchState.error) {
-                    self.movieSearchState.search(query: self.movieSearchState.query)
+                LoadingView(isLoading: self.movieSearchViewModel.isLoading, error: self.movieSearchViewModel.error) {
+                    self.movieSearchViewModel.search(query: self.movieSearchViewModel.query)
                 }
                 
-                if self.movieSearchState.movies != nil {
-                    ForEach(self.movieSearchState.movies!) { movie in
-                        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                if self.movieSearchViewModel.movies != nil {
+                    ForEach(self.movieSearchViewModel.movies!) { movie in
+                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                             VStack(alignment: .leading) {
                                 Text(movie.title)
                                 Text(movie.yearText)
@@ -40,7 +40,7 @@ struct MovieSearchView: View {
                 }
             }
             .onAppear {
-                self.movieSearchState.stateObserve()
+                self.movieSearchViewModel.stateObserve()
             }
             .navigationBarTitle("Search")
         }
