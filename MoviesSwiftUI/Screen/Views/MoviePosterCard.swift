@@ -19,7 +19,7 @@ struct MoviePosterCard: View {
                 Image(uiImage: self.imageLoader.image!)
                 .resizable()
                     .aspectRatio(contentMode: .fit)
-                .cornerRadius(0)
+                .cornerRadius(8)
                 .shadow(radius: 4)
             } else {
                 Rectangle()
@@ -40,6 +40,6 @@ struct MoviePosterCard: View {
 
 struct MoviePosterCard_Previews: PreviewProvider {
     static var previews: some View {
-        MoviePosterCard(movie: Movie.stubbedMovie)
+        MoviePosterCard(movie: Movie.localMovie)
     }
 }

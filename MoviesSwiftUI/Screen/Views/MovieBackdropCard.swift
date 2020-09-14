@@ -18,6 +18,7 @@ struct MovieBackdropCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             ZStack {
+                // We create a gray rectangle that will be shown if the image is nil
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
                 
@@ -40,6 +41,6 @@ struct MovieBackdropCard: View {
 
 struct MovieBackdropCard_Previews: PreviewProvider {
     static var previews: some View {
-        MovieBackdropCard(movie: Movie.stubbedMovie)
+        MovieBackdropCard(movie: Movie.localMovie)
     }
 }
