@@ -10,7 +10,6 @@ import SwiftUI
 
 struct MoviesListView: View {
     
-    @ObservedObject private var nowPlayingViewModel = MovieListViewModel()
     @ObservedObject private var upcomingViewModel = MovieListViewModel()
     @ObservedObject private var topRatedViewModel = MovieListViewModel()
     @ObservedObject private var popularViewModel = MovieListViewModel()
@@ -51,7 +50,6 @@ struct MoviesListView: View {
                 
             }.navigationBarTitle("The MovieDb")
         }.onAppear() {
-            self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
             self.upcomingViewModel.loadMovies(with: .upcoming)
             self.topRatedViewModel.loadMovies(with: .topRated)
             self.popularViewModel.loadMovies(with: .popular)

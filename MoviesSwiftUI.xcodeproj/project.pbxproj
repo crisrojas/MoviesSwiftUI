@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		403FC16A250F8BD900C1B464 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC169250F8BD900C1B464 /* Playground.swift */; };
 		403FC16D250F950300C1B464 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 403FC16C250F950300C1B464 /* QGrid */; };
-		403FC16F250F955300C1B464 /* Qgrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC16E250F955300C1B464 /* Qgrid.swift */; };
-		403FC171250F998500C1B464 /* people.json in Resources */ = {isa = PBXBuildFile; fileRef = 403FC170250F998500C1B464 /* people.json */; };
-		403FC173250F9BBD00C1B464 /* YetAntoherGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC172250F9BBD00C1B464 /* YetAntoherGrid.swift */; };
 		403FC175250FB19000C1B464 /* MovieDetailViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC174250FB19000C1B464 /* MovieDetailViewModelMock.swift */; };
+		403FC17A2510BF3B00C1B464 /* MovieCastCaroussel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC1792510BF3B00C1B464 /* MovieCastCaroussel.swift */; };
+		403FC17C2510C0E800C1B464 /* MovieActorPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC17B2510C0E800C1B464 /* MovieActorPicture.swift */; };
+		403FC17E2510CEA900C1B464 /* PlaceholderAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC17D2510CEA900C1B464 /* PlaceholderAvatar.swift */; };
 		405865CE250F703A0090BA77 /* UIGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405865CD250F703A0090BA77 /* UIGrid.swift */; };
 		405865D0250F713B0090BA77 /* MovieGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405865CF250F713B0090BA77 /* MovieGrid.swift */; };
 		40C3810E250B7C9300EC7471 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C3810D250B7C9300EC7471 /* MovieDetailView.swift */; };
@@ -57,10 +57,10 @@
 
 /* Begin PBXFileReference section */
 		403FC169250F8BD900C1B464 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
-		403FC16E250F955300C1B464 /* Qgrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qgrid.swift; sourceTree = "<group>"; };
-		403FC170250F998500C1B464 /* people.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = people.json; sourceTree = "<group>"; };
-		403FC172250F9BBD00C1B464 /* YetAntoherGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YetAntoherGrid.swift; sourceTree = "<group>"; };
 		403FC174250FB19000C1B464 /* MovieDetailViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModelMock.swift; sourceTree = "<group>"; };
+		403FC1792510BF3B00C1B464 /* MovieCastCaroussel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastCaroussel.swift; sourceTree = "<group>"; };
+		403FC17B2510C0E800C1B464 /* MovieActorPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActorPicture.swift; sourceTree = "<group>"; };
+		403FC17D2510CEA900C1B464 /* PlaceholderAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderAvatar.swift; sourceTree = "<group>"; };
 		405865CD250F703A0090BA77 /* UIGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGrid.swift; sourceTree = "<group>"; };
 		405865CF250F713B0090BA77 /* MovieGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGrid.swift; sourceTree = "<group>"; };
 		40C3810D250B7C9300EC7471 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
@@ -120,6 +120,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		403FC1782510BB1000C1B464 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				40EF5CD0250A4AA500837587 /* SceneDelegate.swift */,
+				40EF5CCE250A4AA500837587 /* AppDelegate.swift */,
+				40EF5CD4250A4AA600837587 /* Assets.xcassets */,
+				40EF5CD9250A4AA600837587 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		405865C5250F51E50090BA77 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,10 +175,7 @@
 				40EF5CE3250A4AEE00837587 /* Domain */,
 				40EF5CE4250A4AF400837587 /* Data */,
 				40EF5CE2250A4AE900837587 /* Screen */,
-				40EF5CD0250A4AA500837587 /* SceneDelegate.swift */,
-				40EF5CCE250A4AA500837587 /* AppDelegate.swift */,
-				40EF5CD4250A4AA600837587 /* Assets.xcassets */,
-				40EF5CD9250A4AA600837587 /* LaunchScreen.storyboard */,
+				403FC1782510BB1000C1B464 /* Resources */,
 				40EF5CDC250A4AA600837587 /* Info.plist */,
 				40EF5CD6250A4AA600837587 /* Preview Content */,
 			);
@@ -219,19 +227,19 @@
 			isa = PBXGroup;
 			children = (
 				40EF5CD2250A4AA500837587 /* ContentView.swift */,
+				403FC17B2510C0E800C1B464 /* MovieActorPicture.swift */,
 				40EF5CFE250A5C9C00837587 /* MovieBackdropCard.swift */,
 				40EF5D03250A648300837587 /* MovieBackdropCarouselView.swift */,
+				403FC1792510BF3B00C1B464 /* MovieCastCaroussel.swift */,
 				405865CF250F713B0090BA77 /* MovieGrid.swift */,
 				40EF5D13250B736800837587 /* MoviesListView.swift */,
 				40C3812B250BC68900EC7471 /* MovieListViewModel.swift */,
 				40EF5D06250A675000837587 /* MoviePosterCard.swift */,
 				40EF5D08250A691C00837587 /* MoviePosterCarouselView.swift */,
 				405865CD250F703A0090BA77 /* UIGrid.swift */,
-				403FC169250F8BD900C1B464 /* Playground.swift */,
-				403FC16E250F955300C1B464 /* Qgrid.swift */,
-				403FC170250F998500C1B464 /* people.json */,
-				403FC172250F9BBD00C1B464 /* YetAntoherGrid.swift */,
 				40C38111250BA3F200EC7471 /* SafariView.swift */,
+				403FC169250F8BD900C1B464 /* Playground.swift */,
+				403FC17D2510CEA900C1B464 /* PlaceholderAvatar.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -345,7 +353,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				40EF5CDB250A4AA600837587 /* LaunchScreen.storyboard in Resources */,
-				403FC171250F998500C1B464 /* people.json in Resources */,
 				40EF5CD8250A4AA600837587 /* Preview Assets.xcassets in Resources */,
 				40EF5CFA250A5A9D00837587 /* movie_list.json in Resources */,
 				40EF5CFB250A5A9D00837587 /* search_movie.json in Resources */,
@@ -390,6 +397,8 @@
 				40EF5D14250B736800837587 /* MoviesListView.swift in Sources */,
 				40EF5CCF250A4AA500837587 /* AppDelegate.swift in Sources */,
 				40C3812E250BC6A200EC7471 /* ImageLoader.swift in Sources */,
+				403FC17E2510CEA900C1B464 /* PlaceholderAvatar.swift in Sources */,
+				403FC17C2510C0E800C1B464 /* MovieActorPicture.swift in Sources */,
 				403FC16A250F8BD900C1B464 /* Playground.swift in Sources */,
 				40C38112250BA3F200EC7471 /* SafariView.swift in Sources */,
 				40EF5CF3250A51D300837587 /* Utils.swift in Sources */,
@@ -397,6 +406,7 @@
 				40EF5D09250A691D00837587 /* MoviePosterCarouselView.swift in Sources */,
 				40C38118250BB1CA00EC7471 /* SearchBar.swift in Sources */,
 				40C38132250BC76700EC7471 /* MovieErrors.swift in Sources */,
+				403FC17A2510BF3B00C1B464 /* MovieCastCaroussel.swift in Sources */,
 				40EF5D04250A648300837587 /* MovieBackdropCarouselView.swift in Sources */,
 				40EF5CEC250A4DEB00837587 /* Movie.swift in Sources */,
 				40EF5CD1250A4AA500837587 /* SceneDelegate.swift in Sources */,
@@ -407,10 +417,8 @@
 				40C38122250BC00F00EC7471 /* MovieCredits.swift in Sources */,
 				40C38130250BC74200EC7471 /* MovieEndpoint.swift in Sources */,
 				40C38120250BBFFB00EC7471 /* MovieGenre.swift in Sources */,
-				403FC16F250F955300C1B464 /* Qgrid.swift in Sources */,
 				40C38126250BC02F00EC7471 /* MovieCrew.swift in Sources */,
 				40C38116250BB15100EC7471 /* MovieSearchView.swift in Sources */,
-				403FC173250F9BBD00C1B464 /* YetAntoherGrid.swift in Sources */,
 				40C38128250BC06A00EC7471 /* MovieVideoResponse.swift in Sources */,
 				40EF5CF5250A5A2800837587 /* Movie+Local.swift in Sources */,
 				40C38124250BC02000EC7471 /* MovieCast.swift in Sources */,

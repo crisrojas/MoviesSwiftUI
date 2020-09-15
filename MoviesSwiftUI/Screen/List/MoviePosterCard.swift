@@ -7,34 +7,22 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct MoviePosterCard: View {
     
     let movie: Movie
-    @ObservedObject var imageLoader = ImageLoader()
     
     var body: some View {
         ZStack {
-            if self.imageLoader.image != nil {
-                Image(uiImage: self.imageLoader.image!)
+            //todo: add gray rectangle
+            KFImage(self.movie.posterURL)
                 .resizable()
-                    .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fit)
                 .cornerRadius(8)
                 .shadow(radius: 4)
-            } else {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .shadow(radius: 4)
-                    .cornerRadius(8)
-                
-                Text(movie.title)
-                    .multilineTextAlignment(.center)
-            }
         }
-        .frame(width: 204, height: 306)
-        .onAppear {
-            self.imageLoader.loadImage(with: self.movie.posterURL)
-        }
+        .aspectRatio(3/4, contentMode: .fit)
     }
 }
 

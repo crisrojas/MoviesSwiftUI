@@ -20,6 +20,15 @@ struct ContentView: View {
             }
             .tag(0)
             
+            MoviesListView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "ellipsis")
+                        Text("More")
+                    }
+            }
+            .tag(1)
+            
             MovieSearchView()
                 .tabItem {
                     VStack {
@@ -27,16 +36,8 @@ struct ContentView: View {
                         Text("Search")
                     }
             }
-            .tag(1)
-            
-            GridView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "tv")
-                        Text("More")
-                    }
-            }
             .tag(2)
+            
         }
         
     }

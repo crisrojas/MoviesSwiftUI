@@ -7,10 +7,10 @@
 //
 
 import SwiftUI
+import struct Kingfisher.KFImage
 
 struct MovieGrid: View {
     
-    let emojiList: [String] = Emoji.emoji
     let movies = Movie.localMovies
     @ObservedObject private var nowPlayingViewModel = MovieListViewModel()
     
@@ -22,7 +22,8 @@ struct MovieGrid: View {
                     UIGrid(columns: 2, list: nowPlayingViewModel.model!) { movie in
                         NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                              MoviePosterCard(movie: movie)
-                        }.buttonStyle(PlainButtonStyle())
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 

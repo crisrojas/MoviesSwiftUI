@@ -29,6 +29,4 @@ class MovieDetailViewModelMock: MovieDetailViewModelInput {
     func loadMovie() {
         self.movie = Movie.localMovie
     }
-    
-    
 }

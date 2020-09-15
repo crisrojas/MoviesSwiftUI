@@ -7,12 +7,12 @@
 //
 
 import SwiftUI
-//import struct Kingfisher.KFImage
+import struct Kingfisher.KFImage
 
 struct MovieDetailView: View {
     
-    //@ObservedObject var movieDetailViewModel: MovieDetailViewModel
-    var movieDetailViewModel: MovieDetailViewModelInput
+    @ObservedObject var movieDetailViewModel: MovieDetailViewModel
+    //var movieDetailViewModel: MovieDetailViewModelInput
     
     var body: some View {
         ZStack {
@@ -104,6 +104,11 @@ struct MovieDetailViewList: View {
             }
             Divider()
             
+            if movie.cast != nil && movie.cast!.count > 0 {
+                MovieCastCaroussel(movie: movie)
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            }
+            
             if movie.youtubeTrailers != nil && movie.youtubeTrailers!.count > 0 {
                 Text("Trailers").font(.headline)
                 ForEach(movie.youtubeTrailers!) { trailer in
@@ -132,25 +137,21 @@ struct MovieDetailImage: View {
     
     let imageURL: URL
     
+    //todo: imageURL should be optional?
+    
     var body: some View {
         ZStack {
             Rectangle().fill(Color.gray.opacity(0.3))
-            if self.imageLoader.image != nil {
-                Image(uiImage: self.imageLoader.image!)
-                    .resizable()
-            }
+            KFImage(self.imageURL)
         }
         .aspectRatio(16/9, contentMode: .fit)
-        .onAppear {
-            self.imageLoader.loadImage(with: self.imageURL)
-        }
     }
 }
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MovieDetailView(movieDetailViewModel: MovieDetailViewModelMock(movieId:Movie.localMovie.id))
+            MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId:Movie.localMovie.id))
         }
     }
 }

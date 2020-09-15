@@ -12,4 +12,10 @@ struct MovieCast: Decodable, Identifiable {
     let id: Int
     let character: String
     let name: String
+    let profilePath: String?
+    
+    var profileURL: String? {
+        guard let profilePath = profilePath else { return nil }
+        return "https://image.tmdb.org/t/p/w500\(profilePath)"
+    }
 }
