@@ -9,10 +9,8 @@
 import Foundation
 
 
-// We define the endpoints for each of the sections of the app
 enum MovieListEndpoint: String {
     
-    // Swift converts case to string if no value
     case nowPlaying = "now_playing"
     case upcoming
     case topRated = "top_rated"

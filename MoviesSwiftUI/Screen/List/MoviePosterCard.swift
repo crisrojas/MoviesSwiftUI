@@ -21,6 +21,7 @@ struct MoviePosterCard: View {
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(8)
                 .shadow(radius: 4)
+                .frame(height: 300)
         }
         .aspectRatio(3/4, contentMode: .fit)
     }

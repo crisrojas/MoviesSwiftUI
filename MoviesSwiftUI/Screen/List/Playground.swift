@@ -16,21 +16,13 @@ struct Playground: View {
     let screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
-        List {
-            if nowPlayingViewModel.model != nil {
-            ForEach(0..<model.count) {i in
-                HStack {
-                    MoviePosterCard(movie: self.nowPlayingViewModel.model![i])
-                    MoviePosterCard(movie: self.nowPlayingViewModel.model![i+1])
-                    
+   
+            
+                List(nowPlayingViewModel.model) { movie in
+                    Text("\(movie.title)")
                 }
-            }
-            } else {
-                LoadingView.init(isLoading: nowPlayingViewModel.isLoading, error: nowPlayingViewModel.error) {
-                    self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
-                }
-            }
-        }.onAppear() {
+            
+        .onAppear() {
             self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
         }
     }

@@ -137,7 +137,6 @@ struct MovieDetailImage: View {
     
     let imageURL: URL
     
-    //todo: imageURL should be optional?
     
     var body: some View {
         ZStack {

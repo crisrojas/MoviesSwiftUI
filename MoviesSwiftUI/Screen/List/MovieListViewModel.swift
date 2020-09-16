@@ -1,13 +1,13 @@
 //
-//  MovieListState.swift
+//  MovieListViewModel.swift
 //  MoviesSwiftUI
 //
-//  Created by cristian on 11/09/2020.
+//  Created by cristian on 16/09/2020.
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
 import Foundation
-import SwiftUI
+
 
 // todo: Write protocol
 
@@ -17,9 +17,10 @@ protocol MovieListViewModelInput {
 
 class MovieListViewModel: ObservableObject {
     
-    @Published var model: [Movie]?
+    @Published var model: [Movie] = []
     @Published var isLoading = false
     @Published var error: NSError?
+    @Published var chunkedModel: [[Movie]] = []
     
     private let movieRepository : MovieRepositoryInput
     
@@ -27,26 +28,21 @@ class MovieListViewModel: ObservableObject {
         self.movieRepository = movieRepository
     }
     
-    func loadMovies(with endpoint: MovieListEndpoint) {
-        self.model = nil
+    func loadMovies(with endpoint: MovieListEndpoint, currentItem: Int? = nil) {
+        //self.model = nil
         self.isLoading = false
-        self.movieRepository.fetchMovies(from: endpoint) { [weak self] (result) in
+        self.movieRepository.fetchMovies(from: endpoint, currentItem: currentItem) { [weak self] (result) in
             guard let self = self else { return }
             self.isLoading = false
-            
             switch result {
             case .success(let response):
-                self.model = response.results
+                self.model.append(contentsOf: response.results)
+                self.chunkedModel = self.model.chunked(into: 2)
             case .failure(let error):
                 self.error = error as NSError
                 
             }
         }
     }
-}
-
-struct MovieListViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
+    
 }

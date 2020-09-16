@@ -17,20 +17,24 @@ struct MovieGrid: View {
     var body: some View {
         NavigationView {
             ScrollView() {
-                  
-                if nowPlayingViewModel.model != nil {
-                    UIGrid(columns: 2, list: nowPlayingViewModel.model!) { movie in
+                
+                if !nowPlayingViewModel.model.isEmpty {
+                    UIGrid(columns: 2, list: nowPlayingViewModel.model) { movie in
                         NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
-                             MoviePosterCard(movie: movie)
+                            MoviePosterCard(movie: movie)
+                            .onAppear() {
+                                print(movie.id)
+                            }
                         }
                         .buttonStyle(PlainButtonStyle())
+
                     }
                 }
                 
             }
             .navigationBarTitle("Now Playing")
             .onAppear() {
-            self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
+                self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
             }
         }
     }

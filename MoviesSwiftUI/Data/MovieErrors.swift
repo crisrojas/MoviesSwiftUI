@@ -8,7 +8,7 @@
 
 import Foundation
 
-// We define a list of possible erros that we may find when fetching data
+
 enum MovieError: Error {
     
     case apiError
@@ -33,6 +33,7 @@ enum MovieError: Error {
         }
     }
     
+    // Todo: que fait ce bout de code? comment est il utilisé?
     var errorUserInfo: [String : Any] {
         [NSLocalizedDescriptionKey: localizedDescription]
     }

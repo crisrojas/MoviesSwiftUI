@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in MovieListViewModel.loadMovies(with:currentItem:):MovieListViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " self.model.chunked(into: 2)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
