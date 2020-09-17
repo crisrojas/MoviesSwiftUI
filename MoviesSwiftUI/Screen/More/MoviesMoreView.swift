@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct MoviesListView: View {
+struct MoviesMoreView: View {
     
-    @ObservedObject private var upcomingViewModel = MovieListViewModel()
-    @ObservedObject private var topRatedViewModel = MovieListViewModel()
-    @ObservedObject private var popularViewModel = MovieListViewModel()
+    @ObservedObject private var upcomingViewModel = MoviesMoreViewModel()
+    @ObservedObject private var topRatedViewModel = MoviesMoreViewModel()
+    @ObservedObject private var popularViewModel = MoviesMoreViewModel()
     
     var body: some View {
         NavigationView {
@@ -23,17 +23,18 @@ struct MoviesListView: View {
                         MoviePosterCarouselView(title: "Upcoming", movies: upcomingViewModel.model)
                     } else {
                         LoadingView(isLoading: upcomingViewModel.isLoading, error: upcomingViewModel.error) {
-                            self.upcomingViewModel.loadMovies(with: .upcoming)
+                            self.upcomingViewModel.loadUpcoming()
                         }
                     }
                 }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
+                
                 
                 Group {
                     if !topRatedViewModel.model.isEmpty {
                         MovieBackdropCarouselView(title: "Top Rated", movies: topRatedViewModel.model)
                     } else {
                         LoadingView(isLoading: topRatedViewModel.isLoading, error: topRatedViewModel.error) {
-                            self.topRatedViewModel.loadMovies(with: .upcoming)
+                            self.topRatedViewModel.loadTopRated()
                         }
                     }
                 }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
@@ -43,22 +44,23 @@ struct MoviesListView: View {
                         MovieBackdropCarouselView(title: "Popular", movies: popularViewModel.model)
                     } else {
                         LoadingView(isLoading: popularViewModel.isLoading, error: topRatedViewModel.error) {
-                            self.popularViewModel.loadMovies(with: .popular)
+                            self.popularViewModel.loadPopular()
                         }
                     }
                 }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
                 
+                
             }.navigationBarTitle("The MovieDb")
         }.onAppear() {
-            self.upcomingViewModel.loadMovies(with: .upcoming)
-            self.topRatedViewModel.loadMovies(with: .topRated)
-            self.popularViewModel.loadMovies(with: .popular)
+            self.upcomingViewModel.loadUpcoming()
+            self.topRatedViewModel.loadTopRated()
+            self.popularViewModel.loadPopular()
         }
     }
 }
 
 struct MoviesListView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesListView()
+        MoviesMoreView()
     }
 }

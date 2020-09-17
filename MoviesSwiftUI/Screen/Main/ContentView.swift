@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            NowPlayingGrid()
+            MoviesMainView()
                 .tabItem {
                     VStack {
                         Image(systemName: "tv")
@@ -20,7 +20,7 @@ struct ContentView: View {
             }
             .tag(0)
             
-            MoviesListView()
+            MoviesMoreView()
                 .tabItem {
                     VStack {
                         Image(systemName: "ellipsis")

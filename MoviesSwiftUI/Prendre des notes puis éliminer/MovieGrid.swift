@@ -12,7 +12,7 @@ import struct Kingfisher.KFImage
 struct MovieGrid: View {
     
     let movies = Movie.localMovies
-    @ObservedObject private var nowPlayingViewModel = MovieListViewModel()
+    @ObservedObject private var nowPlayingViewModel = MoviesMoreViewModel()
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct MovieGrid: View {
             }
             .navigationBarTitle("Now Playing")
             .onAppear() {
-                self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
+                //self.nowPlayingViewModel.loadMovies(with: .nowPlaying)
             }
         }
     }

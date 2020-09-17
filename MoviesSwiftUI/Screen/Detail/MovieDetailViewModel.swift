@@ -11,7 +11,7 @@ import Foundation
 // todo: Write protocol
 protocol MovieDetailViewModelInput {
     // rajouter movieId + movieRepository
-    var movie: Movie? { get set }
+    var model: Movie { get set }
     func loadMovie()
     var error: NSError? { get set }
     var isLoading: Bool { get set }
@@ -19,27 +19,27 @@ protocol MovieDetailViewModelInput {
 
 class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     
-    @Published var movie: Movie?
+    @Published var model: Movie = .mock
     @Published var isLoading = false
     @Published var error: NSError?
     
     //private let movieService: MovieService
-    private let movieRepository: MovieRepositoryInput
+    private var movieRepository: MovieRepositoryInput
     private let movieId: Int
     
     init(movieId: Int, movieRepository: MovieRepositoryInput = MovieRepository.shared) {
-        self.movieRepository = movieRepository
         self.movieId = movieId
+        self.movieRepository = movieRepository
+        self.movieRepository.output = self
     }
     
     func loadMovie() {
-        self.movie = nil
+        //elf.model = nil
         self.isLoading = false
-        self.movieRepository.fetchMovie(id: movieId) { [weak self] (result) in
-            guard let self = self else { return }
+        self.movieRepository.fetchMovie(id: movieId) { (result) in
             switch result {
             case .success(let movie):
-                self.movie = movie
+                self.model = movie
             case .failure(let error):
                 self.error = error as NSError
             }
@@ -48,3 +48,13 @@ class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
 }
 
 
+extension MovieDetailViewModel: MovieRepositoryOutput {
+    func didRetrieveMovie(result: Result<Movie, MovieError>) {
+        switch result {
+        case .success(let movie):
+            self.model = movie
+        case .failure(let error):
+            self.error = error as NSError
+    }
+}
+}

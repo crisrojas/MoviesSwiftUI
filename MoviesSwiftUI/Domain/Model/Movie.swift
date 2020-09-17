@@ -8,7 +8,24 @@
 
 import Foundation
 
-struct Movie: Decodable, Identifiable {
+class Movie: Decodable, Identifiable {
+    
+    init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredits?, videos: MovieVideoResponse?) {
+        self.id = id
+        self.title = title
+        self.backdropPath = backdropPath
+        self.posterPath = posterPath
+        self.overview = overview
+        self.voteAverage = voteAverage
+        self.voteCount = voteCount
+        self.runtime = runtime
+        self.releaseDate = releaseDate
+        self.genres = genres
+        self.credits = credits
+        self.videos = videos
+    }
+    
+
     let id: Int
     let title: String
     let backdropPath: String?
@@ -117,4 +134,8 @@ extension Movie: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+}
+
+extension Movie {
+    static let mock = Movie(id: -1, title: "", backdropPath: "", posterPath: "", overview: "", voteAverage: 0.0, voteCount: 0, runtime: 0, releaseDate: "", genres: nil, credits: nil, videos: nil)
 }

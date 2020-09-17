@@ -12,20 +12,22 @@ import struct Kingfisher.KFImage
 struct MovieDetailView: View {
     
     @ObservedObject var movieDetailViewModel: MovieDetailViewModel
-    //var movieDetailViewModel: MovieDetailViewModelInput
-    
+  
     var body: some View {
         ZStack {
             
-            if movieDetailViewModel.movie != nil {
-                MovieDetailViewList(movie: self.movieDetailViewModel.movie!)
-            } else {
-                LoadingView(isLoading: self.movieDetailViewModel.isLoading, error: self.movieDetailViewModel.error) {
-                    self.movieDetailViewModel.loadMovie()
+            Group {
+                if movieDetailViewModel.model.id != -1 {
+                    AnyView(MovieDetailViewList(movie: self.movieDetailViewModel.model))
+                } else {
+
+                    LoadingView(isLoading: self.movieDetailViewModel.isLoading, error: self.movieDetailViewModel.error) {
+                        self.movieDetailViewModel.loadMovie()
+                    }
                 }
             }
         }
-        .navigationBarTitle(movieDetailViewModel.movie?.title ?? "")
+        .navigationBarTitle(movieDetailViewModel.model.title)
         .onAppear() {
             self.movieDetailViewModel.loadMovie()
         }
@@ -41,8 +43,7 @@ struct MovieDetailViewList: View {
             MovieDetailImage(imageURL: self.movie.backdropURL)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             HStack {
-                Text(movie.genreText)
-                Text("-")
+                Text(movie.genreText + ",")
                 Text(movie.yearText)
                 Text(movie.durationText)
             }
