@@ -6,6 +6,7 @@
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
+import Moya
 import Foundation
 
 protocol MovieAPI {
@@ -17,6 +18,17 @@ protocol MovieAPI {
     func getSearch(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
 }
 
+protocol testApi {
+    func getTopoRated(completion: @escaping (Result<MovieResponse, MoyaError>) -> Void)
+}
+
+extension MoyaProvider: testApi where Target == MovieDb {
+    func getTopoRated(completion: @escaping (Result<MovieResponse, MoyaError>) -> Void) {
+        request(.topRated) { result in
+            //completion(result)
+        }
+    }
+}
 
 class Api: MovieAPI {
     private let apiKey = "b5f1e193c3a2759a19f3f085f3dc2d7e"
@@ -42,7 +54,8 @@ class Api: MovieAPI {
         }
         self.loadURLAndDecode(url: url, completion: completion)
     }
-    
+
+
     func getPopular(completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(MovieListEndpoint.popular.rawValue)") else {
             completion(.failure(.invalidEndpoint))
@@ -93,7 +106,6 @@ class Api: MovieAPI {
             completion(.failure(.invalidEndpoint))
             return
         }
-        // We define a list of queryItems to append to the url (including the api_key)
       
         let page = String(page!)
         var queryItems = [URLQueryItem(name:"api_key", value: apiKey), URLQueryItem(name:"page", value: page)]

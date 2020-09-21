@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Moya
 
 protocol MovieRepositoryInput {
     func fetchMovie(id: Int)
@@ -25,6 +26,10 @@ protocol MovieRepositoryOutput {
     func didRetrieveUpcoming(result: Result<MovieResponse, MovieError>)
     func didRetrievePopular(result: Result<MovieResponse, MovieError>)
     func didRetrieveMovie(result: Result<Movie, MovieError>)
+    
+    
+    
+     func didRetrieveTopRatedWithMoya(result: Result<Response, MoyaError>)
 }
 
 extension MovieRepositoryOutput {
@@ -34,6 +39,10 @@ extension MovieRepositoryOutput {
     func didRetrieveUpcoming(result: Result<MovieResponse, MovieError>) {}
     func didRetrievePopular(result: Result<MovieResponse, MovieError>) {}
     func didRetrieveMovie(result: Result<Movie, MovieError>) {}
+    
+    
+    
+    func didRetrieveTopRatedWithMoya(result: Result<Response, MoyaError>) {}
 
 }
 
@@ -48,7 +57,8 @@ class MovieRepository: MovieRepositoryInput {
     
     var output: MovieRepositoryOutput?
     
-    private let api: Api
+    private let api: MovieAPI
+    private let provider = MoyaProvider<MovieDb>()
     
     init(api: Api = Api.shared) {
         self.api = api
@@ -67,9 +77,7 @@ class MovieRepository: MovieRepositoryInput {
     }
     
     func fetchTopRated() {
-        self.api.getTopRated { (result) in
-            self.output?.didRetrieveTopRated(result: result)
-        }
+        //
     }
     
     func fetchPopular() {

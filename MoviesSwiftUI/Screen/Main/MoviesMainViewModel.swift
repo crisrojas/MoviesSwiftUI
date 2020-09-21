@@ -8,7 +8,11 @@
 
 import Foundation
 
-class MoviesMainViewModel: ObservableObject, MovieRepositoryOutput {
+protocol MoviesMainViewModelInput {
+    var model: [Movie] { get set }
+}
+
+class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
     
     @Published var model: [Movie] = []
     @Published var isLoading = false
@@ -44,7 +48,7 @@ class MoviesMainViewModel: ObservableObject, MovieRepositoryOutput {
     }
 }
 
-extension MoviesMainViewModel {
+extension MoviesMainViewModel: MovieRepositoryOutput {
     func didRetrieveNowPlaying(result: Result<MovieResponse, MovieError>) {
         switch result {
         case .success(let response):

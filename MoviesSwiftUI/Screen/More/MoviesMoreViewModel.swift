@@ -6,11 +6,10 @@
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
+import Moya
 import Foundation
 
-
-// todo: Write protocol
-
+// Write protocol
 protocol MovieListViewModelInput {
     //
 }
@@ -27,7 +26,6 @@ class MoviesMoreViewModel: ObservableObject {
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
-    
     
     func loadUpcoming() {
         self.model = [ ]
@@ -46,13 +44,21 @@ class MoviesMoreViewModel: ObservableObject {
         self.isLoading = false
         self.movieRepository.fetchPopular()
     }
-    
 }
 
 
 // MARK: todo: implement MoviesRepositoryOutput protocol
 
 extension MoviesMoreViewModel: MovieRepositoryOutput {
+    
+    func didRetrieveTopRatedWithMoya(result: Result<Response, MoyaError>) {
+        switch result {
+        case .success(let response):
+           print("Todo: decode response, \(response)")
+        case .failure(let error):
+            self.error = error as NSError
+        }
+    }
     
     func didRetrieveUpcoming(result: Result<MovieResponse, MovieError>) {
         didRetrieveData(result: result)

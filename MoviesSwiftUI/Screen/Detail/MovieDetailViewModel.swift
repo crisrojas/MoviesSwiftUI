@@ -48,7 +48,6 @@ extension MovieDetailViewModel: MovieRepositoryOutput {
                 switch result {
                 case .success(let movie):
                     self.model = movie
-                    print("viewmodel: " + self.model.title)
                 case .failure(let error):
                     self.error = error as NSError
         }

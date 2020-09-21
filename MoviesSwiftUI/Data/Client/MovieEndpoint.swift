@@ -12,7 +12,7 @@ import Foundation
 enum MovieListEndpoint: String {
     
     case nowPlaying = "now_playing"
-    case upcoming = "upcoming"
+    case upcoming
     case topRated = "top_rated"
     case popular
     

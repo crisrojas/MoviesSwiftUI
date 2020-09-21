@@ -6,15 +6,16 @@
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
-import SwiftUI
+import Moya
 import struct Kingfisher.KFImage
+import SwiftUI
 
 struct MoviesMainView: View {
     
     @ObservedObject var nowPlayingViewModel = MoviesMainViewModel()
     
     var body: some View {
-
+        
         NavigationView {
             List(self.nowPlayingViewModel.model) { movie in
                 MovieListItem(movie: movie)
@@ -26,11 +27,14 @@ struct MoviesMainView: View {
                 }
                 
             }.onAppear() {
-                self.nowPlayingViewModel.loadNowPlaying()
+                if self.nowPlayingViewModel.model.isEmpty {
+                    self.nowPlayingViewModel.loadNowPlaying()
+                }
             }
         }
     }
 }
+
 
 struct NowPlayingGrid_Previews: PreviewProvider {
     static var previews: some View {
