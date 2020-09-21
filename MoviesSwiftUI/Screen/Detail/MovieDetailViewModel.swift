@@ -9,8 +9,8 @@
 import Foundation
 
 // todo: Write protocol
+
 protocol MovieDetailViewModelInput {
-    // rajouter movieId + movieRepository
     var model: Movie { get set }
     func loadMovie()
     var error: NSError? { get set }
@@ -19,7 +19,7 @@ protocol MovieDetailViewModelInput {
 
 class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     
-    @Published var model: Movie = .mock
+    @Published var model: Movie = .localMovie
     @Published var isLoading = false
     @Published var error: NSError?
     
@@ -27,34 +27,31 @@ class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     private var movieRepository: MovieRepositoryInput
     private let movieId: Int
     
-    init(movieId: Int, movieRepository: MovieRepositoryInput = MovieRepository.shared) {
+    // don't dare to use f*#*c8dfli#&g Singleton pattern in your vM repositories...
+    init(movieId: Int, movieRepository: MovieRepositoryInput = MovieRepository()) {
         self.movieId = movieId
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
     
     func loadMovie() {
-        //elf.model = nil
+
         self.isLoading = false
-        self.movieRepository.fetchMovie(id: movieId) { (result) in
-            switch result {
-            case .success(let movie):
-                self.model = movie
-            case .failure(let error):
-                self.error = error as NSError
-            }
-        }
+        self.movieRepository.fetchMovie(id: movieId)
     }
 }
 
 
 extension MovieDetailViewModel: MovieRepositoryOutput {
     func didRetrieveMovie(result: Result<Movie, MovieError>) {
-        switch result {
-        case .success(let movie):
-            self.model = movie
-        case .failure(let error):
-            self.error = error as NSError
+        DispatchQueue.main.async {
+                switch result {
+                case .success(let movie):
+                    self.model = movie
+                    print("viewmodel: " + self.model.title)
+                case .failure(let error):
+                    self.error = error as NSError
+        }
     }
 }
 }

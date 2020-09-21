@@ -19,9 +19,10 @@ class MovieSearchViewModel: ObservableObject {
     
     private var subscriptionToken: AnyCancellable?
     
-    let movieRepository: MovieRepositoryInput
-    init(movieRepository: MovieRepositoryInput = MovieRepository.shared) {
+    var movieRepository: MovieRepositoryInput
+    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
         self.movieRepository = movieRepository
+        self.movieRepository.output = self
     }
     
     func stateObserve() {
@@ -59,5 +60,17 @@ class MovieSearchViewModel: ObservableObject {
     deinit {
         self.subscriptionToken?.cancel()
         self.subscriptionToken = nil
+    }
+}
+
+extension MovieSearchViewModel: MovieRepositoryOutput {
+    func didRetrieveSearch(result: Result<MovieResponse, MovieError>) {
+        self.isLoading = false
+        switch result {
+        case .success(let response):
+            self.movies = response.results
+        case .failure(let error):
+            self.error = error as NSError
+        }
     }
 }

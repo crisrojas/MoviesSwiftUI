@@ -54,19 +54,8 @@ class MoviesMoreViewModel: ObservableObject {
 
 extension MoviesMoreViewModel: MovieRepositoryOutput {
     
-    func didRetrieveData(result: Result<MovieResponse, MovieError>) {
-        self.isLoading = false
-        switch result {
-        case .success(let response):
-            self.model = response.results
-        case .failure(let error):
-            self.error = error as NSError
-            
-        }
-    }
-    
     func didRetrieveUpcoming(result: Result<MovieResponse, MovieError>) {
-       didRetrieveData(result: result)
+        didRetrieveData(result: result)
     }
     
     func didRetrieveTopRated(result: Result<MovieResponse, MovieError>) {
@@ -75,6 +64,17 @@ extension MoviesMoreViewModel: MovieRepositoryOutput {
     
     func didRetrievePopular(result: Result<MovieResponse, MovieError>) {
         didRetrieveData(result: result)
+    }
+    
+    private func didRetrieveData(result: Result<MovieResponse, MovieError>) {
+        self.isLoading = false
+        switch result {
+        case .success(let response):
+            self.model = response.results
+        case .failure(let error):
+            self.error = error as NSError
+            
+        }
     }
     
 }

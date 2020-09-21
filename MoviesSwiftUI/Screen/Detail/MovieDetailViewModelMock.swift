@@ -12,7 +12,7 @@ import Foundation
 class MovieDetailViewModelMock: MovieDetailViewModelInput {
 
     
-    var model: Movie = .mock
+    var model: Movie = .localMovie
     
     private let movieRepository: MovieRepositoryInput
     private let movieId: Int

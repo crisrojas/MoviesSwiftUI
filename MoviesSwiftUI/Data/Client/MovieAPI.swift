@@ -8,12 +8,13 @@
 
 import Foundation
 
-
-// Defintion of a typealias that we'll use in each func of the MovieAPI protocol
-
-
 protocol MovieAPI {
-    
+    func getNowPlaying(page: Int?, completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
+    func getTopRated(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
+    func getPopular(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
+    func getUpcoming(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
+    func getMovie(id: Int, completion: @escaping (Result<Movie, MovieError>) -> ())
+    func getSearch(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
 }
 
 
@@ -72,18 +73,28 @@ class Api: MovieAPI {
         
     }
     
+    func getSearch(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
+        guard let url = URL(string: "\(baseAPIURL)/search/movie") else {
+                   completion(.failure(.invalidEndpoint))
+                   return
+               }
+               
+               self.loadURLAndDecode(url: url, params: [
+                   "language": "en-US",
+                   "include_adult": "false",
+                   "region": "US",
+                   "query": query
+               ], completion: completion)
+    }
+    
     private func loadURLAndDecode<D: Decodable>(for page: Int? = 1, url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, MovieError>) -> ()) {
         
-        // If we can correctly access the url we continue, else we return an .invalidEndpoint
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             completion(.failure(.invalidEndpoint))
             return
         }
         // We define a list of queryItems to append to the url (including the api_key)
-        //        var pageString = "1"
-        //        if let page = self.output?.page {
-        //            pageString = String(page)
-        //        }
+      
         let page = String(page!)
         var queryItems = [URLQueryItem(name:"api_key", value: apiKey), URLQueryItem(name:"page", value: page)]
         if let params = params {
@@ -92,7 +103,6 @@ class Api: MovieAPI {
         
         urlComponents.queryItems = queryItems
         
-        // We create the final url, if we got an error (nil) then we pass an .invalidEndpoint value to the completion
         guard let finalURL = urlComponents.url else {
             completion(.failure(.invalidEndpoint))
             return
@@ -103,27 +113,28 @@ class Api: MovieAPI {
     }
     
     private func decodeJSON<D: Decodable>(with url: URL, completion: @escaping (Result<D, MovieError>) -> ()) {
-        // We create a dataTask that will download the data from a url
+       
         urlSession.dataTask(with: url) { [weak self] (data, response, error) in
-            // if Class is instantiated continue, else return
             guard let self = self else { return }
-            // If there's an error execute a completion passing it a .apiiError and return
+            
             if error != nil {
                 self.executeCompletionHandlerInMainThread(with: .failure(.apiError), completion: completion)
                 return
             }
-            // If there's an httpError execute a completion passing it a .invalidResonse and return
+            
+            //
             guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
                 self.executeCompletionHandlerInMainThread(with: .failure(.invalidResponse), completion: completion)
                 return
             }
-            // If there's that continue with the function, else execute completion passing it .noData
+            
+            //
             guard let data = data else {
                 self.executeCompletionHandlerInMainThread(with: .failure(.noData), completion: completion)
                 return
             }
             
-            // Decode response throwing a serializating error if fail
+            //
             do {
                 let decodedResponse = try self.jsonDecoder.decode(D.self, from: data)
                 self.executeCompletionHandlerInMainThread(with: .success(decodedResponse), completion: completion)

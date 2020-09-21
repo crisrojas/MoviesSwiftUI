@@ -17,19 +17,15 @@ struct MovieDetailView: View {
         ZStack {
             
             Group {
-                if movieDetailViewModel.model.id != -1 {
+                
                     AnyView(MovieDetailViewList(movie: self.movieDetailViewModel.model))
-                } else {
-
-                    LoadingView(isLoading: self.movieDetailViewModel.isLoading, error: self.movieDetailViewModel.error) {
-                        self.movieDetailViewModel.loadMovie()
-                    }
-                }
+               
             }
         }
         .navigationBarTitle(movieDetailViewModel.model.title)
         .onAppear() {
             self.movieDetailViewModel.loadMovie()
+            
         }
     }
 }

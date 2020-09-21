@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		403FC16D250F950300C1B464 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 403FC16C250F950300C1B464 /* QGrid */; };
 		403FC175250FB19000C1B464 /* MovieDetailViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC174250FB19000C1B464 /* MovieDetailViewModelMock.swift */; };
 		403FC17A2510BF3B00C1B464 /* MovieCastCaroussel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC1792510BF3B00C1B464 /* MovieCastCaroussel.swift */; };
 		403FC17C2510C0E800C1B464 /* MovieActorPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403FC17B2510C0E800C1B464 /* MovieActorPicture.swift */; };
@@ -45,9 +44,6 @@
 		40EF5CEF250A4E6F00837587 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5CEE250A4E6F00837587 /* MovieRepository.swift */; };
 		40EF5CF3250A51D300837587 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5CF2250A51D300837587 /* Utils.swift */; };
 		40EF5CF5250A5A2800837587 /* Movie+Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5CF4250A5A2800837587 /* Movie+Local.swift */; };
-		40EF5CFA250A5A9D00837587 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EF5CF7250A5A9D00837587 /* movie_list.json */; };
-		40EF5CFB250A5A9D00837587 /* search_movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EF5CF8250A5A9D00837587 /* search_movie.json */; };
-		40EF5CFC250A5A9D00837587 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EF5CF9250A5A9D00837587 /* movie_info.json */; };
 		40EF5CFF250A5C9C00837587 /* MovieBackdropCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5CFE250A5C9C00837587 /* MovieBackdropCard.swift */; };
 		40EF5D04250A648300837587 /* MovieBackdropCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5D03250A648300837587 /* MovieBackdropCarouselView.swift */; };
 		40EF5D07250A675000837587 /* MoviePosterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5D06250A675000837587 /* MoviePosterCard.swift */; };
@@ -55,6 +51,10 @@
 		40EF5D10250A6E5E00837587 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5D0F250A6E5E00837587 /* ActivityIndicatorView.swift */; };
 		40EF5D12250A6F3000837587 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5D11250A6F3000837587 /* LoadingView.swift */; };
 		40EF5D14250B736800837587 /* MoviesMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF5D13250B736800837587 /* MoviesMoreView.swift */; };
+		54099E152513D907006446AD /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 54099E122513D907006446AD /* movie_list.json */; };
+		54099E162513D907006446AD /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 54099E132513D907006446AD /* movie_info.json */; };
+		54099E172513D907006446AD /* search_movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 54099E142513D907006446AD /* search_movie.json */; };
+		54099E192513F38D006446AD /* Arrray+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54099E182513F38D006446AD /* Arrray+Chunked.swift */; };
 		8B15FEEB84F8EBE1F94C2D85 /* libPods-MoviesSwiftUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D17D038DE9D5F0A3AD675D /* libPods-MoviesSwiftUI.a */; };
 /* End PBXBuildFile section */
 
@@ -98,9 +98,6 @@
 		40EF5CEE250A4E6F00837587 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		40EF5CF2250A51D300837587 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		40EF5CF4250A5A2800837587 /* Movie+Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+Local.swift"; sourceTree = "<group>"; };
-		40EF5CF7250A5A9D00837587 /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = movie_list.json; path = "../../../../../../../Users/cristian/Downloads/SwiftUITMDbV2-master/SwiftUIMovieDb/Resources/movie_list.json"; sourceTree = "<group>"; };
-		40EF5CF8250A5A9D00837587 /* search_movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = search_movie.json; path = "../../../../../../../Users/cristian/Downloads/SwiftUITMDbV2-master/SwiftUIMovieDb/Resources/search_movie.json"; sourceTree = "<group>"; };
-		40EF5CF9250A5A9D00837587 /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = movie_info.json; path = "../../../../../../../Users/cristian/Downloads/SwiftUITMDbV2-master/SwiftUIMovieDb/Resources/movie_info.json"; sourceTree = "<group>"; };
 		40EF5CFE250A5C9C00837587 /* MovieBackdropCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBackdropCard.swift; sourceTree = "<group>"; };
 		40EF5D03250A648300837587 /* MovieBackdropCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBackdropCarouselView.swift; sourceTree = "<group>"; };
 		40EF5D06250A675000837587 /* MoviePosterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterCard.swift; sourceTree = "<group>"; };
@@ -108,6 +105,10 @@
 		40EF5D0F250A6E5E00837587 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		40EF5D11250A6F3000837587 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		40EF5D13250B736800837587 /* MoviesMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesMoreView.swift; sourceTree = "<group>"; };
+		54099E122513D907006446AD /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
+		54099E132513D907006446AD /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
+		54099E142513D907006446AD /* search_movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_movie.json; sourceTree = "<group>"; };
+		54099E182513F38D006446AD /* Arrray+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Arrray+Chunked.swift"; sourceTree = "<group>"; };
 		764F2AE3AD45999B719AEB1F /* Pods-MoviesSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-MoviesSwiftUI/Pods-MoviesSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		B1D36DD21352CB36E004B132 /* Pods-MoviesSwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesSwiftUI.release.xcconfig"; path = "Target Support Files/Pods-MoviesSwiftUI/Pods-MoviesSwiftUI.release.xcconfig"; sourceTree = "<group>"; };
 		E8D17D038DE9D5F0A3AD675D /* libPods-MoviesSwiftUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MoviesSwiftUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				403FC16D250F950300C1B464 /* QGrid in Frameworks */,
 				8B15FEEB84F8EBE1F94C2D85 /* libPods-MoviesSwiftUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +213,7 @@
 				40C3812D250BC6A200EC7471 /* ImageLoader.swift */,
 				405865CF250F713B0090BA77 /* MovieGrid.swift */,
 				405865CD250F703A0090BA77 /* UIGrid.swift */,
+				54099E182513F38D006446AD /* Arrray+Chunked.swift */,
 			);
 			name = "Prendre des notes puis éliminer";
 			path = "Prendre des notes puis éliminer";
@@ -329,9 +330,9 @@
 		40EF5CF6250A5A8400837587 /* SampleData */ = {
 			isa = PBXGroup;
 			children = (
-				40EF5CF9250A5A9D00837587 /* movie_info.json */,
-				40EF5CF7250A5A9D00837587 /* movie_list.json */,
-				40EF5CF8250A5A9D00837587 /* search_movie.json */,
+				54099E132513D907006446AD /* movie_info.json */,
+				54099E122513D907006446AD /* movie_list.json */,
+				54099E142513D907006446AD /* search_movie.json */,
 			);
 			path = SampleData;
 			sourceTree = "<group>";
@@ -371,7 +372,6 @@
 			);
 			name = MoviesSwiftUI;
 			packageProductDependencies = (
-				403FC16C250F950300C1B464 /* QGrid */,
 			);
 			productName = MoviesSwiftUI;
 			productReference = 40EF5CCB250A4AA500837587 /* MoviesSwiftUI.app */;
@@ -402,7 +402,6 @@
 			);
 			mainGroup = 40EF5CC2250A4AA500837587;
 			packageReferences = (
-				403FC16B250F950300C1B464 /* XCRemoteSwiftPackageReference "QGrid" */,
 			);
 			productRefGroup = 40EF5CCC250A4AA500837587 /* Products */;
 			projectDirPath = "";
@@ -418,11 +417,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54099E152513D907006446AD /* movie_list.json in Resources */,
 				40EF5CDB250A4AA600837587 /* LaunchScreen.storyboard in Resources */,
+				54099E162513D907006446AD /* movie_info.json in Resources */,
 				40EF5CD8250A4AA600837587 /* Preview Assets.xcassets in Resources */,
-				40EF5CFA250A5A9D00837587 /* movie_list.json in Resources */,
-				40EF5CFB250A5A9D00837587 /* search_movie.json in Resources */,
-				40EF5CFC250A5A9D00837587 /* movie_info.json in Resources */,
+				54099E172513D907006446AD /* search_movie.json in Resources */,
 				40EF5CD5250A4AA600837587 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +465,7 @@
 				403FC17E2510CEA900C1B464 /* PlaceholderAvatar.swift in Sources */,
 				403FC17C2510C0E800C1B464 /* MovieActorPicture.swift in Sources */,
 				40C38112250BA3F200EC7471 /* SafariView.swift in Sources */,
+				54099E192513F38D006446AD /* Arrray+Chunked.swift in Sources */,
 				40EF5CF3250A51D300837587 /* Utils.swift in Sources */,
 				4085FC6025137245001FF728 /* MoviesMainViewModel.swift in Sources */,
 				40EF5CEF250A4E6F00837587 /* MovieRepository.swift in Sources */,
@@ -693,25 +693,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		403FC16B250F950300C1B464 /* XCRemoteSwiftPackageReference "QGrid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Q-Mobile/QGrid";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		403FC16C250F950300C1B464 /* QGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 403FC16B250F950300C1B464 /* XCRemoteSwiftPackageReference "QGrid" */;
-			productName = QGrid;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 40EF5CC3250A4AA500837587 /* Project object */;
 }

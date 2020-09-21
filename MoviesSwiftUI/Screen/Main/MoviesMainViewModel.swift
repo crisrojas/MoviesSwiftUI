@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class MoviesMainViewModel: ObservableObject, MovieRepositoryOutput {
     
     @Published var model: [Movie] = []
