@@ -19,15 +19,14 @@ protocol MovieDetailViewModelInput {
 
 class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     
-    @Published var model: Movie = .localMovie
+    @Published var model: Movie = .mock
     @Published var isLoading = false
     @Published var error: NSError?
     
-    //private let movieService: MovieService
     private var movieRepository: MovieRepositoryInput
     private let movieId: Int
     
-    // don't dare to use f*#*c8dfli#&g Singleton pattern in your vM repositories...
+    
     init(movieId: Int, movieRepository: MovieRepositoryInput = MovieRepository()) {
         self.movieId = movieId
         self.movieRepository = movieRepository
@@ -41,16 +40,13 @@ class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     }
 }
 
-
 extension MovieDetailViewModel: MovieRepositoryOutput {
-    func didRetrieveMovie(result: Result<Movie, MovieError>) {
-        DispatchQueue.main.async {
-                switch result {
-                case .success(let movie):
-                    self.model = movie
-                case .failure(let error):
-                    self.error = error as NSError
+    func didRetrieveMovie(result: Result<Movie, Error>) {
+        switch result {
+        case .success(let movie):
+            self.model = movie
+        case .failure(let error):
+            self.error = error as NSError
         }
     }
-}
 }

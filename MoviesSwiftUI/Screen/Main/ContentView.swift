@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            MoviesMainView()
+            MovieDetailDribble()
                 .tabItem {
                     VStack {
                         Image(systemName: "tv")
@@ -39,7 +39,6 @@ struct ContentView: View {
             .tag(2)
             
         }
-        
     }
 }
 

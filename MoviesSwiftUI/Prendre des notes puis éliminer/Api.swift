@@ -1,78 +1,20 @@
 //
-//  MovieAPI.swift
+//  Api.swift
 //  MoviesSwiftUI
 //
-//  Created by cristian on 17/09/2020.
+//  Created by cristian on 22/09/2020.
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
-import Moya
 import Foundation
 
-protocol MovieAPI {
-    func getNowPlaying(page: Int?, completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
-    func getTopRated(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
-    func getPopular(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
-    func getUpcoming(completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
-    func getMovie(id: Int, completion: @escaping (Result<Movie, MovieError>) -> ())
-    func getSearch(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> Void)
-}
-
-protocol testApi {
-    func getTopoRated(completion: @escaping (Result<MovieResponse, MoyaError>) -> Void)
-}
-
-extension MoyaProvider: testApi where Target == MovieDb {
-    func getTopoRated(completion: @escaping (Result<MovieResponse, MoyaError>) -> Void) {
-        request(.topRated) { result in
-            //completion(result)
-        }
-    }
-}
-
-class Api: MovieAPI {
+class Api/*: MovieApi */ {
     private let apiKey = "b5f1e193c3a2759a19f3f085f3dc2d7e"
     private let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
     
     static let shared = Api()
-    
-    func getNowPlaying(page: Int? = 1, completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(MovieListEndpoint.nowPlaying.rawValue)") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        
-        self.loadURLAndDecode(for: page, url: url, completion: completion)
-    }
-    
-    func getTopRated(completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(MovieListEndpoint.topRated.rawValue)") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        self.loadURLAndDecode(url: url, completion: completion)
-    }
-
-
-    func getPopular(completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(MovieListEndpoint.popular.rawValue)") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        self.loadURLAndDecode(url: url, completion: completion)
-    }
-    
-    func getUpcoming(completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
-        
-        guard let url = URL(string: "\(baseAPIURL)/movie/\(MovieListEndpoint.upcoming.rawValue)") else {
-            completion(.failure(.invalidEndpoint))
-            return
-        }
-        self.loadURLAndDecode(url: url, completion: completion)
-        
-    }
     
     func getMovie(id: Int, completion: @escaping (Result<Movie, MovieError>) -> ()) {
         
@@ -84,20 +26,6 @@ class Api: MovieAPI {
             "append_to_response": "videos,credits"
         ], completion: completion)
         
-    }
-    
-    func getSearch(query: String, completion: @escaping (Result<MovieResponse, MovieError>) -> Void) {
-        guard let url = URL(string: "\(baseAPIURL)/search/movie") else {
-                   completion(.failure(.invalidEndpoint))
-                   return
-               }
-               
-               self.loadURLAndDecode(url: url, params: [
-                   "language": "en-US",
-                   "include_adult": "false",
-                   "region": "US",
-                   "query": query
-               ], completion: completion)
     }
     
     private func loadURLAndDecode<D: Decodable>(for page: Int? = 1, url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, MovieError>) -> ()) {

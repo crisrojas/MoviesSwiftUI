@@ -12,28 +12,46 @@ import Moya
 
 enum MovieDb {
     
-    // Key
     static private let apiKey = "b5f1e193c3a2759a19f3f085f3dc2d7e"
     
-    // Endpoints
     case topRated
+    case upcoming
+    case popular
+    case nowPlaying(page: Int)
+    case movie(id: Int)
+    case search(query: String)
 }
-
 
 extension MovieDb: TargetType {
     var baseURL: URL {
-        return URL(string: "https://api.themoviedb.org/3/movie")!
+        return URL(string: "https://api.themoviedb.org/3")!
     }
     
     var path: String {
         switch self {
-        case .topRated: return "/top_rated"
+        case .topRated:
+            return "/movie/top_rated"
+        case .upcoming:
+            return "/movie/upcoming"
+        case .popular:
+            return "/movie/popular"
+        case .nowPlaying:
+            return "/movie/now_playing"
+        case .movie(id: let id):
+            return "/movie/\(id)"
+        case .search:
+            return "/search/movie"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .topRated:
+        case .topRated,
+             .upcoming,
+             .popular,
+             .nowPlaying,
+             .movie,
+             .search:
             return .get
         }
     }
@@ -47,7 +65,28 @@ extension MovieDb: TargetType {
         case .topRated:
             return .requestParameters(parameters: [
                 "api_key": MovieDb.apiKey], encoding: URLEncoding.default)
+        case .upcoming:
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey], encoding: URLEncoding.default)
+        case .popular:
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey], encoding: URLEncoding.default)
+        case .nowPlaying(page: let page):
+            
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey,
+                "page" : page], encoding: URLEncoding.default)
+        case .movie(id: let id):
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey,
+                "id" : id,
+                "append_to_response" : "videos,credits"], encoding: URLEncoding.default)
+        case .search(query: let query):
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey,
+                "query" : query], encoding: URLEncoding.default)
         }
+        
     }
     
     var headers: [String : String]? {

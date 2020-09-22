@@ -27,8 +27,8 @@ struct MoviePosterCarouselView: View {
                               MoviePosterCard(movie: movie)
                                .frame(width:204, height:306)
                             }.buttonStyle(PlainButtonStyle())
-                            .padding(.leading, movie.id == self.movies.first!.id ? 6 : 0)
-                            .padding(.trailing, movie.id == self.movies.first!.id ? 16 : 0)
+                            .padding(.leading, movie.id == self.movies.first!.id ? 16 : 0)
+                
                         
                     }
                 }

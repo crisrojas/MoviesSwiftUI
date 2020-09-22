@@ -64,7 +64,7 @@ class MovieSearchViewModel: ObservableObject {
 }
 
 extension MovieSearchViewModel: MovieRepositoryOutput {
-    func didRetrieveSearch(result: Result<MovieResponse, MovieError>) {
+    func didRetrieveSearch(result: Result<MovieResponse, Error>) {
         self.isLoading = false
         switch result {
         case .success(let response):

@@ -32,6 +32,7 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
         if !shouldLoad(currentItem: currentItem) {
             return
         }
+        
         self.isLoading = false
         self.movieRepository.fetchNowPlaying(page: page)
     }
@@ -49,13 +50,14 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
 }
 
 extension MoviesMainViewModel: MovieRepositoryOutput {
-    func didRetrieveNowPlaying(result: Result<MovieResponse, MovieError>) {
+    func didRetrieveNowPlaying(result: Result<MovieResponse, Error>) {
         switch result {
         case .success(let response):
             self.model.append(contentsOf: response.results)
             self.page += 1
         case .failure(let error):
             self.error = error as NSError
+            print(error)
         }
     }
 }

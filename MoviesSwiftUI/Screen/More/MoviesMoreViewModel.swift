@@ -51,27 +51,28 @@ class MoviesMoreViewModel: ObservableObject {
 
 extension MoviesMoreViewModel: MovieRepositoryOutput {
     
-    func didRetrieveTopRatedWithMoya(result: Result<Response, MoyaError>) {
+    func didRetrieveUpcoming(result: Result<MovieResponse, Error>) {
+        didRetrieveDataBis(result: result)
+    }
+    
+    func didRetrieveTopRated(result: Result<MovieResponse, Error>) {
+        didRetrieveDataBis(result: result)
+    }
+    
+    
+    func didRetrievePopular(result: Result<MovieResponse, Error>) {
+        didRetrieveDataBis(result: result)
+    }
+    
+    private func didRetrieveDataBis(result: Result<MovieResponse, Error>) {
+        self.isLoading = false
         switch result {
         case .success(let response):
-           print("Todo: decode response, \(response)")
+            self.model = response.results
         case .failure(let error):
             self.error = error as NSError
         }
     }
-    
-    func didRetrieveUpcoming(result: Result<MovieResponse, MovieError>) {
-        didRetrieveData(result: result)
-    }
-    
-    func didRetrieveTopRated(result: Result<MovieResponse, MovieError>) {
-        didRetrieveData(result: result)
-    }
-    
-    func didRetrievePopular(result: Result<MovieResponse, MovieError>) {
-        didRetrieveData(result: result)
-    }
-    
     private func didRetrieveData(result: Result<MovieResponse, MovieError>) {
         self.isLoading = false
         switch result {

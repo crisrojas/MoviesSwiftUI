@@ -13,14 +13,19 @@ struct MovieActorPicture: View {
     let actor: MovieCast
     var body: some View {
         Group {
-            if self.actor.profileURL != nil {
-                KFImage(URL(string:self.actor.profileURL!))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width:120,height: 120)
-                    .clipShape(Circle())
-            } else {
-                PlaceholderAvatar()
+            VStack {
+                if self.actor.profileURL != nil {
+                    KFImage(URL(string:self.actor.profileURL!))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width:120,height: 120)
+                        .clipShape(Circle())
+                } else {
+                    PlaceholderAvatar()
+                }
+                Text(actor.name)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
         }
     }

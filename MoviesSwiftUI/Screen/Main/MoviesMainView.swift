@@ -15,18 +15,20 @@ struct MoviesMainView: View {
     @ObservedObject var nowPlayingViewModel = MoviesMainViewModel()
     
     var body: some View {
-        
+
         NavigationView {
             List(self.nowPlayingViewModel.model) { movie in
-                MovieListItem(movie: movie)
-                    .onAppear() {
-                        self.nowPlayingViewModel.loadNowPlaying(currentItem: movie.id)
-                }
+                
                 NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
-                    EmptyView()
+                    MoviesRow(movie: movie)
+                        .onAppear() {
+                            self.nowPlayingViewModel.loadNowPlaying(currentItem: movie.id)
+                    }
                 }
                 
-            }.onAppear() {
+            }
+            .navigationBarTitle("Now Playing")
+            .onAppear() {
                 if self.nowPlayingViewModel.model.isEmpty {
                     self.nowPlayingViewModel.loadNowPlaying()
                 }

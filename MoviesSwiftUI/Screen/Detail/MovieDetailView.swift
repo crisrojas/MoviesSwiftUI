@@ -14,14 +14,10 @@ struct MovieDetailView: View {
     @ObservedObject var movieDetailViewModel: MovieDetailViewModel
   
     var body: some View {
-        ZStack {
-            
-            Group {
-                
-                    AnyView(MovieDetailViewList(movie: self.movieDetailViewModel.model))
+        
+       MovieDetailViewList(movie: self.movieDetailViewModel.model)
                
-            }
-        }
+  
         .navigationBarTitle(movieDetailViewModel.model.title)
         .onAppear() {
             self.movieDetailViewModel.loadMovie()
@@ -36,6 +32,7 @@ struct MovieDetailViewList: View {
     
     var body: some View {
         List {
+            
             MovieDetailImage(imageURL: self.movie.backdropURL)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             HStack {
@@ -139,8 +136,10 @@ struct MovieDetailImage: View {
         ZStack {
             Rectangle().fill(Color.gray.opacity(0.3))
             KFImage(self.imageURL)
+            .resizable()
         }
         .aspectRatio(16/9, contentMode: .fit)
+        
     }
 }
 

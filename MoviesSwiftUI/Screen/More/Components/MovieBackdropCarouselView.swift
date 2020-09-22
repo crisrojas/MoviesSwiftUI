@@ -29,7 +29,7 @@ struct MovieBackdropCarouselView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                         .padding(.leading, movie.id == self.movies.first!.id ? 16 : 0)
-                        .padding(.trailing, movie.id == self.movies.first!.id ? 16 : 0)
+                        .padding(.trailing, movie.id == self.movies.first!.id ? 0 : 0)
                     }
                 }
             }
