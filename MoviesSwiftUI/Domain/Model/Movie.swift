@@ -10,7 +10,7 @@ import Foundation
 
 class Movie: Decodable, Identifiable {
     
-    init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredits?, videos: MovieVideoResponse?) {
+    init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredits?, videos: MovieVideoResponse?, originalLanguage: String) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
@@ -23,6 +23,7 @@ class Movie: Decodable, Identifiable {
         self.genres = genres
         self.credits = credits
         self.videos = videos
+        self.originalLanguage = originalLanguage
     }
 
 
@@ -35,6 +36,7 @@ class Movie: Decodable, Identifiable {
     let voteCount: Int
     let runtime: Int?
     let releaseDate: String?
+    let originalLanguage: String?
     
     let genres: [MovieGenre]?
     let credits: MovieCredits?
@@ -62,7 +64,7 @@ class Movie: Decodable, Identifiable {
     }
     
     var genreText: String {
-        genres?.first?.name ?? "n/a"
+        genres?.first?.name ?? "N/A"
     }
     
     var ratingText: String {
@@ -77,33 +79,55 @@ class Movie: Decodable, Identifiable {
     
     var ratingStarsOutOfFive: String {
         let rating = Int(voteAverage/2)
-        
         let ratingText = (0..<rating).reduce("") { (acc, _) -> String in
             
             return acc + "★"
         }
+        if rating < 5 {
+            let numOfMissingStars = 5 - rating
+            var missingStars = ""
+            for _ in 0...numOfMissingStars {
+                missingStars.append("✩")
+            }
+//            let missingStars = (0..<numOfMissingStars).reduce("") { (acc, _) -> String in
+//                return acc + "⭐︎"
+//            }
+            return ratingText + missingStars
+        }
         return ratingText
+        
     }
+
+    var voteAverageRounded: String {
+        return "\(voteAverage.reduceScale(to: 1))"
+    }
+    
     var scoreText: String {
         guard ratingText.count > 0 else {
-            return "n/a"
+            return "N/A"
         }
         return "\(ratingText.count)/10"
     }
     
+    var languageText: String {
+        guard let originalLanguage = self.originalLanguage else { return "N/A" }
+        
+        return originalLanguage
+    }
+    
     var yearText: String {
         guard let releaseDate = self.releaseDate, let date = Utils.dateFormatter.date(from: releaseDate) else {
-            return "n/a"
+            return "N/A"
         }
         return Movie.yearFormatter.string(from: date)
     }
     
     var durationText: String {
         guard let runtime = self.runtime, runtime > 0 else {
-            return "n/a"
+            return "N/A"
         }
         
-        return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? "n/a"
+        return Movie.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? "N/A"
     }
     
     var cast: [MovieCast]? {
@@ -146,5 +170,5 @@ extension Movie: Hashable {
 }
 
 extension Movie {
-    static let mock = Movie(id: -1, title: "", backdropPath: "", posterPath: "", overview: "", voteAverage: 0.0, voteCount: 0, runtime: 0, releaseDate: "", genres: nil, credits: nil, videos: nil)
+    static let mock = Movie(id: -1, title: "", backdropPath: "", posterPath: "", overview: "", voteAverage: 0.0, voteCount: 0, runtime: 0, releaseDate: "", genres: nil, credits: nil, videos: nil, originalLanguage: "")
 }
