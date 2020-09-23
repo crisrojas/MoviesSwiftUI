@@ -19,7 +19,7 @@ protocol MovieDetailViewModelInput {
 
 class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     
-    @Published var model: Movie = .mock
+    @Published var model: Movie = .localMovie
     @Published var isLoading = false
     @Published var error: NSError?
     
@@ -49,4 +49,19 @@ extension MovieDetailViewModel: MovieRepositoryOutput {
             self.error = error as NSError
         }
     }
+}
+
+class MovieDetailViewModelMock: ObservableObject, MovieDetailViewModelInput {
+    
+    @Published var model: Movie = .localMovie
+    var error: NSError?
+    var isLoading: Bool = false
+    
+    func loadMovie() {
+        model = Movie.localMovie
+    }
+    
+    
+    
+    
 }

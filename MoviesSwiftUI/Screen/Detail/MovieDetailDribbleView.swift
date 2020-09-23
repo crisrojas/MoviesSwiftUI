@@ -9,7 +9,7 @@
 import SwiftUI
 import struct Kingfisher.KFImage
 
-struct MovieDetailDribble: View {
+struct MovieDetailDribbleView: View {
     let movie: Movie = .localMovie
     @ObservedObject var movieDetailViewModel: MovieDetailViewModel
     var body: some View {
@@ -127,7 +127,7 @@ struct ActorAvatar: View {
 
 struct MovieDetailDribble_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailDribble(movieDetailViewModel: MovieDetailViewModel(movieId: Movie.localMovie.id))
+        MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: Movie.localMovie.id))
     }
 }
 

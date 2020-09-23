@@ -127,7 +127,7 @@ struct MovieDetailViewList: View {
 
 struct MovieDetailImage: View {
     
-    @ObservedObject private var imageLoader = ImageLoader()
+    //@ObservedObject private var imageLoader = ImageLoader()
     
     let imageURL: URL
     
