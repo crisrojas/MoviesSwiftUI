@@ -16,14 +16,15 @@ struct MovieBackdropCarouselView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
-                .font(.title)
-                .fontWeight(.bold)
+                .font(.system(.title, design: .rounded))
+                .fontWeight(.heavy)
                 .padding(.horizontal)
+                .foregroundColor(Color(K.textStrongColor!))
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(self.movies) { movie in
-                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                              MovieBackdropCard(movie: movie)
                             .frame(width: 272, height: 200)
                         }
@@ -40,5 +41,7 @@ struct MovieBackdropCarouselView: View {
 struct MovieBackdropCarouselView_Previews: PreviewProvider {
     static var previews: some View {
         MovieBackdropCarouselView(title: "Latest", movies: Movie.localMovies)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

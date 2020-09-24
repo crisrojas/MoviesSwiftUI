@@ -20,21 +20,25 @@ struct MoviesRow: View {
                     .frame(width: 66, height: 100)
                 Text("Not found")
                     .font(.caption)
+                    .foregroundColor(Color(K.textStrongColor!))
                 KFImage(self.movie.posterURL)
                     .resizable()
                     .cornerRadius(4)
                     .frame(width: 66, height: 100)
                     
-            }.shadow(color: .gray, radius: 4.0, x: 2.0, y: 2.0)
+            }//.shadow(color: .gray, radius: 4.0, x: 2.0, y: 2.0)
             VStack(alignment: .leading, spacing: 4) {
                 Text(movie.title)
-                    .font(.headline)
+                    .foregroundColor(Color(K.textStrongColor!))
+                    .fontWeight(.heavy)
+                    .font(.system(.headline, design: .rounded))
 
                 Group {
                     Text(movie.overview.prefix(90) + "...")
+                        .fontWeight(.bold)
                     Text(movie.ratingText)
-                }.font(.caption)
-                    .foregroundColor(.secondary)
+                }.font(.system(.caption, design: .rounded))
+                    .foregroundColor(Color(K.textSoftColor!))
                 
             }
             Spacer()

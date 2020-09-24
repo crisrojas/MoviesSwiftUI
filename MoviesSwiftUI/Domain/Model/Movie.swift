@@ -50,7 +50,7 @@ class Movie: Decodable, Identifiable {
     
     static private let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
+        formatter.unitsStyle = .abbreviated
         formatter.allowedUnits = [.hour, .minute]
         return formatter
     }()
@@ -86,7 +86,7 @@ class Movie: Decodable, Identifiable {
         if rating < 5 {
             let numOfMissingStars = 5 - rating
             var missingStars = ""
-            for _ in 0...numOfMissingStars {
+            for _ in 1...numOfMissingStars {
                 missingStars.append("✩")
             }
 //            let missingStars = (0..<numOfMissingStars).reduce("") { (acc, _) -> String in
@@ -169,6 +169,3 @@ extension Movie: Hashable {
     }
 }
 
-extension Movie {
-    static let mock = Movie(id: -1, title: "", backdropPath: "", posterPath: "", overview: "", voteAverage: 0.0, voteCount: 0, runtime: 0, releaseDate: "", genres: nil, credits: nil, videos: nil, originalLanguage: "")
-}

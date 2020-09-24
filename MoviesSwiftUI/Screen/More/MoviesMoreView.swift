@@ -50,8 +50,11 @@ struct MoviesMoreView: View {
                 }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
                 
                 
-            }.navigationBarTitle("The MovieDb")
-        }.onAppear() {
+            }.navigationBarTitle("")
+            .navigationBarHidden(true)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        }
+        .onAppear() {
             self.upcomingViewModel.loadUpcoming()
             self.topRatedViewModel.loadTopRated()
             self.popularViewModel.loadPopular()

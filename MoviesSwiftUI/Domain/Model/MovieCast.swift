@@ -14,6 +14,7 @@ struct MovieCast: Decodable, Identifiable {
     let name: String
     let profilePath: String?
     let gender: Int?
+    let creditId: String?
     
     var profileURL: String? {
         guard let profilePath = profilePath else { return nil }

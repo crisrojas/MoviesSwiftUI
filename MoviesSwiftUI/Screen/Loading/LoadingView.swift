@@ -46,5 +46,7 @@ struct LoadingView: View {
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingView(isLoading: true, error: nil, retryAction: nil)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

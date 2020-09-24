@@ -20,18 +20,6 @@ extension Movie {
     static var localMovie: Movie {
         localMovies[0]
     }
-}
-
-
-extension Bundle {
-    /// Allows to decode a local file
-    func loadAndDecodeJSON<D: Decodable>(filename: String) throws -> D? {
-        guard let url = self.url(forResource: filename, withExtension: "json") else {
-              return nil
-          }
-          let data = try Data(contentsOf: url)
-          let jsonDecoder = Utils.jsonDecoder
-          let decodedModel = try jsonDecoder.decode(D.self, from: data)
-          return decodedModel
-    }
+    
+     static let mock = Movie(id: -1, title: "", backdropPath: "", posterPath: "", overview: "", voteAverage: 0.0, voteCount: 0, runtime: 0, releaseDate: "", genres: nil, credits: nil, videos: nil, originalLanguage: "")
 }

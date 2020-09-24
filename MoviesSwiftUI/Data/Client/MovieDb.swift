@@ -20,6 +20,7 @@ enum MovieDb {
     case nowPlaying(page: Int)
     case movie(id: Int)
     case search(query: String)
+    case credit(id: String)
 }
 
 extension MovieDb: TargetType {
@@ -41,6 +42,8 @@ extension MovieDb: TargetType {
             return "/movie/\(id)"
         case .search:
             return "/search/movie"
+        case .credit(id: let id):
+            return "/credit/\(id)"
         }
     }
     
@@ -51,7 +54,8 @@ extension MovieDb: TargetType {
              .popular,
              .nowPlaying,
              .movie,
-             .search:
+             .search,
+             .credit:
             return .get
         }
     }
@@ -85,6 +89,11 @@ extension MovieDb: TargetType {
             return .requestParameters(parameters: [
                 "api_key": MovieDb.apiKey,
                 "query" : query], encoding: URLEncoding.default)
+        case .credit:
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey,
+                ],
+                encoding: URLEncoding.default)
         }
         
     }

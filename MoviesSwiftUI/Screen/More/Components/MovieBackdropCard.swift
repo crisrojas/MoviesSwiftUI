@@ -28,6 +28,9 @@ struct MovieBackdropCard: View {
             .cornerRadius(8)
             .shadow(radius: 4)
             Text(movie.title)
+                .font(.system(.subheadline, design:.rounded))
+                .fontWeight(.bold)
+                .foregroundColor(Color(K.textSoftColor!))
         }
         .lineLimit(1)
     }
@@ -36,5 +39,7 @@ struct MovieBackdropCard: View {
 struct MovieBackdropCard_Previews: PreviewProvider {
     static var previews: some View {
         MovieBackdropCard(movie: Movie.localMovie)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

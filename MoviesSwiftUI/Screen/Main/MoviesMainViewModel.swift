@@ -18,6 +18,7 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
     @Published var isLoading = false
     @Published var error: NSError?
     
+    
     var page: Int = 1
     var currentlyLoading: Bool = false
     

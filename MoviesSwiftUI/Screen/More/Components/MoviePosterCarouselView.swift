@@ -16,14 +16,15 @@ struct MoviePosterCarouselView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
            Text(title)
-            .font(.title)
-            .fontWeight(.bold)
+            .font(.system(.title, design: .rounded))
+            .fontWeight(.heavy)
             .padding(.horizontal)
+            .foregroundColor(Color(K.textStrongColor!))
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(self.movies) { movie in
-                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                               MoviePosterCard(movie: movie)
                                .frame(width:204, height:306)
                             }.buttonStyle(PlainButtonStyle())
@@ -40,5 +41,7 @@ struct MoviePosterCarouselView: View {
 struct MoviePosterCarouselView_Previews: PreviewProvider {
     static var previews: some View {
         MoviePosterCarouselView(title: "Now Playing", movies: Movie.localMovies)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

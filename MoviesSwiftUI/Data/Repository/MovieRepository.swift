@@ -16,16 +16,18 @@ protocol MovieRepositoryInput {
     func fetchUpcoming()
     func fetchTopRated()
     func fetchPopular()
+    func fetchCredits(id: String)
     var output: MovieRepositoryOutput? { get set }
 }
 
-protocol MovieRepositoryOutput {
+protocol MovieRepositoryOutput: class {
     func didRetrieveSearch(result: Result<MovieResponse, Error>)
     func didRetrieveNowPlaying(result: Result<MovieResponse, Error>)
     func didRetrieveTopRated(result: Result<MovieResponse, Error>)
     func didRetrieveUpcoming(result: Result<MovieResponse, Error>)
     func didRetrievePopular(result: Result<MovieResponse, Error>)
     func didRetrieveMovie(result: Result<Movie, Error>)
+    func didRetrieveCredits(result: Result<CreditsResponse, Error>)
 }
 
 extension MovieRepositoryOutput {
@@ -35,11 +37,12 @@ extension MovieRepositoryOutput {
     func didRetrieveUpcoming(result: Result<MovieResponse, Error>) {}
     func didRetrievePopular(result: Result<MovieResponse, Error>) {}
     func didRetrieveMovie(result: Result<Movie, Error>) {}
+    func didRetrieveCredits(result: Result<CreditsResponse, Error>) {}
 }
 
 class MovieRepository: MovieRepositoryInput {
     
-    var output: MovieRepositoryOutput?
+    weak var output: MovieRepositoryOutput?
     
     private let api = MoyaProvider<MovieDb>()
     
@@ -76,6 +79,12 @@ class MovieRepository: MovieRepositoryInput {
     func searchMovie(query: String, completion: @escaping (Result<MovieResponse, Error>) -> ()) {
         api.getSearch(query: query) { (result) in
             self.output?.didRetrieveSearch(result: result)
+        }
+    }
+    
+    func fetchCredits(id: String) {
+        api.getCredits(id: id) { (result) in
+            self.output?.didRetrieveCredits(result: result)
         }
     }
     

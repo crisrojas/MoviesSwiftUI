@@ -29,7 +29,7 @@ struct MovieSearchView: View {
                 
                 if self.movieSearchViewModel.movies != nil {
                     ForEach(self.movieSearchViewModel.movies!) { movie in
-                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                             VStack(alignment: .leading) {
                                 Text(movie.title)
                                 Text(movie.yearText)
@@ -38,11 +38,13 @@ struct MovieSearchView: View {
                         
                     }
                 }
-            }
+            }.background(LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
             .onAppear {
                 self.movieSearchViewModel.stateObserve()
             }
-            .navigationBarTitle("Search")
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            
         }
     }
 }

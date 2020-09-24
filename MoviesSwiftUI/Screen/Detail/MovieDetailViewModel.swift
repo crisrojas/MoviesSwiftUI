@@ -50,18 +50,3 @@ extension MovieDetailViewModel: MovieRepositoryOutput {
         }
     }
 }
-
-class MovieDetailViewModelMock: ObservableObject, MovieDetailViewModelInput {
-    
-    @Published var model: Movie = .localMovie
-    var error: NSError?
-    var isLoading: Bool = false
-    
-    func loadMovie() {
-        model = Movie.localMovie
-    }
-    
-    
-    
-    
-}
