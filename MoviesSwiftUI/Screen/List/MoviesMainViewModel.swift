@@ -18,17 +18,36 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
     @Published var isLoading = false
     @Published var error: NSError?
     
+    private var endpoint: String
+    private var page: Int = 1
+    private var currentlyLoading: Bool = false
     
-    var page: Int = 1
-    var currentlyLoading: Bool = false
+    enum Endpoint {
+        case nowPlaying, popular
+    }
     
     private var movieRepository: MovieRepositoryInput
     
-    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
+    init(endpoint: String, movieRepository: MovieRepositoryInput = MovieRepository()) {
+        self.endpoint = endpoint
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
     
+    func loadMovies() {
+        switch self.endpoint {
+            
+        case "nowPlaying":
+            loadNowPlaying()
+        case "popular":
+            loadPopular()
+        default:
+            break
+        }
+    }
+    
+    /// Loads now playing.
+    /// Current item is used to check if list item is last (necessary for infinite scrolling)
     func loadNowPlaying(currentItem: Int? = nil) {
         if !shouldLoad(currentItem: currentItem) {
             return
@@ -36,6 +55,10 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
         
         self.isLoading = false
         self.movieRepository.fetchNowPlaying(page: page)
+    }
+    
+    func loadPopular() {
+        self.movieRepository.fetchPopular()
     }
     
     private func shouldLoad(currentItem: Int?) -> Bool {
@@ -52,6 +75,13 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
 
 extension MoviesMainViewModel: MovieRepositoryOutput {
     func didRetrieveNowPlaying(result: Result<MovieResponse, Error>) {
+        didRetrieveData(result: result)
+    }
+    func didRetrievePopular(result: Result<MovieResponse, Error>) {
+        didRetrieveData(result: result)
+    }
+    
+    private func didRetrieveData(result: Result<MovieResponse, Error>) {
         switch result {
         case .success(let response):
             self.model.append(contentsOf: response.results)

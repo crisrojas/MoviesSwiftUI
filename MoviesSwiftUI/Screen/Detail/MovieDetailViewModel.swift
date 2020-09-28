@@ -19,7 +19,7 @@ protocol MovieDetailViewModelInput {
 
 class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     
-    @Published var model: Movie = .localMovie
+    @Published var model: Movie = .mock
     @Published var isLoading = false
     @Published var error: NSError?
     

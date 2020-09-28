@@ -26,7 +26,7 @@ struct MoviesRow: View {
                     .cornerRadius(4)
                     .frame(width: 66, height: 100)
                     
-            }//.shadow(color: .gray, radius: 4.0, x: 2.0, y: 2.0)
+            }
             VStack(alignment: .leading, spacing: 4) {
                 Text(movie.title)
                     .foregroundColor(Color(K.textStrongColor!))

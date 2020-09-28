@@ -11,7 +11,7 @@ import Foundation
 
 class ActorViewModel: ObservableObject {
    
-    @Published var model: CreditsResponse? = .mock
+    @Published var model: CreditsResponse? = .localCredits
     @Published var error: NSError?
     
     private var repository: MovieRepositoryInput

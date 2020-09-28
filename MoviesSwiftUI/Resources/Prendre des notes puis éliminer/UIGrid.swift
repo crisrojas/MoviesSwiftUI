@@ -48,7 +48,7 @@ struct UIGrid<Content: View, T: Hashable>: View {
                     ForEach(self.list[i], id: \.self) { object in
                         
                             self.content(object)
-                                .frame(width: UIScreen.main.bounds.size.width/CGFloat(self.columns))
+                                //.frame(width: UIScreen.main.bounds.size.width/CGFloat(self.columns))
                     }
                 }
             }

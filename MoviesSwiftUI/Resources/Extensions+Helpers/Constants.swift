@@ -16,6 +16,8 @@ struct K {
     static let textSoftColor = UIColor(named: "textSoftColor")
     static let themeColor = UIColor(named: "themeColor")
     
+    static let paddingX: CGFloat = 30
+    
     static func setUpNavBarAppearance() {
         let appearance = UINavigationBarAppearance()
                appearance.configureWithTransparentBackground()
@@ -26,5 +28,7 @@ struct K {
                
         UINavigationBar.appearance().tintColor = K.textStrongColor
     }
+    
+    
     
 }

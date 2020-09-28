@@ -12,35 +12,36 @@ import SwiftUI
 
 struct MoviesMainView: View {
     
-    @ObservedObject var nowPlayingViewModel = MoviesMainViewModel()
+    @ObservedObject var moviesViewModel: MoviesMainViewModel
     
     
-    init() {
+    init(moviesViewModel: MoviesMainViewModel) {
+        self.moviesViewModel = moviesViewModel
        K.setUpNavBarAppearance()
        setUpListAppearance()
     }
     
     var body: some View {
 
-        NavigationView {
-            List(self.nowPlayingViewModel.model) { movie in
+        
+            List(self.moviesViewModel.model) { movie in
                 
                 NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                     MoviesRow(movie: movie)
+                       
                         .onAppear() {
-                            self.nowPlayingViewModel.loadNowPlaying(currentItem: movie.id)
+                            self.moviesViewModel.loadNowPlaying(currentItem: movie.id)
                     }
                 }
                 
             }.background(LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+         
             .onAppear() {
-                if self.nowPlayingViewModel.model.isEmpty {
-                    self.nowPlayingViewModel.loadNowPlaying()
+                if self.moviesViewModel.model.isEmpty {
+                    self.moviesViewModel.loadMovies()
                 }
             }
-        }
+        
     }
     
     
@@ -53,6 +54,6 @@ struct MoviesMainView: View {
 
 struct NowPlayingGrid_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesMainView()
+        MoviesMainView(moviesViewModel: MoviesMainViewModel(endpoint: "nowPlaying"))
     }
 }

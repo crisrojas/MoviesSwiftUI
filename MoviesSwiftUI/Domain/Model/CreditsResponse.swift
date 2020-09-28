@@ -67,9 +67,9 @@ struct Person: Decodable {
 
 
 extension CreditsResponse {
-    static var emptyMock: CreditsResponse = CreditsResponse(creditType: "", department: "", job: "", media: nil, mediaType: "", id: "", person: nil)
-    static var mock: CreditsResponse {
+    static var mock: CreditsResponse = CreditsResponse(creditType: "", department: "", job: "", media: nil, mediaType: "", id: "", person: nil)
+    static var localCredits: CreditsResponse {
         let response: CreditsResponse? = try? Bundle.main.loadAndDecodeJSON(filename: "credit_info")
-        return response ?? emptyMock
+        return response ?? mock
     }
 }
