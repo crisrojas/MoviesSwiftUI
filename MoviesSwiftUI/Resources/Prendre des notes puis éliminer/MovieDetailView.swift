@@ -18,7 +18,7 @@ struct MovieDetailView: View {
        MovieDetailViewList(movie: self.movieDetailViewModel.model)
                
   
-        .navigationBarTitle(movieDetailViewModel.model.title)
+        .navigationBarTitle(movieDetailViewModel.model.title ?? "Unknown title")
         .onAppear() {
             self.movieDetailViewModel.loadMovie()
             
@@ -42,6 +42,7 @@ struct MovieDetailViewList: View {
             }
             
             Text(movie.overview)
+            
             HStack {
                 if !movie.ratingText.isEmpty {
                     Text(movie.ratingText).foregroundColor(.yellow)

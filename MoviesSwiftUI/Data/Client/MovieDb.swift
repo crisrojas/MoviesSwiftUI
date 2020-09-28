@@ -16,11 +16,13 @@ enum MovieDb {
     
     case topRated
     case upcoming
-    case popular
+    case popular(page: Int)
     case nowPlaying(page: Int)
     case movie(id: Int)
     case search(query: String)
     case credit(id: String)
+    case genres
+    case genre(id: Int, page: Int)
 }
 
 extension MovieDb: TargetType {
@@ -44,7 +46,12 @@ extension MovieDb: TargetType {
             return "/search/movie"
         case .credit(id: let id):
             return "/credit/\(id)"
+        case .genres:
+            return "/genre/movie/list"
+        case .genre:
+            return "/discover/movie"
         }
+       
     }
     
     var method: Moya.Method {
@@ -55,7 +62,9 @@ extension MovieDb: TargetType {
              .nowPlaying,
              .movie,
              .search,
-             .credit:
+             .credit,
+             .genres,
+             .genre:
             return .get
         }
     }
@@ -72,9 +81,10 @@ extension MovieDb: TargetType {
         case .upcoming:
             return .requestParameters(parameters: [
                 "api_key": MovieDb.apiKey], encoding: URLEncoding.default)
-        case .popular:
-            return .requestParameters(parameters: [
-                "api_key": MovieDb.apiKey], encoding: URLEncoding.default)
+        case .popular(let page):
+           return .requestParameters(parameters: [
+            "api_key": MovieDb.apiKey,
+            "page" : page], encoding: URLEncoding.default)
         case .nowPlaying(page: let page):
             
             return .requestParameters(parameters: [
@@ -94,7 +104,20 @@ extension MovieDb: TargetType {
                 "api_key": MovieDb.apiKey,
                 ],
                 encoding: URLEncoding.default)
+        case .genres:
+            return .requestParameters(parameters: [
+            "api_key": MovieDb.apiKey,
+            ],
+            encoding: URLEncoding.default)
+        case .genre(id: let id, page: let page):
+            return .requestParameters(parameters: [
+                "api_key": MovieDb.apiKey,
+                "with_genres": id,
+                "page": page
+                ],
+                encoding: URLEncoding.default)
         }
+        
         
     }
     

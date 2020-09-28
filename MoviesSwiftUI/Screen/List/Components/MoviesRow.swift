@@ -28,7 +28,7 @@ struct MoviesRow: View {
                     
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text(movie.title)
+                Text(movie.title ?? "Unknown title")
                     .foregroundColor(Color(K.textStrongColor!))
                     .fontWeight(.heavy)
                     .font(.system(.headline, design: .rounded))

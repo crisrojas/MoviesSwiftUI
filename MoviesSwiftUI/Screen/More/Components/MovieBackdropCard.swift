@@ -27,7 +27,7 @@ struct MovieBackdropCard: View {
             .aspectRatio(16/9, contentMode: .fit)
             .cornerRadius(8)
             .shadow(radius: 4)
-            Text(movie.title)
+            Text(movie.title ?? "Unknown title")
                 .font(.system(.subheadline, design:.rounded))
                 .fontWeight(.bold)
                 .foregroundColor(Color(K.textSoftColor!))

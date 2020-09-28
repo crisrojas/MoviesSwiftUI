@@ -8,44 +8,54 @@
 
 import Foundation
 
-protocol MoviesMainViewModelInput {
+protocol MoviesListViewModelInput {
     var model: [Movie] { get set }
 }
 
-class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
+class MoviesListViewModel: ObservableObject, MoviesListViewModelInput {
     
     @Published var model: [Movie] = []
+    @Published var genres: [Genre] = []
     @Published var isLoading = false
     @Published var error: NSError?
     
-    private var endpoint: String
+    //private var endpoint: String?
     private var page: Int = 1
     private var currentlyLoading: Bool = false
     
-    enum Endpoint {
-        case nowPlaying, popular
-    }
-    
     private var movieRepository: MovieRepositoryInput
     
-    init(endpoint: String, movieRepository: MovieRepositoryInput = MovieRepository()) {
-        self.endpoint = endpoint
+    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
     
-    func loadMovies() {
-        switch self.endpoint {
-            
+    func loadGenres() {
+        self.movieRepository.fetchGenres()
+    }
+    
+    func loadGenre(id: Int, currentItem: Int? = nil) {
+        if !shouldLoad(currentItem: currentItem) {
+            return
+        }
+        
+        self.movieRepository.fetchGenre(id: id, page: page)
+    }
+    
+    func loadMovies(endpoint: String? = nil, currentItem: Int? = nil) {
+        switch endpoint {
         case "nowPlaying":
-            loadNowPlaying()
+            loadNowPlaying(currentItem: currentItem)
         case "popular":
-            loadPopular()
+            loadPopular(currentItem: currentItem)
+        case nil: do {
+            loadPopular(currentItem: currentItem)
+        }
         default:
             break
         }
     }
-    
+
     /// Loads now playing.
     /// Current item is used to check if list item is last (necessary for infinite scrolling)
     func loadNowPlaying(currentItem: Int? = nil) {
@@ -57,8 +67,13 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
         self.movieRepository.fetchNowPlaying(page: page)
     }
     
-    func loadPopular() {
-        self.movieRepository.fetchPopular()
+    func loadPopular(currentItem: Int? = nil) {
+        if !shouldLoad(currentItem: currentItem) {
+                   return
+               }
+               
+               self.isLoading = false
+        self.movieRepository.fetchPopular(page: page)
     }
     
     private func shouldLoad(currentItem: Int?) -> Bool {
@@ -71,9 +86,28 @@ class MoviesMainViewModel: ObservableObject, MoviesMainViewModelInput {
         
         return currentItem == lastItem.id
     }
+    
 }
 
-extension MoviesMainViewModel: MovieRepositoryOutput {
+extension MoviesListViewModel: MovieRepositoryOutput {
+    func didRetrieveGenres(result: Result<GenresResponse, Error>) {
+        switch result {
+        case .success(let response):
+            self.genres = response.genres
+        case .failure(let error):
+            self.error = error as NSError
+            print(error)
+        }
+    }
+    func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {
+        switch result {
+        case .success(let response):
+            self.model = response.results
+            self.page += 1
+        case .failure(let error):
+            print(error)
+        }
+    }
     func didRetrieveNowPlaying(result: Result<MovieResponse, Error>) {
         didRetrieveData(result: result)
     }

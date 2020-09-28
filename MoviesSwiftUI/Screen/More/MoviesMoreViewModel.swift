@@ -9,10 +9,8 @@
 import Moya
 import Foundation
 
-// Write protocol
-protocol MovieListViewModelInput {
-    //
-}
+// todo: Write protocol
+protocol MovieListViewModelInput {}
 
 class MoviesMoreViewModel: ObservableObject {
     
@@ -39,11 +37,6 @@ class MoviesMoreViewModel: ObservableObject {
         self.movieRepository.fetchTopRated()
     }
     
-    func loadPopular() {
-        self.model = [ ]
-        self.isLoading = false
-        self.movieRepository.fetchPopular()
-    }
 }
 
 
@@ -52,19 +45,14 @@ class MoviesMoreViewModel: ObservableObject {
 extension MoviesMoreViewModel: MovieRepositoryOutput {
     
     func didRetrieveUpcoming(result: Result<MovieResponse, Error>) {
-        didRetrieveDataBis(result: result)
+        didRetrieveMovies(result: result)
     }
     
     func didRetrieveTopRated(result: Result<MovieResponse, Error>) {
-        didRetrieveDataBis(result: result)
+        didRetrieveMovies(result: result)
     }
     
-    
-    func didRetrievePopular(result: Result<MovieResponse, Error>) {
-        didRetrieveDataBis(result: result)
-    }
-    
-    private func didRetrieveDataBis(result: Result<MovieResponse, Error>) {
+    private func didRetrieveMovies(result: Result<MovieResponse, Error>) {
         self.isLoading = false
         switch result {
         case .success(let response):
@@ -73,15 +61,4 @@ extension MoviesMoreViewModel: MovieRepositoryOutput {
             self.error = error as NSError
         }
     }
-    private func didRetrieveData(result: Result<MovieResponse, MovieError>) {
-        self.isLoading = false
-        switch result {
-        case .success(let response):
-            self.model = response.results
-        case .failure(let error):
-            self.error = error as NSError
-            
-        }
-    }
-    
 }

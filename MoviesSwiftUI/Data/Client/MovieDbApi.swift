@@ -12,47 +12,49 @@ import Foundation
 typealias MovieCompletion<Response> = (_ result: Result<Response, Error>) -> Void
 
 protocol MovieDbApi {
-    func getTopRated(completion: @escaping (Result<MovieResponse, Error>) -> Void)
-    func getUpcoming(completion: @escaping (Result<MovieResponse, Error>) -> Void)
-    func getPopular(completion: @escaping (Result<MovieResponse, Error>) -> Void)
-    func getNowPlaying(page: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void)
-    func getMovie(id: Int, completion: @escaping (Result<Movie, Error>) -> Void)
-    func getSearch(query: String, completion: @escaping (Result<MovieResponse, Error>) -> Void)
+    func getTopRated(completion: @escaping MovieCompletion<MovieResponse>)
+    func getUpcoming(completion: @escaping MovieCompletion<MovieResponse>)
+    func getPopular(page: Int, completion: @escaping MovieCompletion<MovieResponse>)
+    func getNowPlaying(page: Int, completion: @escaping MovieCompletion<MovieResponse>)
+    func getMovie(id: Int, completion: @escaping MovieCompletion<Movie>)
+    func getSearch(query: String, completion: @escaping MovieCompletion<MovieResponse>)
     func getCredits(id: String, completion: @escaping MovieCompletion<CreditsResponse>)
+    func getGenres(completion: @escaping MovieCompletion<GenresResponse>)
+    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<DiscoverResponse>)
 }
 
 extension MoyaProvider: MovieDbApi where Target == MovieDb {
     
-    func getPopular(completion: @escaping (Result<MovieResponse, Error>) -> Void) {
-        request(.popular) { result in
+    func getPopular(page: Int, completion: @escaping MovieCompletion<MovieResponse>) {
+        request(.popular(page: page)) { result in
             completion(result.mapResponse())
         }
     }
     
-    func getNowPlaying(page: Int, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    func getNowPlaying(page: Int, completion: @escaping MovieCompletion<MovieResponse>) {
         request(.nowPlaying(page: page)) { result in
             completion(result.mapResponse())
         }
     }
     
-    func getTopRated(completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    func getTopRated(completion: @escaping MovieCompletion<MovieResponse>) {
         request(.topRated) { result in
             completion(result.mapResponse())
         }
     }
     
-    func getUpcoming(completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    func getUpcoming(completion: @escaping MovieCompletion<MovieResponse>) {
            request(.upcoming) { result in
                completion(result.mapResponse())
            }
        }
-    func getMovie(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
+    func getMovie(id: Int, completion: @escaping MovieCompletion<Movie>) {
         request(.movie(id: id)) { result in
             completion(result.mapResponse())
         }
     }
     
-    func getSearch(query: String, completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+    func getSearch(query: String, completion: @escaping MovieCompletion<MovieResponse>) {
         request(.search(query: query)) { result in
             completion(result.mapResponse())
         }
@@ -62,12 +64,17 @@ extension MoyaProvider: MovieDbApi where Target == MovieDb {
         request(.credit(id: id)) { result in
             completion(result.mapResponse())
         }
-        
-        // Print url
-        if let request = try? MoyaProvider.defaultEndpointMapping(for: .credit(id: id)).urlRequest(),
-          let url = request.url {
-          let key = url.absoluteString
-          print(key)
+    }
+    
+    func getGenres(completion: @escaping MovieCompletion<GenresResponse>) {
+        request(.genres) { result in
+            completion(result.mapResponse())
+        }
+   }
+    
+    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<DiscoverResponse>) {
+        request(.genre(id: id, page: page)) { result in
+            completion(result.mapResponse())
         }
     }
 }

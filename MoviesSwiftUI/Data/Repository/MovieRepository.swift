@@ -15,8 +15,10 @@ protocol MovieRepositoryInput {
     func fetchNowPlaying(page: Int?)
     func fetchUpcoming()
     func fetchTopRated()
-    func fetchPopular()
+    func fetchPopular(page: Int?)
     func fetchCredits(id: String)
+    func fetchGenres()
+    func fetchGenre(id: Int, page: Int?)
     var output: MovieRepositoryOutput? { get set }
 }
 
@@ -28,6 +30,8 @@ protocol MovieRepositoryOutput: class {
     func didRetrievePopular(result: Result<MovieResponse, Error>)
     func didRetrieveMovie(result: Result<Movie, Error>)
     func didRetrieveCredits(result: Result<CreditsResponse, Error>)
+    func didRetrieveGenres(result: Result<GenresResponse, Error>)
+    func didRetrieveGenre(result: Result<DiscoverResponse, Error>)
 }
 
 extension MovieRepositoryOutput {
@@ -38,6 +42,8 @@ extension MovieRepositoryOutput {
     func didRetrievePopular(result: Result<MovieResponse, Error>) {}
     func didRetrieveMovie(result: Result<Movie, Error>) {}
     func didRetrieveCredits(result: Result<CreditsResponse, Error>) {}
+    func didRetrieveGenres(result: Result<GenresResponse, Error>) {}
+    func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {}
 }
 
 class MovieRepository: MovieRepositoryInput {
@@ -64,8 +70,8 @@ class MovieRepository: MovieRepositoryInput {
         }
     }
     
-    func fetchPopular() {
-        api.getPopular { (result) in
+    func fetchPopular(page: Int? = 1) {
+        api.getPopular(page: page!) { (result) in
             self.output?.didRetrievePopular(result: result)
         }
     }
@@ -88,4 +94,15 @@ class MovieRepository: MovieRepositoryInput {
         }
     }
     
+    func fetchGenres() {
+        api.getGenres { (result) in
+            self.output?.didRetrieveGenres(result: result)
+        }
+    }
+    
+    func fetchGenre(id: Int, page: Int? = 1) {
+        api.getGenre(id: id, page: page!) { (result) in
+            self.output?.didRetrieveGenre(result: result)
+        }
+    }
 }

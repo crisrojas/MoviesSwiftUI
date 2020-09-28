@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-// We'll create two objects with local data from the resources/movie_list.json file
 extension Movie {
     
     static var localMovies: [Movie] {

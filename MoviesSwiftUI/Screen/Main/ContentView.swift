@@ -20,8 +20,10 @@ struct ContentView: View {
             MoviesHomeView()
                 .tabItem {
                     VStack {
-                        Image(systemName: "play.fill")
+        
+                        Image(systemName: "house")
                             .font(Font.headline.weight(.heavy))
+                        Text("Home")
                     }
             }
             .tag(0)
@@ -29,8 +31,9 @@ struct ContentView: View {
             MoviesMoreView()
                 .tabItem {
                     VStack {
-                        Image(systemName: "tv")
+                        Image(systemName: "ellipsis")
                         .font(Font.headline.weight(.heavy))
+                        Text("More")
                     }
             }
             .tag(1)
@@ -40,6 +43,7 @@ struct ContentView: View {
                     VStack {
                         Image(systemName: "magnifyingglass")
                         .font(Font.headline.weight(.heavy))
+                        Text("Search")
 
                     }
             }

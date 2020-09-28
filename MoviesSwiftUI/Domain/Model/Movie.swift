@@ -10,7 +10,7 @@ import Foundation
 
 class Movie: Decodable, Identifiable {
     
-    init(id: Int, title: String, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [MovieGenre]?, credits: MovieCredits?, videos: MovieVideoResponse?, originalLanguage: String) {
+    init(id: Int, title: String?, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [Genre]?, credits: MovieCredits?, videos: MovieVideoResponse?, originalLanguage: String) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
@@ -28,7 +28,7 @@ class Movie: Decodable, Identifiable {
 
 
     let id: Int
-    let title: String
+    let title: String?
     let backdropPath: String?
     let posterPath: String?
     let overview: String
@@ -38,7 +38,7 @@ class Movie: Decodable, Identifiable {
     let releaseDate: String?
     let originalLanguage: String?
     
-    let genres: [MovieGenre]?
+    let genres: [Genre]?
     let credits: MovieCredits?
     let videos: MovieVideoResponse?
     

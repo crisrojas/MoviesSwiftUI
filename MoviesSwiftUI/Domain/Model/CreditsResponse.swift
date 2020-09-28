@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - CreditsResponse
 struct CreditsResponse: Decodable {
-    internal init(creditType: String?, department: String?, job: String?, media: Media?, mediaType: String?, id: String?, person: Person?) {
+    internal init(creditType: String?, department: String?, job: String?, media: Movie?, mediaType: String?, id: String?, person: Person?) {
         self.creditType = creditType
         self.department = department
         self.job = job
@@ -20,35 +20,34 @@ struct CreditsResponse: Decodable {
         self.person = person
     }
     
-    
     let creditType, department, job: String?
-    let media: Media?
+    let media: Movie?
     let mediaType, id: String?
     let person: Person?
 }
 
-// MARK: - Media
-struct Media: Decodable, Identifiable {
-    let id: Int?
-    let video: Bool?
-    let voteCount: Int?
-    let voteAverage: Double?
-    let title, releaseDate, originalLanguage, originalTitle: String?
-    let genreIDS: [Int]?
-    let backdropPath: String?
-    let adult: Bool?
-    let overview, posterPath: String?
-    let popularity: Double?
-    let character, mediaType: String?
-    
-    var backdropURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
-    }
-    
-    var posterURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
-    }
-}
+// MARK: - Media === Movie
+//struct Media: Decodable, Identifiable {
+//    let id: Int?
+//    let video: Bool?
+//    let voteCount: Int?
+//    let voteAverage: Double?
+//    let title, releaseDate, originalLanguage, originalTitle: String?
+//    let genreIDS: [Int]?
+//    let backdropPath: String?
+//    let adult: Bool?
+//    let overview, posterPath: String?
+//    let popularity: Double?
+//    let character, mediaType: String?
+//    
+//    var backdropURL: URL {
+//        return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
+//    }
+//    
+//    var posterURL: URL {
+//        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
+//    }
+//}
 
 // MARK: - Person
 struct Person: Decodable {
@@ -56,7 +55,7 @@ struct Person: Decodable {
     let gender: Int?
     let name: String?
     let id: Int?
-    let knownFor: [Media]?
+    let knownFor: [Movie]?
     let knownForDepartment, profilePath: String?
     let popularity: Double?
     

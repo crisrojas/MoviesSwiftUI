@@ -11,7 +11,7 @@ import Foundation
 
 class ActorViewModel: ObservableObject {
    
-    @Published var model: CreditsResponse? = .localCredits
+    @Published var model: CreditsResponse?
     @Published var error: NSError?
     
     private var repository: MovieRepositoryInput
@@ -32,9 +32,8 @@ class ActorViewModel: ObservableObject {
 extension ActorViewModel: MovieRepositoryOutput {
      func didRetrieveCredits(result: Result<CreditsResponse, Error>) {
         switch result {
-        case .success(let credits):
-            self.model = credits
-            print(self.model!)
+        case .success(let response):
+            self.model = response
         case .failure(let error):
             self.error = error as NSError
            

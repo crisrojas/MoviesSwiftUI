@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 
@@ -29,6 +30,14 @@ struct K {
         UINavigationBar.appearance().tintColor = K.textStrongColor
     }
     
-    
-    
+    static func setUpListAppearance() {
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+    }
+}
+
+struct bgGradient: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!).opacity(1)]),startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
+    }
 }

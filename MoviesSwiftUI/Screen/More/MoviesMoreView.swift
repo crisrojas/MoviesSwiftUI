@@ -12,7 +12,6 @@ struct MoviesMoreView: View {
     
     @ObservedObject private var upcomingViewModel = MoviesMoreViewModel()
     @ObservedObject private var topRatedViewModel = MoviesMoreViewModel()
-    @ObservedObject private var popularViewModel = MoviesMoreViewModel()
     
     var body: some View {
         NavigationView {
@@ -39,25 +38,25 @@ struct MoviesMoreView: View {
                     }
                 }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
                 
-                Group {
-                    if !popularViewModel.model.isEmpty {
-                        MovieBackdropCarouselView(title: "Popular", movies: popularViewModel.model)
-                    } else {
-                        LoadingView(isLoading: popularViewModel.isLoading, error: topRatedViewModel.error) {
-                            self.popularViewModel.loadPopular()
-                        }
-                    }
-                }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
-                
+//                Group {
+//                    if !popularViewModel.model.isEmpty {
+//                        MovieBackdropCarouselView(title: "Popular", movies: popularViewModel.model)
+//                    } else {
+//                        LoadingView(isLoading: popularViewModel.isLoading, error: topRatedViewModel.error) {
+//                            self.popularViewModel.loadPopular()
+//                        }
+//                    }
+//                }.listRowInsets(EdgeInsets(top: 14, leading: 0, bottom: 8, trailing: 0))
+//
                 
             }.navigationBarTitle("")
             .navigationBarHidden(true)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+            .background(bgGradient())
         }
         .onAppear() {
             self.upcomingViewModel.loadUpcoming()
             self.topRatedViewModel.loadTopRated()
-            self.popularViewModel.loadPopular()
+            //self.popularViewModel.loadPopular()
         }
     }
 }

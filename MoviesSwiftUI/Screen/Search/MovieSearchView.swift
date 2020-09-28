@@ -31,14 +31,14 @@ struct MovieSearchView: View {
                     ForEach(self.movieSearchViewModel.movies!) { movie in
                         NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                             VStack(alignment: .leading) {
-                                Text(movie.title)
+                                Text(movie.title ?? "Unknown title")
                                 Text(movie.yearText)
                             }
                         }
                         
                     }
                 }
-            }.background(LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+            }.background(bgGradient())
             .onAppear {
                 self.movieSearchViewModel.stateObserve()
             }
