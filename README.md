@@ -18,7 +18,7 @@ Highly inspired by the [Movie App design of Emre Secer](https://dribbble.com/sho
 - [x] ~~Infinity scroll for MovieListGenresView~~
 - [x] ~~Add three points ("...") to the truncated movie overview text at ActorView~~
 - [x] ~~Home Screen: Fetch genres~~
-- [x] ~~Home screen: the "view all" button gets the user to the selected list~~~
+- [x] ~~Home screen: the "view all" button gets the user to the selected list~~
 
 **Problems to fix**
 

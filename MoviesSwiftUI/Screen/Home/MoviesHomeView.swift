@@ -14,22 +14,26 @@ struct MoviesHomeView: View {
     @ObservedObject private var popularViewModel = MoviesHomeViewModel()
     @ObservedObject private var nowPlayingViewModel = MoviesHomeViewModel()
     
+    init() {
+        K.setUpNavBarAppearance()
+    }
     
     var body: some View {
         
         NavigationView {
             ScrollView {
+              
                 VStack {
-                    //MoviesHomeTitle()
-                    MoviesHomePopularCaroussel(movies: self.popularViewModel.movies).padding(.top, 40)
+                    MoviesHomeTitle()
+                    MoviesHomePopularCaroussel(movies: self.popularViewModel.movies).padding(.top, 60)
                     MoviesHomeGenres()
                     MoviesHomeGrid(movies: self.nowPlayingViewModel.movies)
                 }.padding(30)
-                    
                 
-            }
-            .background(bgGradient())
-            .navigationBarTitle("🎬 moVieLabs")
+                
+                }.background(bgGradient())
+                .navigationBarTitle(Text("🎬 moVieLabs").font(.headline))
+            .navigationBarHidden(true)
         }
         .onAppear() {
             self.popularViewModel.loadPopular()
@@ -41,8 +45,12 @@ struct MoviesHomeView: View {
 
 struct MoviesHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesHomeView()
-            .previewDevice("iPhone 11")
+        Group {
+            MoviesHomeView()
+                .preferredColorScheme(.dark)
+            MoviesHomeView()
+                .previewDevice("iPhone SE (2nd generation)")
+        }
     }
 }
 
@@ -76,6 +84,7 @@ struct MoviesHomeSectionHeader<Content: View>: View {
                     .foregroundColor(Color(K.textStrongColor!))
                     .fontWeight(.bold)
                     .font(.system(.callout, design: .rounded))
+                .navigationBarHidden(false)
             }
             
         }
