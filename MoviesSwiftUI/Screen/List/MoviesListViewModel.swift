@@ -102,7 +102,7 @@ extension MoviesListViewModel: MovieRepositoryOutput {
     func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {
         switch result {
         case .success(let response):
-            self.model = response.results
+            self.model.append(contentsOf: response.results)
             self.page += 1
         case .failure(let error):
             print(error)
