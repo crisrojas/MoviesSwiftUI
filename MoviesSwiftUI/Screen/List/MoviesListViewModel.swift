@@ -12,12 +12,21 @@ protocol MoviesListViewModelInput {
     var model: [Movie] { get set }
 }
 
-class MoviesListViewModel: ObservableObject, MoviesListViewModelInput {
+enum MoviesListState {
+    case loading, success, error
+    var isLoading: Bool {
+        self == .loading
+    }
+}
+
+
+class MoviesListViewModel: ObservableObject {
     
     @Published var model: [Movie] = []
     @Published var genres: [Genre] = []
     @Published var isLoading = false
     @Published var error: NSError?
+    
     
     //private var endpoint: String?
     private var page: Int = 1
@@ -56,8 +65,6 @@ class MoviesListViewModel: ObservableObject, MoviesListViewModelInput {
         }
     }
 
-    /// Loads now playing.
-    /// Current item is used to check if list item is last (necessary for infinite scrolling)
     func loadNowPlaying(currentItem: Int? = nil) {
         if !shouldLoad(currentItem: currentItem) {
             return
@@ -72,7 +79,7 @@ class MoviesListViewModel: ObservableObject, MoviesListViewModelInput {
                    return
                }
                
-               self.isLoading = false
+         self.isLoading = false
         self.movieRepository.fetchPopular(page: page)
     }
     

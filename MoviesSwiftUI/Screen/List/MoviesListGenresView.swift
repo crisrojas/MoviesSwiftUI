@@ -16,14 +16,7 @@ struct MoviesListGenresView: View {
     
     @ObservedObject var moviesViewModel = MoviesListViewModel()
     let id: Int
-    
-    init(id: Int) {
-       // self.moviesViewModel = moviesViewModel
-       self.id = id
-       //K.setUpNavBarAppearance()
-        //K.setUpListAppearance()
-    }
-    
+ 
     var body: some View {
             List(self.moviesViewModel.model) { movie in
                 
