@@ -13,17 +13,23 @@ struct MoviesHomePopularCaroussel: View {
     let movies : [Movie]
     var body: some View {
         VStack(alignment: .leading) {
-            MoviesHomeSectionHeader(title: "Popular movies", viewAllDestination: MoviesListView(endpoint: "popular"))
+            MoviesHomeSectionHeader(title: "Popular Movies", viewAllDestination: LazyView { MoviesListView(title: "Popular", endpoint: .popular) })
             ScrollView(.horizontal) {
                 HStack(spacing: 15) {
                     ForEach(movies) { movie in
                         NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
                             ZStack {
-                                Rectangle()
-                                    .fill(Color(K.primaryColor!))
-                                    .cornerRadius(20)
-                                Text("Not found")
+                              
                                 KFImage(movie.backdropURL)
+                                    .placeholder {
+                                        Rectangle()
+                                            .fill(Color(K.primaryColor!))
+                                            .cornerRadius(20)
+                                        Text("Not found")
+                                        Image(systemName: "arrow.2.circlepath.circle")
+                                            .font(.largeTitle)
+                                            .opacity(0.3)
+                                    }
                                     .renderingMode(.original)
                                     .resizable()
                                     .frame(width:350, height:200)
@@ -34,21 +40,24 @@ struct MoviesHomePopularCaroussel: View {
                                     
                                     .offset(y:50)
                                 
-                                VStack(alignment: .leading) {
-                                    Text(movie.title ?? "Unknown title")
-                                        .font(.system(.headline, design: .rounded))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Color.white)
-                                    if movie.genres != nil {
-                                        Text("Action, Adventure, Comedy")
-                                        .font(.system(.caption, design: .rounded))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Color.white)
-                                            .multilineTextAlignment(.leading)
-                                            .opacity(0.6)
-                                    }
-                                }.offset(x: -100, y: 50)
-                            }.cornerRadius(20).frame(width: 350)
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(movie.title ?? "Unknown title")
+                                            .font(.system(.title, design: .rounded))
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.white)
+                                        if movie.genres != nil {
+                                            Text("Action, Adventure, Comedy")
+                                            .font(.system(.caption, design: .rounded))
+                                            .fontWeight(.heavy)
+                                            .foregroundColor(Color.white)
+                                                .multilineTextAlignment(.leading)
+                                                .opacity(0.6)
+                                        }
+                                    }.padding(.leading, 30).offset(y:40)
+                                    Spacer()
+                                }
+                            }.cornerRadius(20).frame(width: 350, height:200)
                             
                         }.padding(.leading, movie.id == self.movies.first!.id ? 30 : 0)
                     }

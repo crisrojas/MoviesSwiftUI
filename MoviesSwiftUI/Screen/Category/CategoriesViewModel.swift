@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GenresListViewModel: ObservableObject {
+class CategoriesViewModel: ObservableObject {
     
     @Published var model: [Genre]?
     
@@ -24,7 +24,7 @@ class GenresListViewModel: ObservableObject {
     }
 }
 
-extension GenresListViewModel: MovieRepositoryOutput {
+extension CategoriesViewModel: MovieRepositoryOutput {
     func didRetrieveGenres(result: Result<GenresResponse, Error>) {
         switch result {
         case .success(let response):

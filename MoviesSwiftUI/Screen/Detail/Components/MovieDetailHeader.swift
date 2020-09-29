@@ -18,12 +18,19 @@ struct MovieDetailHeader: View {
         Group {
             VStack {
                 ZStack {
-                    Rectangle()
-                        .fill(Color(K.primaryColor!))
-                        .cornerRadius(8)
-                        .shadow(radius: 8)
-                    Text("No poster")
+                   
                     KFImage(self.movie.posterURL)
+                        .placeholder {
+                            ZStack {
+                                Rectangle()
+                                    .fill(Color(K.primaryColor!))
+                                    .cornerRadius(8)
+                                    .shadow(radius: 8)
+                                Image(systemName: "arrow.2.circlepath.circle")
+                                    .font(.largeTitle)
+                                    .opacity(0.3)
+                            }
+                        }
                         .resizable()
                         .cornerRadius(8)
                         .shadow(radius: 8)
@@ -62,7 +69,7 @@ struct MovieDetailHeader: View {
                 Text(self.movie.ratingStarsOutOfFive)
                     .padding(.top, 10)
                     .foregroundColor(Color.orange)
-            }.padding(.top, 60)
+            }.padding(.top, 110)
                 .background(
                     ZStack {
                         KFImage(self.movie.backdropURL)

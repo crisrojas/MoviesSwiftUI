@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct GenreButton: View {
+struct CategoryButton: View {
     let genreId: Int
     let genre: String
     let color: Color
     var body: some View {
-        NavigationLink(destination: MoviesListGenresView(id: genreId)) {
+        NavigationLink(destination: LazyView { MoviesListView(title: genre, endpoint: .genre, genreId: genreId) }) {
             
             ZStack {
                 Rectangle()
@@ -33,7 +33,7 @@ struct GenreButton: View {
 
 struct GenreButton_Previews: PreviewProvider {
     static var previews: some View {
-        GenreButton(genreId: 28, genre: "Adventure", color: Color(#colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)))
+        CategoryButton(genreId: 28, genre: "Adventure", color: Color(#colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)))
             .padding()
             .previewLayout(.sizeThatFits)
     }

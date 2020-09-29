@@ -22,7 +22,7 @@ struct ActorView: View {
                 }
                 
                 if self.actorViewModel.model!.person!.knownFor != nil {
-                    KnownFor(knownFor: self.actorViewModel.model!.person!.knownFor!)
+                    KnownFor(knownFor: self.actorViewModel.model!.person!.knownFor!).padding(.top, 20)
                 }
             }
             

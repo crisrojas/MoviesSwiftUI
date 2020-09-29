@@ -57,6 +57,7 @@ struct ContentView: View {
         
         let appearance = UITabBar.appearance()
         
+        
         appearance.backgroundColor = K.themeColor
     
         appearance.shadowImage =  UIImage.getShadow()
@@ -78,7 +79,7 @@ struct ContentView_Previews: PreviewProvider {
 extension UIImage {
     static func getShadow() -> UIImage {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 20)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 1, height: 10)
         
         let color1 = K.primaryColor!.cgColor.copy(alpha: 0.4)!
         let color2: CGColor = UIColor.white.cgColor.copy(alpha: 0)!

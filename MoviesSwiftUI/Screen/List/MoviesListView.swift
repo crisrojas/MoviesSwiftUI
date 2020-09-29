@@ -10,36 +10,67 @@ import Moya
 import struct Kingfisher.KFImage
 import SwiftUI
 
+enum MovieListViewEndpoint {
+    case popular
+    case nowPlaying
+    case genre
+}
+
 struct MoviesListView: View {
     
-    @ObservedObject var moviesViewModel = MoviesListViewModel()
-    let endpoint: String?
+    @ObservedObject var moviesViewModel: MoviesListViewModel
+    let title: String
+    let endpoint: MovieListViewEndpoint
+    let genreId: Int?
     
-    init(endpoint: String) {
-       self.endpoint = endpoint
-       //K.setUpNavBarAppearance()
-       //K.setUpListAppearance()
+    
+    init(title: String, endpoint: MovieListViewEndpoint, genreId: Int? = nil) {
+        self.genreId = genreId
+        self.title = title
+        self.endpoint = endpoint
+        moviesViewModel = MoviesListViewModel()
     }
     
     var body: some View {
-            List(self.moviesViewModel.model) { movie in
-                
-                NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+        
+        List(self.moviesViewModel.model) { movie in
+            
+            ZStack {
+                NavigationLink(destination: LazyView { MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id)) }) {
                     MoviesRow(movie: movie)
-                       
-                        .onAppear() {
-                            self.moviesViewModel.loadMovies(endpoint: self.endpoint, currentItem: movie.id)
-                    }
-                }
-                
-            }.background(bgGradient())
-         
-            .onAppear() {
-                if self.moviesViewModel.model.isEmpty {
-                    self.moviesViewModel.loadMovies(endpoint: self.endpoint)
+                }.onAppear {
+                    loadData(currentItem: movie.id)
                 }
             }
+            
+            
+        }.background(bgGradient())
+        .navigationBarTitle(Text(title), displayMode: .inline)
         
+        .onAppear() {
+            if moviesViewModel.model.isEmpty {
+               loadData()
+            }
+        }
+    }
+    
+    func loadData(currentItem: Int? = nil) {
+        switch endpoint {
+        case .popular:
+            moviesViewModel.loadPopular(currentItem: currentItem)
+        case .nowPlaying:
+            moviesViewModel.loadNowPlaying(currentItem: currentItem)
+        case .genre:
+            guard let id = genreId else { return }
+            moviesViewModel.loadGenre(id: id, currentItem: currentItem)
+        }
     }
 }
 
+extension MoviesListView: MoviesListVMOutput {
+    func didUpdate(state: MoviesListViewState) {
+        //
+    }
+    
+    
+}

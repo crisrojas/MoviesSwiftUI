@@ -12,13 +12,16 @@ protocol MoviesListViewModelInput {
     var model: [Movie] { get set }
 }
 
-enum MoviesListState {
+enum MoviesListViewState {
     case loading, success, error
     var isLoading: Bool {
         self == .loading
     }
 }
 
+protocol MoviesListVMOutput {
+    func didUpdate(state: MoviesListViewState)
+}
 
 class MoviesListViewModel: ObservableObject {
     
@@ -26,7 +29,7 @@ class MoviesListViewModel: ObservableObject {
     @Published var genres: [Genre] = []
     @Published var isLoading = false
     @Published var error: NSError?
-    
+    //let view: MoviesListVMOutput
     
     //private var endpoint: String?
     private var page: Int = 1
@@ -34,13 +37,15 @@ class MoviesListViewModel: ObservableObject {
     
     private var movieRepository: MovieRepositoryInput
     
-    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
+    init(/*todo: view: MoviesListVMOutput, */movieRepository: MovieRepositoryInput = MovieRepository()) {
+        //self.view = view
+        print("Instance of MoviesListViewModel created")
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
     
-    func loadGenres() {
-        self.movieRepository.fetchGenres()
+    deinit {
+        print("Instance of MovieListViewModel deleted")
     }
     
     func loadGenre(id: Int, currentItem: Int? = nil) {
@@ -49,20 +54,6 @@ class MoviesListViewModel: ObservableObject {
         }
         
         self.movieRepository.fetchGenre(id: id, page: page)
-    }
-    
-    func loadMovies(endpoint: String? = nil, currentItem: Int? = nil) {
-        switch endpoint {
-        case "nowPlaying":
-            loadNowPlaying(currentItem: currentItem)
-        case "popular":
-            loadPopular(currentItem: currentItem)
-        case nil: do {
-            loadPopular(currentItem: currentItem)
-        }
-        default:
-            break
-        }
     }
 
     func loadNowPlaying(currentItem: Int? = nil) {
@@ -82,30 +73,12 @@ class MoviesListViewModel: ObservableObject {
          self.isLoading = false
         self.movieRepository.fetchPopular(page: page)
     }
-    
-    private func shouldLoad(currentItem: Int?) -> Bool {
-        if currentlyLoading {
-            return false
-        }
-        
-        guard let currentItem = currentItem else { return true }
-        guard let lastItem = model.last else { return true }
-        
-        return currentItem == lastItem.id
-    }
-    
 }
 
+
+// MARK: RepositoryOutput methods
 extension MoviesListViewModel: MovieRepositoryOutput {
-    func didRetrieveGenres(result: Result<GenresResponse, Error>) {
-        switch result {
-        case .success(let response):
-            self.genres = response.genres
-        case .failure(let error):
-            self.error = error as NSError
-            print(error)
-        }
-    }
+    
     func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {
         switch result {
         case .success(let response):
@@ -120,6 +93,22 @@ extension MoviesListViewModel: MovieRepositoryOutput {
     }
     func didRetrievePopular(result: Result<MovieResponse, Error>) {
         didRetrieveData(result: result)
+    }
+}
+
+
+// MARK: Private methods
+private extension MoviesListViewModel {
+    
+     func shouldLoad(currentItem: Int?) -> Bool {
+        if currentlyLoading {
+            return false
+        }
+        
+        guard let currentItem = currentItem else { return true }
+        guard let lastItem = model.last else { return true }
+        
+        return currentItem == lastItem.id
     }
     
     private func didRetrieveData(result: Result<MovieResponse, Error>) {

@@ -14,17 +14,21 @@ struct MoviesRow: View {
     var body: some View {
         HStack(spacing: 24) {
             ZStack {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .cornerRadius(4)
-                    .frame(width: 66, height: 100)
-                Text("Not found")
-                    .font(.caption)
-                    .foregroundColor(Color(K.textStrongColor!))
                 KFImage(self.movie.posterURL)
+                    .placeholder {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .cornerRadius(4)
+                            .frame(width: 66, height: 100)
+                           Image(systemName: "arrow.2.circlepath.circle")
+                               .font(.largeTitle)
+                               .opacity(0.3)
+                       }
+                    .cancelOnDisappear(true)
                     .resizable()
                     .cornerRadius(4)
                     .frame(width: 66, height: 100)
+                    
                     
             }
             VStack(alignment: .leading, spacing: 4) {
@@ -33,7 +37,7 @@ struct MoviesRow: View {
                     .fontWeight(.heavy)
                     .font(.system(.headline, design: .rounded))
 
-                Group {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(movie.overview.prefix(90) + "...")
                         .fontWeight(.bold)
                     Text(movie.ratingText)

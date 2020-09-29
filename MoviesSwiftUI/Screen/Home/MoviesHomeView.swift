@@ -14,10 +14,6 @@ struct MoviesHomeView: View {
     @ObservedObject private var popularViewModel = MoviesHomeViewModel()
     @ObservedObject private var nowPlayingViewModel = MoviesHomeViewModel()
     
-    init() {
-        K.setUpNavBarAppearance()
-    }
-    
     var body: some View {
         
         NavigationView {
@@ -26,15 +22,15 @@ struct MoviesHomeView: View {
                 VStack {
                     MoviesHomeTitle()
                     MoviesHomePopularCaroussel(movies: self.popularViewModel.movies).padding(.top, 60)
-                    MoviesHomeGenres()
+                    TrendingCategory()
                     MoviesHomeGrid(movies: self.nowPlayingViewModel.movies)
+                    
                 }.padding(30)
                 
-                
                 }.background(bgGradient())
-                .navigationBarTitle(Text("🎬 moVieLabs").font(.headline))
-            .navigationBarHidden(true)
-        }
+                .navigationBarTitle("Home")
+                .navigationBarHidden(true)
+        } .navigationViewStyle(StackNavigationViewStyle())
         .onAppear() {
             self.popularViewModel.loadPopular()
             self.nowPlayingViewModel.loadNowPlaying()

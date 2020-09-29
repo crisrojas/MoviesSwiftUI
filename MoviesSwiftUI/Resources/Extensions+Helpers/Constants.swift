@@ -21,18 +21,29 @@ struct K {
     
     static func setUpNavBarAppearance() {
         let appearance = UINavigationBarAppearance()
-               appearance.configureWithTransparentBackground()
-               
-               UINavigationBar.appearance().scrollEdgeAppearance = appearance
-               UINavigationBar.appearance().standardAppearance = appearance
-               
-               
-        UINavigationBar.appearance().tintColor = K.textStrongColor
+        appearance.configureWithTransparentBackground()
+        
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//        UINavigationBar.appearance().standardAppearance = appearance
+        
+        
+        let coloredAppearance = UINavigationBarAppearance()
+        coloredAppearance.configureWithTransparentBackground()
+//        coloredAppearance.backgroundColor = K.primaryColor
+        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//        UINavigationBar.appearance().standardAppearance = coloredAppearance
+//        UINavigationBar.appearance().compactAppearance = coloredAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+//        UINavigationBar.appearance().tintColor = K.textStrongColor
+        
     }
     
     static func setUpListAppearance() {
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
+        UITableView.appearance().separatorStyle = .none
     }
 }
 
