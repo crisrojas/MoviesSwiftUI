@@ -41,7 +41,7 @@ extension MoviesHomeViewModel: MovieRepositoryOutput {
     private func didRetrieveList(result: Result<MovieResponse, Error>) {
         switch result {
         case .success(let response):
-            self.movies.append(contentsOf: response.results)
+            self.movies = response.results
         case .failure(let error):
             print(error)
         }

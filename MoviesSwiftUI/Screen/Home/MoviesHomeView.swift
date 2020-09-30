@@ -18,7 +18,6 @@ struct MoviesHomeView: View {
         
         NavigationView {
             ScrollView {
-              
                 VStack {
                     MoviesHomeTitle()
                     MoviesHomePopularCaroussel(movies: self.popularViewModel.movies).padding(.top, 60)
@@ -29,7 +28,7 @@ struct MoviesHomeView: View {
                 
                 }.background(bgGradient())
                 .navigationBarTitle("Home")
-                .navigationBarHidden(true)
+                //.navigationBarHidden(true)
         } .navigationViewStyle(StackNavigationViewStyle())
         .onAppear() {
             self.popularViewModel.loadPopular()
@@ -80,7 +79,7 @@ struct MoviesHomeSectionHeader<Content: View>: View {
                     .foregroundColor(Color(K.textStrongColor!))
                     .fontWeight(.bold)
                     .font(.system(.callout, design: .rounded))
-                .navigationBarHidden(false)
+                .navigationBarHidden(true)
             }
             
         }
