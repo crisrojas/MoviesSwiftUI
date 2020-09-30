@@ -51,7 +51,6 @@ extension MovieDb: TargetType {
         case .genre:
             return "/discover/movie"
         }
-       
     }
     
     var method: Moya.Method {
@@ -117,8 +116,6 @@ extension MovieDb: TargetType {
                 ],
                 encoding: URLEncoding.default)
         }
-        
-        
     }
     
     var headers: [String : String]? {

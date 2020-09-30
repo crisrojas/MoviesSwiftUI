@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+//todo: move to test target and delete from main target
 extension Bundle {
     /// Allows to decode a local file
     func loadAndDecodeJSON<D: Decodable>(filename: String) throws -> D? {

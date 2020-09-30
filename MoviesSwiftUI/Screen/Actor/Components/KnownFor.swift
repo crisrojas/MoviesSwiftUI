@@ -45,7 +45,7 @@ struct KnownFor: View {
                                 .font(.system(.caption, design: .rounded))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color(K.textSoftColor!))
-                                .padding(.top, 10)
+                                //.padding(.top, 10)
                         }
                     }.padding(.top, 20)
                 }

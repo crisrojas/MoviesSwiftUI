@@ -26,29 +26,6 @@ struct CreditsResponse: Decodable {
     let person: Person?
 }
 
-// MARK: - Media === Movie
-//struct Media: Decodable, Identifiable {
-//    let id: Int?
-//    let video: Bool?
-//    let voteCount: Int?
-//    let voteAverage: Double?
-//    let title, releaseDate, originalLanguage, originalTitle: String?
-//    let genreIDS: [Int]?
-//    let backdropPath: String?
-//    let adult: Bool?
-//    let overview, posterPath: String?
-//    let popularity: Double?
-//    let character, mediaType: String?
-//    
-//    var backdropURL: URL {
-//        return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
-//    }
-//    
-//    var posterURL: URL {
-//        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
-//    }
-//}
-
 // MARK: - Person
 struct Person: Decodable {
     let adult: Bool?
@@ -63,7 +40,6 @@ struct Person: Decodable {
         return URL(string: "https://image.tmdb.org/t/p/w500\(profilePath ?? "")")!
     }
 }
-
 
 extension CreditsResponse {
     static var mock: CreditsResponse = CreditsResponse(creditType: "", department: "", job: "", media: nil, mediaType: "", id: "", person: nil)

@@ -31,7 +31,7 @@ protocol MovieRepositoryOutput: class {
     func didRetrieveMovie(result: Result<Movie, Error>)
     func didRetrieveCredits(result: Result<CreditsResponse, Error>)
     func didRetrieveGenres(result: Result<GenresResponse, Error>)
-    func didRetrieveGenre(result: Result<DiscoverResponse, Error>)
+    func didRetrieveGenre(result: Result<MovieResponse, Error>)
 }
 
 extension MovieRepositoryOutput {
@@ -43,15 +43,17 @@ extension MovieRepositoryOutput {
     func didRetrieveMovie(result: Result<Movie, Error>) {}
     func didRetrieveCredits(result: Result<CreditsResponse, Error>) {}
     func didRetrieveGenres(result: Result<GenresResponse, Error>) {}
-    func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {}
+    func didRetrieveGenre(result: Result<MovieResponse, Error>) {}
 }
 
 class MovieRepository: MovieRepositoryInput {
     
     weak var output: MovieRepositoryOutput?
+    private let api: MovieDbApi
     
-    private let api = MoyaProvider<MovieDb>()
-    
+    init(api: MovieDbApi = MoyaProvider<MovieDb>()) {
+        self.api = api
+    }
     func fetchNowPlaying(page: Int? = 1) {
         api.getNowPlaying(page: page!) { [weak output] (result) in
             output?.didRetrieveNowPlaying(result: result)

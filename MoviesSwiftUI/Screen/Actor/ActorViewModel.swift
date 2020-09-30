@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol ActorViewModelInput {
+    var model: CreditsResponse? { get set }
+    func loadCredits()
+}
+
 
 class ActorViewModel: ObservableObject {
    

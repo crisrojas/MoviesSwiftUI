@@ -20,7 +20,7 @@ protocol MovieDbApi {
     func getSearch(query: String, completion: @escaping MovieCompletion<MovieResponse>)
     func getCredits(id: String, completion: @escaping MovieCompletion<CreditsResponse>)
     func getGenres(completion: @escaping MovieCompletion<GenresResponse>)
-    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<DiscoverResponse>)
+    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<MovieResponse>)
 }
 
 extension MoyaProvider: MovieDbApi where Target == MovieDb {
@@ -72,7 +72,7 @@ extension MoyaProvider: MovieDbApi where Target == MovieDb {
         }
    }
     
-    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<DiscoverResponse>) {
+    func getGenre(id: Int, page: Int, completion: @escaping MovieCompletion<MovieResponse>) {
         request(.genre(id: id, page: page)) { result in
             completion(result.mapResponse())
         }
@@ -88,11 +88,11 @@ extension Result where Success == Moya.Response, Failure == MoyaError {
                 let object: Object = try response.map(Object.self, using: Utils.jsonDecoder)
                 return .success(object)
             } catch {
-                return .failure(error)
+                return .failure(.noData)
             }
         case .failure(let error):
-            let error = error
-            return .failure(error)
+            print(error)
+            return .failure(.noData)
         }
     }
 }

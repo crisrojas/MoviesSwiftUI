@@ -1,15 +1,13 @@
 //
 //  Utils.swift
-//  MoviesSwiftUI
+//  MoviesSwiftUITests
 //
-//  Created by cristian on 10/09/2020.
+//  Created by cristian on 01/10/2020.
 //  Copyright © 2020 cristian. All rights reserved.
 //
 
 import Foundation
 
-//todo: move to test folder and delete from main target
-// Public jsonDecoder used in the repository
 class Utils {
     
     static let jsonDecoder : JSONDecoder = {
@@ -25,4 +23,3 @@ class Utils {
         return dateFormatter
     }()
 }
-

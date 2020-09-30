@@ -51,7 +51,7 @@ struct ActorViewHeader: View {
                 
                 
                 
-            }.padding(.top, 110)
+            }.padding(.top, 140)
             
         }.frame(height:350)
     }

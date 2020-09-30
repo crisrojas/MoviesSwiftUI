@@ -25,7 +25,7 @@ protocol MoviesListVMOutput {
 
 class MoviesListViewModel: ObservableObject {
     
-    @Published var model: [Movie] = []
+    @Published var movies: [Movie] = []
     @Published var genres: [Genre] = []
     @Published var isLoading = false
     @Published var error: NSError?
@@ -38,7 +38,7 @@ class MoviesListViewModel: ObservableObject {
     private var movieRepository: MovieRepositoryInput
     
     init(/*todo: view: MoviesListVMOutput, */movieRepository: MovieRepositoryInput = MovieRepository()) {
-        //self.view = view
+        
         print("Instance of MoviesListViewModel created")
         self.movieRepository = movieRepository
         self.movieRepository.output = self
@@ -79,10 +79,10 @@ class MoviesListViewModel: ObservableObject {
 // MARK: RepositoryOutput methods
 extension MoviesListViewModel: MovieRepositoryOutput {
     
-    func didRetrieveGenre(result: Result<DiscoverResponse, Error>) {
+    func didRetrieveGenre(result: Result<MovieResponse, Error>) {
         switch result {
         case .success(let response):
-            self.model.append(contentsOf: response.results)
+            self.movies.append(contentsOf: response.results)
             self.page += 1
         case .failure(let error):
             print(error)
@@ -106,7 +106,7 @@ private extension MoviesListViewModel {
         }
         
         guard let currentItem = currentItem else { return true }
-        guard let lastItem = model.last else { return true }
+        guard let lastItem = movies.last else { return true }
         
         return currentItem == lastItem.id
     }
@@ -114,7 +114,7 @@ private extension MoviesListViewModel {
     private func didRetrieveData(result: Result<MovieResponse, Error>) {
         switch result {
         case .success(let response):
-            self.model.append(contentsOf: response.results)
+            self.movies.append(contentsOf: response.results)
             self.page += 1
         case .failure(let error):
             self.error = error as NSError

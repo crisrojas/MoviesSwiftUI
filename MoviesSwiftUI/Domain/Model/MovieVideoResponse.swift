@@ -13,3 +13,18 @@ struct MovieVideoResponse: Decodable {
     
     let results: [MovieVideo]
 }
+
+struct MovieVideo: Decodable, Identifiable {
+    
+    let id: String
+    let key: String
+    let name: String
+    let site: String
+    
+    var youtubeURL: URL? {
+        guard site == "YouTube" else {
+            return nil
+        }
+        return URL(string: "https://www.youtube.com/watch?v=\(key)")
+    }
+}

@@ -33,7 +33,7 @@ struct MoviesListView: View {
     
     var body: some View {
         
-        List(self.moviesViewModel.model) { movie in
+        List(self.moviesViewModel.movies) { movie in
             
             ZStack {
                 NavigationLink(destination: LazyView { MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id)) }) {
@@ -48,7 +48,7 @@ struct MoviesListView: View {
         .navigationBarTitle(Text(title), displayMode: .inline)
         
         .onAppear() {
-            if moviesViewModel.model.isEmpty {
+            if moviesViewModel.movies.isEmpty {
                loadData()
             }
         }

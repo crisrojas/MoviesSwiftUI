@@ -9,7 +9,7 @@
 import Foundation
 
 
-enum MovieError: Error {
+enum Error: Swift.Error {
     
     case apiError
     case invalidEndpoint

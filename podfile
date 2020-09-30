@@ -1,4 +1,8 @@
 target 'MoviesSwiftUI' do
 	pod 'Kingfisher/SwiftUI'
 	pod 'Moya', '~> 14.0'
+
+	target 'MoviesSwiftUITests' do
+		inherit! :search_paths
+	end
 end
