@@ -25,7 +25,7 @@ extension Bundle {
        guard let bundle = Bundle(identifier: "fr.v-labs.MoviesSwiftUITests") else { return nil }
        guard let url = bundle.url(forResource: filename, withExtension: "json") else { return nil }
        let data = try Data(contentsOf: url)
-       let jsonDecoder = Utils.jsonDecoder
+       let jsonDecoder = Tools.jsonDecoder
        let decodedModel = try jsonDecoder.decode(D.self, from: data)
        return decodedModel
    }

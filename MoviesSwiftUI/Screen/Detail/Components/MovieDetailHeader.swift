@@ -59,6 +59,8 @@ struct MovieDetailHeader: View {
                 }.frame(width:230, height: 310)
                 
                 Text(self.movie.title ?? "Unknown title")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 24, weight: .heavy, design: .rounded))
                     .foregroundColor(Color(K.textStrongColor!))
                     .padding(.top, 20)

@@ -13,8 +13,16 @@ struct ActorViewHeader: View {
     let cast: CreditsResponse
     var body: some View {
         ZStack {
-           
+            
             KFImage(self.cast.person!.profileURL)
+                .placeholder {
+                    // Temporary fix: without a item that takes the full width the header shows a leading padding
+                        Image(systemName: "play")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .opacity(0.1)
+                    
+                }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .saturation(0.5)
@@ -26,6 +34,7 @@ struct ActorViewHeader: View {
                 ZStack {
                     Rectangle()
                         .foregroundColor(Color(K.primaryColor!))
+
                     VStack {
                         Text("😓")
                             .font(.system(size: 60))
@@ -33,10 +42,11 @@ struct ActorViewHeader: View {
                             .foregroundColor(Color(K.textStrongColor!))
                             .fontWeight(.heavy)
                     }
+                    
                     KFImage(self.cast.person!.profileURL)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                    
+
                 }.clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 6))
                     .shadow(color: Color.black.opacity(0.05), radius: 10)
@@ -56,9 +66,3 @@ struct ActorViewHeader: View {
         }.frame(height:350)
     }
 }
-
-//struct ActorViewHeader_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ActorViewHeader()
-//    }
-//}

@@ -9,5 +9,10 @@
 import XCTest
 
 class MoyaMovieDbTests: XCTestCase {
-
+    
+    var expectationTest: XCTestExpectation!
+    
+    func testGetTopRated() {
+        
+    }
 }

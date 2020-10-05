@@ -18,6 +18,17 @@ struct ActorAvatar: View {
         NavigationLink(destination: ActorView(actorViewModel: ActorViewModel(creditId: self.actor.creditId ?? ""))) {
             if self.actor.profilePath != nil {
                 KFImage(URL(string: self.actor.profileURL!))
+                    .placeholder {
+                        ZStack {
+                            Rectangle()
+                                .fill(Color(K.textSoftColor!).opacity(0.5))
+                                .frame(width:60, height:60)
+                                .cornerRadius(12)
+                            Image(systemName: "arrow.2.circlepath.circle")
+                                .font(.largeTitle)
+                                .opacity(0.3)
+                        }
+                    }
                     // necessary to render properly an image inside a navigationlink
                     .renderingMode(.original)
                     .resizable()

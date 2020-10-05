@@ -23,6 +23,9 @@ class MockMovieDbApi: MovieDbApi {
     
     var movieResponse: MovieResponse!
     var genresResponse: GenresResponse!
+    var creditsResponse: CreditsResponse!
+    var movie: Movie!
+    
     
     var withError: Bool
     
@@ -56,6 +59,12 @@ class MockMovieDbApi: MovieDbApi {
     
     func getMovie(id: Int, completion: @escaping MovieCompletion<Movie>) {
         isGetMovieCalled = true
+        
+        if withError {
+            completion(.failure(.noData))
+        } else {
+            completion(.success(movie))
+        }
     }
     
     func getSearch(query: String, completion: @escaping MovieCompletion<MovieResponse>) {
@@ -66,6 +75,12 @@ class MockMovieDbApi: MovieDbApi {
     
     func getCredits(id: String, completion: @escaping MovieCompletion<CreditsResponse>) {
         isGetCreditsCalled = true
+        
+        if withError {
+            completion(.failure(.noData))
+        } else {
+            completion(.success(creditsResponse))
+        }
     }
     
     func getGenres(completion: @escaping MovieCompletion<GenresResponse>) {

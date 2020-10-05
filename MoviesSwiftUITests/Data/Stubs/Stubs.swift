@@ -27,4 +27,9 @@ class Stubs {
         let movie = movies[0]
         return movie
     }
+    
+    static var credits: CreditsResponse {
+        let response: CreditsResponse? = try? Bundle.loadData(filename: "credit_info")
+        return response!
+    }
 }

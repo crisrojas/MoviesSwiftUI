@@ -33,6 +33,10 @@ class StubTestCase: XCTestCase {
         XCTAssertTrue(response != nil)
     }
     
+    func testCreditStubFileIsDecoded() {
+        let response: CreditsResponse? = try? Bundle.loadData(filename: "credit_info")
+        XCTAssertTrue(response != nil)
+    }
     
     
     

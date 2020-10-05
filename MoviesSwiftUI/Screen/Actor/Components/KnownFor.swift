@@ -19,17 +19,20 @@ struct KnownFor: View {
                 .foregroundColor(Color(K.textStrongColor!))
             ForEach(self.knownFor) { movie in
                 NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
-                    HStack(spacing: 30) {
+                    HStack(spacing: 20) {
                         
                         ZStack {
-                            Rectangle()
-                                .fill(Color(K.primaryColor!))
                             
-                            Text("Pic not found")
-                                .font(.system(.caption))
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(K.textStrongColor!))
                             KFImage(movie.posterURL)
+                                .placeholder {
+                                    Rectangle()
+                                        .fill(Color(K.primaryColor!))
+                                    
+                                    Text("Pic not found")
+                                        .font(.system(.caption))
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(K.textStrongColor!))
+                                }
                                 .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -52,7 +55,7 @@ struct KnownFor: View {
                 
                 
             }
-        }.padding(30)
+        }.padding(50)
     }
 }
 

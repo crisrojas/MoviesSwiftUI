@@ -15,10 +15,12 @@ struct SearchBarView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UISearchBar, context: Context) {
         uiView.text = text
+
     }
     
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
+        searchBar.barStyle = .black
         searchBar.placeholder = placeholder
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = context.coordinator

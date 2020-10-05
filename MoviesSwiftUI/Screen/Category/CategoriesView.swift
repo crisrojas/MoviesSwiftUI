@@ -14,20 +14,20 @@ struct CategoriesView: View {
     var body: some View {
         List {
             if self.categoryViewModel.model != nil {
-            ForEach(0..<self.categoryViewModel.model!.count) { i in
-                NavigationLink(destination: LazyView { MoviesListView(title: self.categoryViewModel.model![i].name, endpoint: .genre, genreId: self.categoryViewModel.model![i].id) }) {
-                    Text(self.categoryViewModel.model![i].name)
-                        .font(.system(.headline, design: .rounded))
-                        .foregroundColor(Color(K.textStrongColor!))
-                }.frame(height:60)
-                
-            }
+                ForEach(0..<self.categoryViewModel.model!.count) { i in
+                    NavigationLink(destination: LazyView { MoviesListView(title: self.categoryViewModel.model![i].name, endpoint: .genre, genreId: self.categoryViewModel.model![i].id) }) {
+                        Text(self.categoryViewModel.model![i].name)
+                            .font(.system(.headline, design: .rounded))
+                            .foregroundColor(Color(K.textStrongColor!))
+                    }.frame(height:60)
+                    
+                }
             } else {
                 LoadingView(isLoading: true, error: nil) {
                     self.categoryViewModel.loadGenres()
                 }
             }
-           
+            
         }.navigationBarTitle(Text("Categories"), displayMode: .inline)
         .onAppear() { self.categoryViewModel.loadGenres() }
         .background(bgGradient())

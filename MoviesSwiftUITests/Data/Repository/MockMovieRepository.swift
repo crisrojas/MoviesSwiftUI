@@ -70,7 +70,7 @@ class MockMovieRepository: MovieRepositoryInput {
         if withError {
             output?.didRetrieveCredits(result: .failure(.noData))
         } else {
-            output?.didRetrieveCredits(result: .success(.localCredits))
+            output?.didRetrieveCredits(result: .success(Stubs.credits))
         }
     }
     

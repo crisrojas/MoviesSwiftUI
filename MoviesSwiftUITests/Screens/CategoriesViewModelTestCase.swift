@@ -19,4 +19,11 @@ class CategoriesViewModelTestCase: XCTestCase {
 
         XCTAssertFalse(vm.model == nil)
     }
+    
+    func testGivenModleIsNil_WhenCallingLoadGenresWithError_ThenModelShouldStillNil() {
+        let repository = MockMovieRepository()
+        let vm = CategoriesViewModel(repository: repository)
+        
+        repository.withError = true
+    }
 }

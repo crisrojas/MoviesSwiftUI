@@ -12,7 +12,7 @@ import XCTest
 class MovieTests: XCTestCase {
     
     func testDecodable() {
-        let movieList = Movie.localMovies
+        let movieList = Stubs.movies
         let firstMovie = movieList.first
         XCTAssertEqual(movieList.count, 20)
         XCTAssertEqual(firstMovie?.title, "Bloodshot")   

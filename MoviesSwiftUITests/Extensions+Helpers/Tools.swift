@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Utils {
+class Tools {
     
     static let jsonDecoder : JSONDecoder = {
         let jsonDecoder = JSONDecoder()
