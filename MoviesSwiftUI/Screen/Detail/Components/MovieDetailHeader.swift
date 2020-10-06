@@ -18,7 +18,6 @@ struct MovieDetailHeader: View {
         Group {
             VStack {
                 ZStack {
-                   
                     KFImage(self.movie.posterURL)
                         .placeholder {
                             ZStack {

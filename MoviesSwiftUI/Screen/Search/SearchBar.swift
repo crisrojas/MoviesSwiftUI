@@ -20,7 +20,7 @@ struct SearchBarView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
-        searchBar.barStyle = .black
+        //searchBar.barStyle = .black
         searchBar.placeholder = placeholder
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = context.coordinator

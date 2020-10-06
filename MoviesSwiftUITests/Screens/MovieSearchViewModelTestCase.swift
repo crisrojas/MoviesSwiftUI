@@ -26,4 +26,15 @@ class MovieSearchViewModelTestCase: XCTestCase {
         vm.search(query: "")
         XCTAssertTrue(vm.movies == nil)
     }
+    
+    func testGivenThatMoviesIsNil_WhenCallingSearchWithNonEmptyQueryWithError_ThenMoviesShouldBeNil() {
+        let repository = MockMovieRepository()
+        let vm = MovieSearchViewModel(movieRepository: repository)
+        
+        repository.withError = true
+        
+        vm.search(query: "non empty query")
+        XCTAssertTrue(vm.movies == nil)
+    }
+    
 }

@@ -11,7 +11,6 @@ import XCTest
 
 class MoviesDetailViewModelTestCase: XCTestCase {
 
-
     func testGivenModelIsAnEmptyMock_WhenCallingLoadMovies_ModelShouldBeFilled() {
             let repository = MockMovieRepository()
             let vm = MovieDetailViewModel(movieId: 1, movieRepository: repository)
@@ -19,5 +18,15 @@ class MoviesDetailViewModelTestCase: XCTestCase {
             vm.loadMovie()
             
         XCTAssertEqual(vm.model.title, "Bloodshot")
+    }
+    
+    func testGivenModelIsEmptyMock_WhenCallingLoadMoviesWithError_ModelShouldStillBeingEmpty() {
+        let repository = MockMovieRepository()
+        repository.withError = true
+        let vm = MovieDetailViewModel(movieId: 1, movieRepository: repository)
+        
+        vm.loadMovie()
+        
+        XCTAssertTrue(vm.model.title!.isEmpty)
     }
 }

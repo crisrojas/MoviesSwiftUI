@@ -88,11 +88,11 @@ extension Result where Success == Moya.Response, Failure == MoyaError {
                 let object: Object = try response.map(Object.self, using: Utils.jsonDecoder)
                 return .success(object)
             } catch {
-                return .failure(.noData)
+                return .failure(.serializationError)
             }
         case .failure(let error):
             print(error)
-            return .failure(.noData)
+            return .failure(.networkError)
         }
     }
 }

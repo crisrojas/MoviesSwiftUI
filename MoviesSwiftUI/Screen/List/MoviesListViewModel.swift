@@ -29,7 +29,7 @@ class MoviesListViewModel: ObservableObject {
     @Published var genres: [Genre] = []
     @Published var isLoading = false
     @Published var error: NSError?
-    //let view: MoviesListVMOutput
+    
     
     //private var endpoint: String?
     private var page: Int = 1
@@ -37,7 +37,7 @@ class MoviesListViewModel: ObservableObject {
     
     private var movieRepository: MovieRepositoryInput
     
-    init(/*todo: view: MoviesListVMOutput, */movieRepository: MovieRepositoryInput = MovieRepository()) {
+    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
         
         print("Instance of MoviesListViewModel created")
         self.movieRepository = movieRepository

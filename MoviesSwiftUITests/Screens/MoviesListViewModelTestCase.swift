@@ -11,7 +11,27 @@ import XCTest
 
 class MoviesListViewModelTestCase: XCTestCase {
 
-    func testGivenModelIsEmpty_WhenCallingLoadNowPlaying_ThenModelShouldnBeEmpty() {
+    func testGivenMoviesArrayIsEmpty_WhenCallingLoadNowPlaying_ThenMoviesArrayShouldntBeEmpty() {
+        let repository = MockMovieRepository()
+        let vm = MoviesListViewModel(movieRepository: repository)
+        
+        vm.loadNowPlaying()
+        
+        XCTAssertFalse(vm.movies.isEmpty)
+    }
+    
+    func testGivenMoviesArrayIsEmpty_WhenCallingLoadNowPlayingWithError_ThenMoviesArrayShouldBeEmpty() {
+        let repository = MockMovieRepository()
+        let vm = MoviesListViewModel(movieRepository: repository)
+        
+        repository.withError = true
+        
+        vm.loadNowPlaying()
+        
+        XCTAssertTrue(vm.movies.isEmpty)
+    }
+    
+    func testGivenMoviesArrayIsEmpty_WhenCallingLoadPopular_ThenMoviesArrayShouldntBeEmpty() {
         let repository = MockMovieRepository()
         let vm = MoviesListViewModel(movieRepository: repository)
         
@@ -20,12 +40,34 @@ class MoviesListViewModelTestCase: XCTestCase {
         XCTAssertFalse(vm.movies.isEmpty)
     }
     
-    func testGivenModelIsEmpty_WhenCallingLoadPopular_ThenModelShouldntBeEmpty() {
+    func testGivenMoviesArrayIssEmpty_WhenCallingloadPopularWithError_ThenMoviesArrayShoudlBeEmpty() {
         let repository = MockMovieRepository()
         let vm = MoviesListViewModel(movieRepository: repository)
         
+        repository.withError = true
+        
         vm.loadPopular()
         
+        XCTAssertTrue(vm.movies.isEmpty)
+    }
+    
+    func testGivenMoviesArrayIsEmpty_WhenCallingLoadGenre_ThenMoviesArrayShouldntBeEmpty() {
+        let repository = MockMovieRepository()
+        let vm = MoviesListViewModel(movieRepository: repository)
+        
+        vm.loadGenre(id: 0)
+        
         XCTAssertFalse(vm.movies.isEmpty)
+    }
+    
+    func testGivenMoviesArrayIsEmpty_WhenCallingLoadGenreWithError_ThenMoviesArrayShoudlBeEmpty() {
+        let repository = MockMovieRepository()
+        let vm = MoviesListViewModel(movieRepository: repository)
+        
+        repository.withError = true
+        
+        vm.loadPopular()
+        
+        XCTAssertTrue(vm.movies.isEmpty)
     }
 }

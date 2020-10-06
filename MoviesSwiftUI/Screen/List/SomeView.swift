@@ -14,7 +14,7 @@ struct SomeView: View {
         NavigationView {
               Text("Hello World")
             }
-            .navigationBarColor(.green) // This is how you will use it
+            .navigationBarColor(.green)
         }
     
 }

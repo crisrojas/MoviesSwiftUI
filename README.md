@@ -8,11 +8,9 @@ UI adaptation of the [Movie App design by Emre Secer](https://dribbble.com/shots
 
 
 - [ ] Change "vote count" from the MovieDetailView for a more useful data
-- [ ] Use v-labs color scheme
-- [ ] Add a "About this app" tab
-- [ ] Implement state
-- [ ] Keyboard scape from searchView
-- [ ] Write unit tests
+- [ ] Use V-labs color scheme
+- [ ] Implement state the V-labs ways (adapted to SwiftUI)
+- [ ] Hidding keyboard when needed when interacting with searchfield on Search View
 - [x] ~~[Kingfisher placeholders everywhere](https://github.com/onevcat/Kingfisher/wiki/SwiftUI-Support))~~
 - [x] ~~Merge MoviesListView & MoviesListGenresView in a single view~~
 - [x] ~~Add popularity bar to the ActorView~~ (implemented but not used because unuseful to the user)
@@ -22,6 +20,8 @@ UI adaptation of the [Movie App design by Emre Secer](https://dribbble.com/shots
 - [x] ~~Home screen: the "view all" button gets the user to the selected list~~
 - [x] ~~Give a navbar title for each list when necessary for a better user experience~~
 - [x] ~~Redondant model: DiscoverResponse is same as MovieResponse~~
+- [x] ~~Write unit tests~~
+- [x] ~~API: Map response~~
 
 ### toFix
 
@@ -29,7 +29,7 @@ UI adaptation of the [Movie App design by Emre Secer](https://dribbble.com/shots
 - [ ] Ugly search text field isn't coherent with the UI
 - [ ] Some movies doesn't show the rating correctly (see "The Crimes That Bind")
 - [ ] After updating xcode (v12) list background isn't cleared with  `appearance()` method (may be a simulator problem)
-- [ ] Infinite scroll crashes after many page loads (probably last page)
+- [ ] **Infinite scroll crashes wtith an EXC_BAD_ACCESS error**
 - [ ] NavigationView pushes to back screen randomly when clicking in a navigation link (only observed from home screen)
 - [ ] Random behaviour: slow back navigation from a list (usually when many movies have been loaded in infinite scroll)
 - [x] ~~Now playing grid duplicates data when changing of screen and then returning back~~ (I was appending movies to the array instead of overwritting it)

@@ -66,7 +66,13 @@ struct MoviesHomeTitle: View {
 
 struct MoviesHomeSectionHeader<Content: View>: View {
     let title: String
-    var viewAllDestination: Content
+    private var viewAllDestination: Content
+    
+    init(title: String, viewAllDestination: Content) {
+        self.viewAllDestination = viewAllDestination
+        self.title = title
+    }
+    
     var body: some View {
         HStack {
             Text(title)

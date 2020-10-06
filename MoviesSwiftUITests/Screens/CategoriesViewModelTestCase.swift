@@ -24,6 +24,8 @@ class CategoriesViewModelTestCase: XCTestCase {
         let repository = MockMovieRepository()
         let vm = CategoriesViewModel(repository: repository)
         
+        vm.loadGenres()
         repository.withError = true
     }
+
 }
