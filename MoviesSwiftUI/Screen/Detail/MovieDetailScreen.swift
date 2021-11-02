@@ -10,17 +10,18 @@ import SafariServices
 import SwiftUI
 import struct Kingfisher.KFImage
 
-struct MovieDetailDribbleView: View {
+// @todo: pass id as a parameter
+// @todo: instantiate viewModel as StateObject
+struct MovieDetailScreen: View {
     
-    @ObservedObject var movieDetailViewModel: MovieDetailViewModel
-
+    @StateObject var movieDetailViewModel = MovieDetailViewModel()
+    let id: Int
     var body: some View {
         
         ScrollView {
             
             MovieDetailHeader(movie: self.movieDetailViewModel.model)
             
-            /// Body of the detail view
             VStack {
                 
                 MovieDetailInfoStack(movie: self.movieDetailViewModel.model)
@@ -54,18 +55,10 @@ struct MovieDetailDribbleView: View {
         
         .edgesIgnoringSafeArea(.all)
         .onAppear() {
-            self.movieDetailViewModel.loadMovie()
+            self.movieDetailViewModel.loadMovie(id: id)
         }
     }
 }
-
-
-struct MovieDetailDribble_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: Movie.localMovie.id))
-    }
-}
-
 
 
 

@@ -28,7 +28,7 @@ struct ActorViewHeader: View {
                 .saturation(0.5)
                 .opacity(0.5)
             
-            bgGradient()
+            DefaultGradient()
             
             VStack {
                 ZStack {

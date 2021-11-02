@@ -14,7 +14,7 @@ struct MoviesMoreView: View {
     @ObservedObject private var topRatedViewModel = MoviesMoreViewModel()
     
     var body: some View {
-        NavigationView {
+        
             List {
                
                 Group {
@@ -51,13 +51,12 @@ struct MoviesMoreView: View {
                 
             }.navigationBarTitle("")
             .navigationBarHidden(true)
-            .background(bgGradient())
-        }
-        .onAppear() {
-            self.upcomingViewModel.loadUpcoming()
-            self.topRatedViewModel.loadTopRated()
-            //self.popularViewModel.loadPopular()
-        }
+            .background(DefaultGradient())
+            .onAppear() {
+                self.upcomingViewModel.loadUpcoming()
+                self.topRatedViewModel.loadTopRated()
+                //self.popularViewModel.loadPopular()
+            }
     }
 }
 

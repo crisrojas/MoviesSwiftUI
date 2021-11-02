@@ -43,6 +43,14 @@ class Movie: Decodable, Identifiable {
     let originalLanguage: String?
     
     let genres: [Genre]?
+    
+    // @todo
+    // Created on init
+    var genresList: String? {
+        guard let genres = genres else { return nil }
+        return genres.map { $0.name }.joined(separator: ", ")
+    }
+    
     let credits: MovieCredits?
     let videos: MovieVideoResponse?
     

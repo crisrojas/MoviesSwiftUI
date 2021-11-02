@@ -18,37 +18,22 @@ struct K {
     static let themeColor = UIColor(named: "themeColor")
     
     static let paddingX: CGFloat = 30
-    
-    static func setUpNavBarAppearance() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        
-//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//        UINavigationBar.appearance().standardAppearance = appearance
-        
-        
-        let coloredAppearance = UINavigationBarAppearance()
-        coloredAppearance.configureWithTransparentBackground()
-//        coloredAppearance.backgroundColor = K.primaryColor
-        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//
-//        UINavigationBar.appearance().standardAppearance = coloredAppearance
-//        UINavigationBar.appearance().compactAppearance = coloredAppearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
-//        UINavigationBar.appearance().tintColor = K.textStrongColor
-        
-    }
-    
-    static func setUpListAppearance() {
-        UITableView.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().backgroundColor = .clear
-        UITableView.appearance().separatorStyle = .none
-    }
 }
 
-struct bgGradient: View {
+struct DefaultGradient: View {
+    
+    let gradient = Gradient(colors: [
+        Color(K.primaryColor!).opacity(0.5),
+        Color(K.themeColor!).opacity(1)
+    ])
+    
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color(K.primaryColor!).opacity(0.5), Color(K.themeColor!).opacity(1)]),startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
+        LinearGradient(
+            gradient: gradient,
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        // @todo: delete this line
+        .edgesIgnoringSafeArea(.all)
     }
 }

@@ -30,7 +30,7 @@ struct CategoriesView: View {
             
         }.navigationBarTitle(Text("Categories"), displayMode: .inline)
         .onAppear() { self.categoryViewModel.loadGenres() }
-        .background(bgGradient())
+        .background(DefaultGradient())
         
     }
 }
@@ -41,6 +41,8 @@ struct GenresListView_Previews: PreviewProvider {
     }
 }
 
+
+// @todo: Delete everywhere
 struct LazyView<Content: View>: View {
     var content: () -> Content
     var body: some View {

@@ -24,7 +24,7 @@ struct MovieBackdropCarouselView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(self.movies) { movie in
-                        NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
                              MovieBackdropCard(movie: movie)
                             .frame(width: 272, height: 200)
                         }

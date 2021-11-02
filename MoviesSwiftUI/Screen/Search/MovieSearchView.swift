@@ -8,17 +8,12 @@
 
 import SwiftUI
 
-// todo: write protocol
-protocol MovieSearchViewInput {
-    //
-}
-
 struct MovieSearchView: View {
     
     @ObservedObject var movieSearchViewModel = MovieSearchViewModel()
     
     var body: some View {
-        NavigationView {
+
             List {
                 SearchBarView(placeholder: "Search movies", text: self.$movieSearchViewModel.query)
                     .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
@@ -29,7 +24,7 @@ struct MovieSearchView: View {
                 
                 if self.movieSearchViewModel.movies != nil {
                     ForEach(self.movieSearchViewModel.movies!) { movie in
-                        NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
                             VStack(alignment: .leading) {
                                 Text(movie.title ?? "Unknown title")
                                 Text(movie.yearText)
@@ -38,14 +33,12 @@ struct MovieSearchView: View {
                         
                     }
                 }
-            }.background(bgGradient())
+            }.background(DefaultGradient())
             .onAppear {
                 self.movieSearchViewModel.stateObserve()
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
-            
-        }
     }
 }
 

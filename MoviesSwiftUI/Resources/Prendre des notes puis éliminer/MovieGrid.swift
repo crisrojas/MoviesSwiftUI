@@ -20,7 +20,7 @@ struct MovieGrid: View {
                 
                 if !nowPlayingViewModel.model.isEmpty {
                     UIGrid(columns: 2, list: nowPlayingViewModel.model) { movie in
-                        NavigationLink(destination: MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                        NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
                             MoviePosterCard(movie: movie)
                             .onAppear() {
                                 print(movie.id)

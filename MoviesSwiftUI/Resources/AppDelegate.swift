@@ -21,10 +21,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    return true
                }
        #endif
-
-        K.setUpNavBarAppearance()
-        K.setUpListAppearance()
+        
+        // @todo: Style large title
+        // @todo: refacto "K" -> extensions (cgfloat, color, etc...)
+        setTabBarAppearance()
+//        setUpNavBarAppearance()
+        setUpListAppearance()
         return true
+    }
+    
+    func setTabBarAppearance() {
+        
+        let appearance = UITabBar.appearance()
+        
+        
+        appearance.backgroundColor = K.themeColor
+    
+        appearance.shadowImage =  .tabBarShadow
+        appearance.backgroundImage = .clear
+        
+        appearance.unselectedItemTintColor = K.textSoftColor
+    }
+    
+    func setUpNavBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        
+        let coloredAppearance = UINavigationBarAppearance()
+        coloredAppearance.configureWithTransparentBackground()
+        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//
+        UINavigationBar.appearance().standardAppearance = coloredAppearance
+//        UINavigationBar.appearance().compactAppearance = coloredAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+//        UINavigationBar.appearance().tintColor = K.textStrongColor
+        
+    }
+    
+    func setUpListAppearance() {
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+        UITableView.appearance().separatorStyle = .none
     }
 
     // MARK: UISceneSession Lifecycle

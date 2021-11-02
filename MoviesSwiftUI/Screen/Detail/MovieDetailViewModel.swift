@@ -12,7 +12,7 @@ import Foundation
 
 protocol MovieDetailViewModelInput {
     var model: Movie { get set }
-    func loadMovie()
+    func loadMovie(id: Int)
     var error: NSError? { get set }
     var isLoading: Bool { get set }
 }
@@ -24,19 +24,19 @@ class MovieDetailViewModel: ObservableObject, MovieDetailViewModelInput {
     @Published var error: NSError?
     
     private var movieRepository: MovieRepositoryInput
-    private let movieId: Int
+//    private let movieId: Int
     
     
-    init(movieId: Int, movieRepository: MovieRepositoryInput = MovieRepository()) {
-        self.movieId = movieId
+    init(movieRepository: MovieRepositoryInput = MovieRepository()) {
+//        self.movieId = movieId
         self.movieRepository = movieRepository
         self.movieRepository.output = self
     }
     
-    func loadMovie() {
+    func loadMovie(id: Int) {
 
         self.isLoading = false
-        self.movieRepository.fetchMovie(id: movieId)
+        self.movieRepository.fetchMovie(id: id)
     }
 }
 

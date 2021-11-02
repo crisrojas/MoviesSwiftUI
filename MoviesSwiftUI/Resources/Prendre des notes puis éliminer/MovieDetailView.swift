@@ -20,7 +20,8 @@ struct MovieDetailView: View {
   
         .navigationBarTitle(movieDetailViewModel.model.title ?? "Unknown title")
         .onAppear() {
-            self.movieDetailViewModel.loadMovie()
+            // @todo
+//            self.movieDetailViewModel.loadMovie()
             
         }
     }
@@ -147,7 +148,7 @@ struct MovieDetailImage: View {
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MovieDetailView(movieDetailViewModel: MovieDetailViewModel(movieId:Movie.localMovie.id))
+            MovieDetailView(movieDetailViewModel: MovieDetailViewModel())
         }
     }
 }

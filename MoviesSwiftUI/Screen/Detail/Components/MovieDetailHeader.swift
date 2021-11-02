@@ -78,7 +78,7 @@ struct MovieDetailHeader: View {
                             .aspectRatio(contentMode: .fill)
                             .opacity(0.7)
                             .saturation(0.0)
-                        bgGradient()
+                        DefaultGradient()
                     }
             )
         }

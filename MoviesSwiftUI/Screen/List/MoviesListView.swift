@@ -36,7 +36,7 @@ struct MoviesListView: View {
         List(self.moviesViewModel.movies) { movie in
             
             ZStack {
-                NavigationLink(destination: LazyView { MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id)) }) {
+                NavigationLink(destination: LazyView { MovieDetailScreen(id: movie.id) }) {
                     MoviesRow(movie: movie)
                 }.onAppear {
                     loadData(currentItem: movie.id)
@@ -44,7 +44,7 @@ struct MoviesListView: View {
             }
             
             
-        }.background(bgGradient())
+        }.background(DefaultGradient())
         .navigationBarTitle(Text(title), displayMode: .inline)
         
         .onAppear() {

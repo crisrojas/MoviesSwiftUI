@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftUItilities",
+        "repositoryURL": "https://github.com/crisrojas/swiftuitilities",
+        "state": {
+          "branch": "main",
+          "revision": "817fe3c71271b54abcd9b0418ea61c703885aac3",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

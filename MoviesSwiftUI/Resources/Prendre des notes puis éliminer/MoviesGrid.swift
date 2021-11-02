@@ -24,7 +24,7 @@ struct MoviesGrid: View {
                             .resizable()
                             .frame(width:150, height: 195)
                              .cornerRadius(10)
-                            NavigationLink(destination: MovieDetailDribbleView(movieDetailViewModel: MovieDetailViewModel(movieId: movie.id))) {
+                            NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
                                 EmptyView()
                             }
                         }
