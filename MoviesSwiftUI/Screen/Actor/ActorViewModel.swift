@@ -20,16 +20,14 @@ class ActorViewModel: ObservableObject {
     @Published var error: NSError?
     
     private var repository: MovieRepositoryInput
-    private let creditId: String
-    
-    init(creditId: String, repository: MovieRepositoryInput = MovieRepository()) {
-        self.creditId = creditId
+
+    init(repository: MovieRepositoryInput = MovieRepository()) {
         self.repository = repository
         self.repository.output = self
     }
     
-    func loadCredits() {
-        self.repository.fetchCredits(id: creditId)
+    func loadCredits(id: String) {
+        self.repository.fetchCredits(id: id)
     }
 
 }

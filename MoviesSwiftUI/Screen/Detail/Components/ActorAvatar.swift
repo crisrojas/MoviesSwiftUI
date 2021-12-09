@@ -15,7 +15,7 @@ struct ActorAvatar: View {
     var body: some View {
         
         
-        NavigationLink(destination: ActorView(actorViewModel: ActorViewModel(creditId: self.actor.creditId ?? ""))) {
+        NavigationLink(destination: ActorView(id: actor.creditId ?? "")) {
             if self.actor.profilePath != nil {
                 KFImage(URL(string: self.actor.profileURL!))
                     .placeholder {

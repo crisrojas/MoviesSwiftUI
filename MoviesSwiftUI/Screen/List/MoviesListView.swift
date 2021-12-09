@@ -18,7 +18,8 @@ enum MovieListViewEndpoint {
 
 struct MoviesListView: View {
     
-    @ObservedObject var moviesViewModel: MoviesListViewModel
+    @StateObject var viewModel = MoviesListViewModel()
+    
     let title: String
     let endpoint: MovieListViewEndpoint
     let genreId: Int?
@@ -28,12 +29,11 @@ struct MoviesListView: View {
         self.genreId = genreId
         self.title = title
         self.endpoint = endpoint
-        moviesViewModel = MoviesListViewModel()
     }
     
     var body: some View {
         
-        List(self.moviesViewModel.movies) { movie in
+        List(self.viewModel.movies) { movie in
             
             ZStack {
                 NavigationLink(destination: LazyView { MovieDetailScreen(id: movie.id) }) {
@@ -48,7 +48,7 @@ struct MoviesListView: View {
         .navigationBarTitle(Text(title), displayMode: .inline)
         
         .onAppear() {
-            if moviesViewModel.movies.isEmpty {
+            if viewModel.movies.isEmpty {
                loadData()
             }
         }
@@ -57,12 +57,12 @@ struct MoviesListView: View {
     func loadData(currentItem: Int? = nil) {
         switch endpoint {
         case .popular:
-            moviesViewModel.loadPopular(currentItem: currentItem)
+            viewModel.loadPopular(currentItem: currentItem)
         case .nowPlaying:
-            moviesViewModel.loadNowPlaying(currentItem: currentItem)
+            viewModel.loadNowPlaying(currentItem: currentItem)
         case .genre:
             guard let id = genreId else { return }
-            moviesViewModel.loadGenre(id: id, currentItem: currentItem)
+            viewModel.loadGenre(id: id, currentItem: currentItem)
         }
     }
 }

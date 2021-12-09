@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @ObservedObject var categoryViewModel = CategoriesViewModel()
+    @StateObject var viewModel = CategoriesViewModel()
 
     var body: some View {
         List {
-            if self.categoryViewModel.model != nil {
-                ForEach(0..<self.categoryViewModel.model!.count) { i in
-                    NavigationLink(destination: LazyView { MoviesListView(title: self.categoryViewModel.model![i].name, endpoint: .genre, genreId: self.categoryViewModel.model![i].id) }) {
-                        Text(self.categoryViewModel.model![i].name)
+            if self.viewModel.model != nil {
+                ForEach(0..<self.viewModel.model!.count) { i in
+                    NavigationLink(destination: LazyView { MoviesListView(title: self.viewModel.model![i].name, endpoint: .genre, genreId: self.viewModel.model![i].id) }) {
+                        Text(self.viewModel.model![i].name)
                             .font(.system(.headline, design: .rounded))
                             .foregroundColor(Color(K.textStrongColor!))
                     }.frame(height:60)
@@ -24,12 +24,12 @@ struct CategoriesView: View {
                 }
             } else {
                 LoadingView(isLoading: true, error: nil) {
-                    self.categoryViewModel.loadGenres()
+                    self.viewModel.loadGenres()
                 }
             }
             
         }.navigationBarTitle(Text("Categories"), displayMode: .inline)
-        .onAppear() { self.categoryViewModel.loadGenres() }
+        .onAppear() { self.viewModel.loadGenres() }
         .background(DefaultGradient())
         
     }

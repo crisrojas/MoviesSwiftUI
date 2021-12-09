@@ -10,20 +10,20 @@ import SwiftUI
 
 struct MovieSearchView: View {
     
-    @ObservedObject var movieSearchViewModel = MovieSearchViewModel()
+    @StateObject var viewModel = MovieSearchViewModel()
     
     var body: some View {
 
             List {
-                SearchBarView(placeholder: "Search movies", text: self.$movieSearchViewModel.query)
+                SearchBarView(placeholder: "Search movies", text: self.$viewModel.query)
                     .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                 
-                LoadingView(isLoading: self.movieSearchViewModel.isLoading, error: self.movieSearchViewModel.error) {
-                    self.movieSearchViewModel.search(query: self.movieSearchViewModel.query)
+                LoadingView(isLoading: self.viewModel.isLoading, error: self.viewModel.error) {
+                    self.viewModel.search(query: self.viewModel.query)
                 }
                 
-                if self.movieSearchViewModel.movies != nil {
-                    ForEach(self.movieSearchViewModel.movies!) { movie in
+                if self.viewModel.movies != nil {
+                    ForEach(self.viewModel.movies!) { movie in
                         NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
                             VStack(alignment: .leading) {
                                 Text(movie.title ?? "Unknown title")
@@ -35,7 +35,7 @@ struct MovieSearchView: View {
                 }
             }.background(DefaultGradient())
             .onAppear {
-                self.movieSearchViewModel.stateObserve()
+                self.viewModel.stateObserve()
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
