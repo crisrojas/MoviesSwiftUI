@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // @todo: Style large title
         // @todo: refacto "K" -> extensions (cgfloat, color, etc...)
         setTabBarAppearance()
-//        setUpNavBarAppearance()
+        setUpNavBarAppearance()
         setUpListAppearance()
         return true
     }
@@ -41,18 +41,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.backgroundImage = .clear
         
         appearance.unselectedItemTintColor = K.textSoftColor
+        
+        
     }
     
     func setUpNavBarAppearance() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
         
-        let coloredAppearance = UINavigationBarAppearance()
-        coloredAppearance.configureWithTransparentBackground()
-        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UIBarButtonItem.appearance(
+            whenContainedInInstancesOf:
+                [UINavigationBar.classForCoder() as! UIAppearanceContainer.Type])
+            .setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal
+            )
+        
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithTransparentBackground()
 //
-        UINavigationBar.appearance().standardAppearance = coloredAppearance
+//        let coloredAppearance = UINavigationBarAppearance()
+//        coloredAppearance.configureWithTransparentBackground()
+//        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+////
+//        UINavigationBar.appearance().standardAppearance = coloredAppearance
 //        UINavigationBar.appearance().compactAppearance = coloredAppearance
 //        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
 //        UINavigationBar.appearance().tintColor = K.textStrongColor

@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// @todo: Where is used this?
+// what it looks like?
 struct LoadingView: View {
     
     let isLoading: Bool

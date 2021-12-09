@@ -18,7 +18,7 @@ struct KnownFor: View {
                 .fontWeight(.heavy)
                 .foregroundColor(Color(K.textStrongColor!))
             ForEach(self.knownFor) { movie in
-                NavigationLink(destination: MovieDetailScreen(id: movie.id)) {
+                NavigationLink(destination: DetailScreen(id: movie.id)) {
                     HStack(spacing: 20) {
                         
                         ZStack {

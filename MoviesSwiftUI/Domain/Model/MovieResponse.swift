@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Algorithms
 
 struct MovieResponse: Decodable {
     let results: [Movie]
@@ -161,8 +162,16 @@ class Movie: Decodable, Identifiable {
         crew?.filter { $0.job.lowercased() == "story" }
     }
     
+    // @todo: delete
     var youtubeTrailers: [MovieVideo]? {
         videos?.results.filter { $0.youtubeURL != nil }
+    }
+    
+    var youtubeURL: URL? {
+        videos?.results
+            .filter { $0.youtubeURL != nil }
+            .first?
+            .youtubeURL
     }
 }
 

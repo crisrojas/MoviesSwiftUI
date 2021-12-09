@@ -33,7 +33,7 @@ struct HomeCaroussel: View {
                 )
                     .width(350)
                     .height(200)
-                    .makeNavigationLink(MovieDetailScreen(id: movie.id), $showMovieDetail)
+                    .makeNavigationLink(DetailScreen(id: movie.id), $showMovieDetail)
                     .leading(movie.id == movies.first?.id ? 30 : 0)
    
             }

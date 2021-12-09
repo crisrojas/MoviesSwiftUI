@@ -23,7 +23,7 @@ protocol MovieRepositoryInput {
     var output: MovieRepositoryOutput? { get set }
 }
 
-protocol MovieRepositoryOutput: class {
+protocol MovieRepositoryOutput: AnyObject {
     func didRetrieveSearch(result: Result<MovieResponse, Error>)
     func didRetrieveNowPlaying(result: Result<MovieResponse, Error>)
     func didRetrieveTopRated(result: Result<MovieResponse, Error>)

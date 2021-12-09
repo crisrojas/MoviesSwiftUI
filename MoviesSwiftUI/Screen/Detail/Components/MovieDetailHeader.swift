@@ -7,82 +7,102 @@
 //
 import SafariServices
 import SwiftUI
-import struct Kingfisher.KFImage
+import SwiftUItilities
 
 struct MovieDetailHeader: View {
-    
-    let movie: Movie
-    @State var showingTrailer = false
+
+    let title: String
+    let averageVote: String
+    let ratingStars: String
+    let posterURL: URL?
+    let trailerURL: URL?
     
     var body: some View {
-        Group {
-            VStack {
-                ZStack {
-                    KFImage(self.movie.posterURL)
-                        .placeholder {
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color(K.primaryColor!))
-                                    .cornerRadius(8)
-                                    .shadow(radius: 8)
-                                Image(systemName: "arrow.2.circlepath.circle")
-                                    .font(.largeTitle)
-                                    .opacity(0.3)
-                            }
-                        }
-                        .resizable()
-                        .cornerRadius(8)
-                        .shadow(radius: 8)
-                    
-                    if self.movie.youtubeTrailers != nil && self.movie.youtubeTrailers!.count > 0 {
-                        
-                        Group {
-                            Button(action: {
-                                let safariVC = SFSafariViewController(url: self.movie.youtubeTrailers![0].youtubeURL!)
-                                UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
-                                
-                            }) {
-                                ZStack {
-                                    LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]), startPoint: .leading, endPoint: .trailing)
-                                    .clipShape(Circle())
-                                    .shadow(color: .orange, radius: 8)
-                                    Image(systemName: "play.fill")
-                                        .foregroundColor(.white)
-                                }.frame(width:70, height:70)
-                            }.sheet(isPresented: $showingTrailer) {
-                                SafariView(url: (self.movie.youtubeTrailers![0].youtubeURL!))
-                            }
-                        }.offset(x: 115, y: 155)
-                    }
-                    
-                }.frame(width:230, height: 310)
+        
+        VStack {
+        
+            posterView
+            
+            Text(title)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                .foregroundColor(Color(K.textStrongColor!))
+                .top(20)
+            
+            Text(averageVote)
+                .font(.system(size: 38, weight: .black, design: .rounded))
+                .foregroundColor(Color(K.textSoftColor!))
+                .top(10)
+            
+            Text(ratingStars)
+                .foregroundColor(Color.orange)
+                .top(10)
+        }
+        .top(110)
+    }
+    
+    
+    func trailerButton(url: URL) -> some View {
+        
+        Button {
+            let safariVC = SFSafariViewController(url: url)
+            UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
+            
+        } label: {
+               
+                Image(systemName: "play.fill")
+                    .foregroundColor(.white)
+                    .width(70)
+                    .height(70)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]), startPoint: .leading, endPoint: .trailing)
+                            .clipShape(Circle())
+                            .shadow(color: .orange, radius: 8)
+                    )
+            
+        }
+        .offset(x: 115)
+        .offset(y: 155)
+    }
+    
+    var posterView: some View {
+        
+        ZStack {
+            
+            AsyncImage(url: posterURL) { image in
+                image
+                    .resizable()
+                    .cornerRadius(8)
+                    .shadow(radius: 8)
                 
-                Text(self.movie.title ?? "Unknown title")
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 24, weight: .heavy, design: .rounded))
-                    .foregroundColor(Color(K.textStrongColor!))
-                    .padding(.top, 20)
-                Text("\(self.movie.voteAverageRounded)")
-                    .font(.system(size:38, weight: .black, design: .rounded))
-                    .foregroundColor(Color(K.textSoftColor!))
-                    .padding(.top, 10)
-                Text(self.movie.ratingStarsOutOfFive)
-                    .padding(.top, 10)
-                    .foregroundColor(Color.orange)
-            }.padding(.top, 110)
-                .background(
-                    ZStack {
-                        KFImage(self.movie.backdropURL)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .opacity(0.7)
-                            .saturation(0.0)
-                        DefaultGradient()
-                    }
-            )
+            } placeholder: {
+                imagePlaeholder
+            }
+
+            if let youtubeURL = trailerURL {
+                trailerButton(url: youtubeURL)
+            }
+        }
+        .width(230)
+        .height(310)
+    }
+    
+    
+    var imagePlaeholder: some View {
+        
+        
+        
+        ZStack {
+            
+            Rectangle()
+                .fill(Color(K.primaryColor!))
+                .cornerRadius(8)
+                .shadow(radius: 8)
+            Image(systemName: "arrow.2.circlepath.circle")
+                .font(.largeTitle)
+                .opacity(0.3)
         }
     }
+    
 }
-
-

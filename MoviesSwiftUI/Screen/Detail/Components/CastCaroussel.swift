@@ -7,37 +7,29 @@
 //
 
 import SwiftUI
+import SwiftUItilities
 
 struct CastCarrousel: View {
+    
     let cast: [MovieCast]
+    
     var body: some View {
-        VStack(alignment: .leading) {
+        
+        VStack(alignment: .leading, spacing: 20) {
+            
             Text("Cast")
                 .font(.system(.headline, design: .rounded))
                 .fontWeight(.heavy)
                 .foregroundColor(Color(K.textStrongColor!))
-                .padding(.leading, 30)
-            ScrollView(.horizontal) {
-                HStack(spacing:20) {
-                    ForEach(0..<self.cast.count) { i in
-                        if i == 0 {
-                            ActorAvatar(actor: self.cast[i])
-                                .padding(.leading, 30)
-                        } else {
-                            ActorAvatar(actor: self.cast[i])
-                        }
-                    }
-                }
-                
+                .leading(30)
+            
+            
+            CarousselView(model: cast, spacing: 20) { actor in
+                ActorAvatar(actor: actor)
+                    .leading(actor == cast.first ? 30 : 0)
             }
-        }.padding(.top, 30)
-            .padding(.bottom, 100)
+        }
+        .top(30)
+        .bottom(100)
     }
 }
-
-
-//struct CastCaroussel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CastCaroussel()
-//    }
-//}

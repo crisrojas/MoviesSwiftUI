@@ -36,7 +36,7 @@ struct MoviesListView: View {
         List(self.viewModel.movies) { movie in
             
             ZStack {
-                NavigationLink(destination: LazyView { MovieDetailScreen(id: movie.id) }) {
+                NavigationLink(destination: LazyView { DetailScreen(id: movie.id) }) {
                     MoviesRow(movie: movie)
                 }.onAppear {
                     loadData(currentItem: movie.id)

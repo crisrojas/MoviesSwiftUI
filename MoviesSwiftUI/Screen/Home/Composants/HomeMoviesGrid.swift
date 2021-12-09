@@ -27,7 +27,7 @@ struct HomeMoviesGrid: View {
             TwoColumnsGrid(model: movies) { movie in
                 
                 gridImage(url: movie.posterURL)
-                    .onTap(navigateTo: MovieDetailScreen(id: movie.id))
+                    .onTap(navigateTo: DetailScreen(id: movie.id))
             }
             .top(15)
         }

@@ -21,6 +21,6 @@ struct CarousselView<Content: View, T: Identifiable>: View {
                 content(item)
             }
         }
-        .scrollViewlize(axis: .horizontal)
+        .scrollify(.horizontal)
     }
 }

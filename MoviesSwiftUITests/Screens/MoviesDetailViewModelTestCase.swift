@@ -13,7 +13,7 @@ class MoviesDetailViewModelTestCase: XCTestCase {
 
     func testGivenModelIsAnEmptyMock_WhenCallingLoadMovies_ModelShouldBeFilled() {
             let repository = MockMovieRepository()
-            let vm = MovieDetailViewModel(movieId: 1, movieRepository: repository)
+            let vm = DetailScreenViewModel(movieId: 1, movieRepository: repository)
             
             vm.loadMovie()
             
@@ -23,7 +23,7 @@ class MoviesDetailViewModelTestCase: XCTestCase {
     func testGivenModelIsEmptyMock_WhenCallingLoadMoviesWithError_ModelShouldStillBeingEmpty() {
         let repository = MockMovieRepository()
         repository.withError = true
-        let vm = MovieDetailViewModel(movieId: 1, movieRepository: repository)
+        let vm = DetailScreenViewModel(movieId: 1, movieRepository: repository)
         
         vm.loadMovie()
         
