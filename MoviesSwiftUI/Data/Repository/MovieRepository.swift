@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 
+// @todo: Split Repository
 protocol MovieRepositoryInput {
     func fetchMovie(id: Int)
     func searchMovie(query: String, completion: @escaping (Result<MovieResponse, Error>) -> ())
