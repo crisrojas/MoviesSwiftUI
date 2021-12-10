@@ -12,20 +12,23 @@ import SwiftUItilities
 
 struct DetailScreen: View {
     
-    @StateObject var movieDetailViewModel = DetailScreenViewModel()
+    @StateObject private var viewModel = DetailScreenViewModel()
     let id: Int
     
     var body: some View {
         
-        switch movieDetailViewModel.state {
+        switch viewModel.state {
             
         case .idle, .loading:
             
             LoaderView()
-                .onAppear { movieDetailViewModel.loadMovie(id: id) }
+                .onAppear { viewModel.loadMovie(id: id) }
+                .background(DefaultGradient().fullScreen())
+            
         case .success(let movie):
             
             successView(movie: movie)
+            
         case .error(let error):
             
             ErrorView(message: error)

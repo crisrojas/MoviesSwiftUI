@@ -8,16 +8,17 @@
 
 import Foundation
 
-protocol ActorViewModelInput {
-    var model: CreditsResponse? { get set }
-    func loadCredits()
-}
-
-
+// @todo: model shoulwd be CreditsResponse.person
 class ActorViewModel: ObservableObject {
-   
-    @Published var model: CreditsResponse?
-    @Published var error: NSError?
+  
+    @Published var state: State = .idle
+    
+    enum State {
+        case idle
+        case loading
+        case success(Person)
+        case error(String)
+    }
     
     private var repository: MovieRepositoryInput
 
@@ -33,13 +34,22 @@ class ActorViewModel: ObservableObject {
 }
 
 extension ActorViewModel: MovieRepositoryOutput {
+    
      func didRetrieveCredits(result: Result<CreditsResponse, Error>) {
+        
         switch result {
         case .success(let response):
-            self.model = response
-        case .failure(let error):
-            self.error = error as NSError
-           
+            
+            guard let person = response.person else {
+                state = .error("@error")
+                return
+            }
+            
+            state = .success(person)
+            
+        case .failure(_):
+            
+            state = .error("@error")
         }
     }
 }

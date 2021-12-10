@@ -16,8 +16,8 @@ struct MovieCast: Decodable, Identifiable, Equatable {
     let gender: Int?
     let creditId: String?
     
-    var profileURL: String? {
+    var profileURL: URL? {
         guard let profilePath = profilePath else { return nil }
-        return "https://image.tmdb.org/t/p/w500\(profilePath)"
+        return URL(string: "https://image.tmdb.org/t/p/w500\(profilePath)")
     }
 }

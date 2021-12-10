@@ -25,11 +25,47 @@ struct CastCarrousel: View {
             
             
             CarousselView(model: cast, spacing: 20) { actor in
-                ActorAvatar(actor: actor)
+                actorAvatar(actor: actor)
                     .leading(actor == cast.first ? 30 : 0)
             }
         }
         .top(30)
         .bottom(100)
+    }
+    
+    func actorAvatar(actor: MovieCast) -> some View {
+        
+        
+        AsyncImage(url: actor.profileURL) { image in
+            
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .width(60)
+                .height(60)
+                .cornerRadius(12)
+            
+            
+        } placeholder: {
+            
+            imagePlaceholder
+            
+        }
+        .onTap(navigateTo: ActorScreen(id: actor.creditId ?? ""))
+        
+        
+    }
+    
+    var imagePlaceholder: some View {
+        
+        Color(K.textSoftColor!)
+            .opacity(0.5)
+            .font(.largeTitle)
+            .width(60)
+            .height(60)
+            .cornerRadius(12)
+            .opacity(0.3)
+            .overlayView(ProgressView.init)
+        
     }
 }

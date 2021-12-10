@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appearance.backgroundColor = K.themeColor
     
-        appearance.shadowImage =  .tabBarShadow
+//        appearance.shadowImage =  .tabBarShadow
         appearance.backgroundImage = .clear
         
         appearance.unselectedItemTintColor = K.textSoftColor
