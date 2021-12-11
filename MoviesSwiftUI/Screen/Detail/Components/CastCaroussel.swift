@@ -9,9 +9,9 @@
 import SwiftUI
 import SwiftUItilities
 
-struct CastCarrousel: View {
+struct CastCarousel: View {
     
-    let cast: [MovieCast]
+    let model: [MovieCast]
     
     var body: some View {
         
@@ -21,22 +21,25 @@ struct CastCarrousel: View {
                 .font(.system(.headline, design: .rounded))
                 .fontWeight(.heavy)
                 .foregroundColor(Color(K.textStrongColor!))
-                .leading(30)
+            // @todo:
+                .leading(.horizontal)
             
             
-            CarousselView(model: cast, spacing: 20) { actor in
-                actorAvatar(actor: actor)
-                    .leading(actor == cast.first ? 30 : 0)
+            CarouselView(model: model, spacing: 20) { actor in
+                actorAvatar(
+                    url: actor.profileURL,
+                    id: actor.creditId
+                )
+                    .leading(actor == model.first ? .horizontal : 0)
+                    .trailing(actor == model.last ? .horizontal : 0)
             }
         }
-        .top(30)
-        .bottom(100)
     }
     
-    func actorAvatar(actor: MovieCast) -> some View {
+    func actorAvatar(url: URL?, id: String?) -> some View {
         
         
-        AsyncImage(url: actor.profileURL) { image in
+        AsyncImage(url: url) { image in
             
             image
                 .resizable()
@@ -51,7 +54,7 @@ struct CastCarrousel: View {
             imagePlaceholder
             
         }
-        .onTap(navigateTo: ActorScreen(id: actor.creditId ?? ""))
+        .onTap(navigateTo: ActorScreen(id: id ?? ""))
         
         
     }

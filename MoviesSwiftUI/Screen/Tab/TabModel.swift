@@ -9,10 +9,10 @@
 import Foundation
 
 // MARK: - Model
-enum Tab: Int {
-    case home = 1
-    case more = 2
-    case search = 3
+enum Tab {
+    case home
+    case more
+    case search
     
     var image: String {
         switch self {

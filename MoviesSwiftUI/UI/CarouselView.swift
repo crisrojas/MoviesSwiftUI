@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CarousselView<Content: View, T: Identifiable>: View {
+struct CarouselView<Content: View, T: Identifiable>: View {
     
     let model: [T]
     let spacing: CGFloat

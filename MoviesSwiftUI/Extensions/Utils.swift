@@ -10,6 +10,7 @@ import Foundation
 
 //todo: move to test folder and delete from main target
 // Public jsonDecoder used in the repository
+// @todo: Declare this as a global property
 class Utils {
     
     static let jsonDecoder : JSONDecoder = {

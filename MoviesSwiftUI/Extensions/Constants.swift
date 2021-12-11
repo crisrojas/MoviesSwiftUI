@@ -10,16 +10,17 @@ import Foundation
 import SwiftUI
 import UIKit
 
-
+// @todo: make UIColor & olor extension
 struct K {
     static let primaryColor = UIColor(named: "primaryColor")
     static let textStrongColor = UIColor(named: "textStrongColor")
     static let textSoftColor = UIColor(named: "textSoftColor")
     static let themeColor = UIColor(named: "themeColor")
     
-    static let paddingX: CGFloat = 30
+//    static let paddingX: CGFloat = 30
 }
 
+// @todo: split
 struct DefaultGradient: View {
     
     let gradient = Gradient(colors: [

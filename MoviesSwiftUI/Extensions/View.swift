@@ -12,13 +12,9 @@ import SwiftUItilities
 // @todo: Add to @SwiftUItilities
 extension View {
     
-    //    func ovrl<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-    //        self.overlay(content)
-    //    }
-        
-        func overlayView<Content: View>(_ content: () -> Content ) -> some View {
-            self.overlay(content())
-        }
+    func overlayView<Content: View>(_ content: () -> Content ) -> some View {
+        self.overlay(content())
+    }
     
     func makeNavigationLink<Destination: View>(
         _ destination: Destination,
@@ -28,11 +24,34 @@ extension View {
         
     }
     
+    func onTap(perform action: @escaping () -> ()) -> some View {
+        Button {
+            action()
+        } label: {
+            self
+        }
+    }
+    
     func onTap<Destination: View>(navigateTo destination: Destination) -> some View {
         NavigationLink(destination: destination) {
             self
         }
     }
+    
+    
+    func showPerimeter(color: Color = .blue, width: CGFloat = 1) -> some View {
+        self.border(color, width: width)
+    }
+    
+    
+    func maxWidth(_ value: CGFloat) -> some View {
+        self.frame(maxWidth: value)
+    }
+    
+    func maxHeight(_ value: CGFloat) -> some View {
+        self.frame(maxHeight: value)
+    }
+    
 }
 
 struct NavigationLinkifyModifier<Destination: View>: ViewModifier {

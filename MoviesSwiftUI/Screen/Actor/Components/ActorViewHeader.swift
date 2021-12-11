@@ -29,9 +29,8 @@ struct ActorViewHeader: View {
                 
             }
             .clipShape(Circle())
-            // @replace with border
-            .overlay(Circle().stroke(Color.white, lineWidth: 6))
-            .shadow(color: Color.black.opacity(0.05), radius: 10)
+            .overlay(Circle().stroke(.white, lineWidth: 2))
+            .shadow(color: .black.opacity(0.05), radius: 10)
             .size(200)
             
             
@@ -39,18 +38,17 @@ struct ActorViewHeader: View {
                 .font(.system(.title, design: .rounded))
                 .fontWeight(.black)
                 .foregroundColor(Color(K.textStrongColor!))
-            
         }
     }
     
     var actorPicture: some View {
+        /// @todo: Implement an error view for each AsyncImage in project
         AsyncImage(url: pictureURL) { image in
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } placeholder: {
-                Text("🥸")
-                    .font(.system(size: 60))
+                ProgressView()
         }
     }
     

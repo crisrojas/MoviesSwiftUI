@@ -11,8 +11,6 @@ import SwiftUItilities
 
 struct HomeCaroussel: View {
     
-    @State private var showMovieDetail: Bool = false
-    
     let movies: [Movie]
     
     var body: some View {
@@ -24,21 +22,22 @@ struct HomeCaroussel: View {
                 destination: LazyView { MoviesListView(title: "Popular", endpoint: .popular) }
             )
             
-            CarousselView(model: movies, spacing: 15) { movie in
+            CarouselView(model: movies, spacing: 15) { movie in
                 
-                PopularCarousselCard(
+                PopularCarouselCard(
                     image: movie.backdropURL,
                     title: movie.title,
                     genres: movie.genresList
                 )
                     .width(350)
                     .height(200)
-                    .makeNavigationLink(DetailScreen(id: movie.id), $showMovieDetail)
-                    .leading(movie.id == movies.first?.id ? 30 : 0)
+                    .onTap(navigateTo: DetailScreen.init(id: movie.id))
+                    .leading(movie.id == movies.first?.id ? .horizontal : 0)
+                    .trailing(movie.id == movies.last?.id ? .horizontal : 0)
    
             }
             .top(15)
-            .horizontal(-30) /// @todo @badPractice
+            .horizontal(-.horizontal) /// @todo @notSoGoodPractice
         }
     }
 }

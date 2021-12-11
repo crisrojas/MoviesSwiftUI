@@ -46,7 +46,7 @@ struct HomeMoviesGrid: View {
         AsyncImage(url: url) { image in
             image
                 .resizable()
-                .frame(width: 170)
+                .frame(maxWidth: .infinity)
                 .aspectRatio(210/297, contentMode: .fill)
                 .cornerRadius(10)
         } placeholder: {
@@ -58,7 +58,7 @@ struct HomeMoviesGrid: View {
     private var image¨Placeholder: some View {
         
        Color(K.primaryColor!)
-            .frame(width: 170)
+            .frame(maxWidth: .infinity)
             .aspectRatio(210/297, contentMode: .fill)
             .cornerRadius(10)
             .overlayView(ProgressView.init)

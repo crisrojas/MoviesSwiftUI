@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUItilities
 
 struct MovieDetailHeader: View {
-
+    
     let title: String
     let averageVote: String
     let ratingStars: String
@@ -19,8 +19,8 @@ struct MovieDetailHeader: View {
     
     var body: some View {
         
-        VStack {
-        
+        VStack(spacing: 0) {
+            
             posterView
             
             Text(title)
@@ -28,7 +28,7 @@ struct MovieDetailHeader: View {
                 .multilineTextAlignment(.center)
                 .font(.system(size: 24, weight: .heavy, design: .rounded))
                 .foregroundColor(Color(K.textStrongColor!))
-                .top(20)
+                .top(28)
             
             Text(averageVote)
                 .font(.system(size: 38, weight: .black, design: .rounded))
@@ -39,70 +39,81 @@ struct MovieDetailHeader: View {
                 .foregroundColor(Color.orange)
                 .top(10)
         }
-        .top(110)
     }
     
+}
+
+
+// MARK: - Sub Views
+private extension MovieDetailHeader {
     
-    func trailerButton(url: URL) -> some View {
-        
-        Button {
-            let safariVC = SFSafariViewController(url: url)
-            UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
-            
-        } label: {
-               
-                Image(systemName: "play.fill")
-                    .foregroundColor(.white)
-                    .width(70)
-                    .height(70)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]), startPoint: .leading, endPoint: .trailing)
-                            .clipShape(Circle())
-                            .shadow(color: .orange, radius: 8)
-                    )
-            
-        }
-        .offset(x: 115)
-        .offset(y: 155)
-    }
     
     var posterView: some View {
-        
-        ZStack {
-            
-            AsyncImage(url: posterURL) { image in
-                image
-                    .resizable()
-                    .cornerRadius(8)
-                    .shadow(radius: 8)
-                
-            } placeholder: {
-                imagePlaeholder
-            }
 
-            if let youtubeURL = trailerURL {
-                trailerButton(url: youtubeURL)
-            }
+        AsyncImage(url: posterURL) { image in
+            image
+                .resizable()
+                .cornerRadius(8)
+                .shadow(radius: 8)
+            
+        } placeholder: {
+            imagePlaceholder
         }
+        .overlay(trailerButton)
         .width(230)
         .height(310)
     }
     
-    
-    var imagePlaeholder: some View {
+    var imagePlaceholder: some View {
         
-        
-        
-        ZStack {
-            
-            Rectangle()
-                .fill(Color(K.primaryColor!))
-                .cornerRadius(8)
-                .shadow(radius: 8)
-            Image(systemName: "arrow.2.circlepath.circle")
-                .font(.largeTitle)
-                .opacity(0.3)
-        }
+        Rectangle()
+            .fill(Color(K.primaryColor!))
+            .cornerRadius(8)
+            .shadow(radius: 8)
+            .overlay(ProgressView())
     }
     
+    @ViewBuilder
+    var trailerButton: some View {
+        
+        if let url = trailerURL {
+            Image(systemName: "play.fill")
+                .foregroundColor(.white)
+                .width(70)
+                .height(70)
+                .onTap { presentVideoInSafari(url: url) }
+                .background(trailerButonBagckground)
+                .offset(x: 115)
+                .offset(y: 155)
+        } else { EmptyView() }
+    }
+    
+    var trailerButonBagckground: some View {
+        LinearGradient(
+            gradient: Gradient(
+                colors: [Color.orange, Color.yellow]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+            .clipShape(Circle())
+            .shadow(color: .orange, radius: 8)
+    }
+}
+
+// MARK: - View methods
+private extension MovieDetailHeader {
+    
+    func presentVideoInSafari(url: URL) {
+        
+        let safariVC = SFSafariViewController(url: url)
+        
+        UIApplication.shared.windows
+            .first?
+            .rootViewController?
+            .present(
+                safariVC,
+                animated: true,
+                completion: nil
+            )
+    }
 }

@@ -49,8 +49,9 @@ private extension HomeScreen {
             HomeCategorySection()
             HomeMoviesGrid(movies: nowPlaying)
         }
-        .padding(30)
-        .scrollViewlize()
+        .vertical(30)
+        .horizontal(.horizontal)
+        .scrollify()
         .background(background)
         .navigationBarTitle("🎬 moVieLabs")
     }

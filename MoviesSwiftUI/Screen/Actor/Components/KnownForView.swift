@@ -9,11 +9,9 @@
 import SwiftUI
 import SwiftUItilities
 
-import struct Kingfisher.KFImage
-
-struct KnownFor: View {
+struct KnownForView: View {
     
-    let knownFor: [Movie]
+    let model: [Movie]
     
     var body: some View {
         
@@ -24,9 +22,11 @@ struct KnownFor: View {
                 .fontWeight(.heavy)
                 .foregroundColor(Color(K.textStrongColor!))
             
-            ForEach(knownFor) { movie in
+            ForEach(model) { movie in
                 
-                HStack(spacing: 20) {
+                /// @todo: Create an extension of CGfloat with a
+                /// tailwind alike spacing utilities and use aross project
+                HStack(alignment: .top, spacing: 20) {
                     
                     thumbnail(url: movie.posterURL)
                     overview(
@@ -36,7 +36,6 @@ struct KnownFor: View {
                 }
                 .top(20)
                 .onTap(navigateTo: DetailScreen(id: movie.id))
-                
             }
         }
         
@@ -55,11 +54,8 @@ struct KnownFor: View {
             
             Rectangle()
                 .fill(Color(K.primaryColor!))
-            
-            Text("Pic not found")
-                .font(.system(.caption))
-                .fontWeight(.bold)
-                .foregroundColor(Color(K.textStrongColor!))
+                .overlay(ProgressView())
+
         }
         .width(60)
         .height(60)

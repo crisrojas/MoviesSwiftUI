@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUItilities
 import struct Kingfisher.KFImage
 
 struct ActorScreen: View {
@@ -50,32 +51,32 @@ private extension ActorScreen {
 
 
             if let knownFor = model.knownFor  {
-                KnownFor(knownFor: knownFor)
+                KnownForView(model: knownFor)
                     .top(40)
-                    .horizontal(30)
+                    .horizontal(.horizontal)
             }
         }
+        .bottom(.bottom)
         .scrollify()
-        .background(imageBackground(url: model.profileURL).fullScreen())
+        .background(ImageBackground(url: model.profileURL))
     }
     
-    // @todo: used in DetailScreen.
-    // create a view
-    // weird UI bug when poping back
     func imageBackground(url: URL?) -> some View {
         
         AsyncImage(url: url) { image in
             
             image
                 .resizable()
-                .aspectRatio(contentMode: .fill)
                 .opacity(0.5)
                 .saturation(0.5)
-       
+                .fullScreen()
+                .aspectRatio(contentMode: .fill)
+                .overlayView(DefaultGradient.init)
+
         } placeholder: {
-            DefaultGradient()
+            DefaultGradient().fullScreen()
         }
-        .overlayView(DefaultGradient.init)
+      
     }
 }
 

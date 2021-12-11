@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUItilities
 
 
-struct PopularCarousselCard: View {
+struct PopularCarouselCard: View {
     
     let image: URL?
     let title: String?
@@ -43,7 +43,7 @@ struct PopularCarousselCard: View {
 }
 
 // MARK: - Sub Views
-private extension PopularCarousselCard {
+private extension PopularCarouselCard {
     
     var linearGradient: some View {
         
@@ -79,7 +79,7 @@ private extension PopularCarousselCard {
             }
             
         }
-        .leading(30)
+        .leading(.horizontal)
         .offset(y: 40)
         .alignX(.leading)
     }

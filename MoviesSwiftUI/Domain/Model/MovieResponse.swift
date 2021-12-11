@@ -7,16 +7,33 @@
 //
 
 import Foundation
-import Algorithms
 
 struct MovieResponse: Decodable {
     let results: [Movie]
 }
 
+/// @todo:
+/// To many computed variables. Refacto
+/// Maybe use manual decoding
+/// Make model dumber (create methods for rating stars)
 // MARK: Movie Model
 class Movie: Decodable, Identifiable {
     
-    init(id: Int, title: String?, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [Genre]?, credits: MovieCredits?, videos: MovieVideoResponse?, originalLanguage: String) {
+    init(
+        id: Int,
+        title: String?,
+        backdropPath: String?,
+        posterPath: String?,
+        overview: String,
+        voteAverage: Double,
+        voteCount: Int,
+        runtime: Int?,
+        releaseDate: String?,
+        genres: [Genre]?,
+        credits: MovieCredits?,
+        videos: MovieVideoResponse?,
+        originalLanguage: String
+    ) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
