@@ -17,8 +17,9 @@ struct TabbarScreen: View {
         
         TabView {
 
+           
+            tab(.more, content: MoreScreen.init)
             tab(.home, content: HomeScreen.init)
-            tab(.more, content: MoviesMoreView.init)
             tab(.search, content: MovieSearchView.init)
             
         }

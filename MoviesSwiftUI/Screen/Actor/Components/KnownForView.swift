@@ -78,6 +78,7 @@ struct KnownForView: View {
                 .foregroundColor(Color(K.textStrongColor!))
                 .multilineTextAlignment(.leading)
             
+            // @todo: Use linelimit(2)
             Text(overview.prefix(65) + "...")
                 .font(.system(.caption, design: .rounded))
                 .fontWeight(.bold)

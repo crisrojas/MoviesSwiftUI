@@ -51,26 +51,16 @@ private extension MovieDetailHeader {
     var posterView: some View {
 
         AsyncImage(url: posterURL) { image in
-            image
-                .resizable()
-                .cornerRadius(8)
-                .shadow(radius: 8)
-            
+            image.resizable()
         } placeholder: {
-            imagePlaceholder
+            Color(K.primaryColor!)
+                .overlay(ProgressView())
         }
+        .cornerRadius(8)
+        .shadow(radius: 8)
         .overlay(trailerButton)
         .width(230)
         .height(310)
-    }
-    
-    var imagePlaceholder: some View {
-        
-        Rectangle()
-            .fill(Color(K.primaryColor!))
-            .cornerRadius(8)
-            .shadow(radius: 8)
-            .overlay(ProgressView())
     }
     
     @ViewBuilder

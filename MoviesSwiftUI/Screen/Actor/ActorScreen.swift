@@ -49,34 +49,16 @@ private extension ActorScreen {
                 pictureURL: model.profileURL
             )
 
-
             if let knownFor = model.knownFor  {
                 KnownForView(model: knownFor)
                     .top(40)
+                    .alignX(.leading)
                     .horizontal(.horizontal)
             }
         }
         .bottom(.bottom)
         .scrollify()
         .background(ImageBackground(url: model.profileURL))
-    }
-    
-    func imageBackground(url: URL?) -> some View {
-        
-        AsyncImage(url: url) { image in
-            
-            image
-                .resizable()
-                .opacity(0.5)
-                .saturation(0.5)
-                .fullScreen()
-                .aspectRatio(contentMode: .fill)
-                .overlayView(DefaultGradient.init)
-
-        } placeholder: {
-            DefaultGradient().fullScreen()
-        }
-      
     }
 }
 
