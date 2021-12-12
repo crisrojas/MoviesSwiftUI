@@ -8,7 +8,6 @@
 
 import SwiftUI
 import SwiftUItilities
-import struct Kingfisher.KFImage
 
 struct ActorScreen: View {
     

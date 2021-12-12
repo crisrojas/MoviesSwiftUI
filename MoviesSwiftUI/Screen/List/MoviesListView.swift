@@ -7,7 +7,6 @@
 //
 
 import Moya
-import struct Kingfisher.KFImage
 import SwiftUI
 
 enum MovieListViewEndpoint {

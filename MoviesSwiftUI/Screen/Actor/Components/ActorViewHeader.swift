@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-// @todo: Delete kingfisher everywhere withing the project
-import struct Kingfisher.KFImage
 
 struct ActorViewHeader: View {
     
