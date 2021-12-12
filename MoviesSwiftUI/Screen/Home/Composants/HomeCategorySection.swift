@@ -20,7 +20,7 @@ struct HomeCategorySection: View {
             
             HomeSectionHeading(
                 title: "Trending Category",
-                destination: LazyView { CategoriesView() }
+                destination: LazyView { CategoriesScreen() }
             )
             
             TwoColumnsGrid(model: Category.allCases) { category in

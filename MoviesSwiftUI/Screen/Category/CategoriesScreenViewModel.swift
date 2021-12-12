@@ -8,9 +8,16 @@
 
 import Foundation
 
-class CategoriesViewModel: ObservableObject {
+class CategoriesScreenViewModel: ObservableObject {
     
-    @Published var model: [Genre]?
+    @Published var state: State = .idle
+
+    enum State {
+        case idle
+        case loading
+        case success([Genre])
+        case error(String)
+    }
     
     private var repository: MovieRepositoryInput
     
@@ -20,17 +27,19 @@ class CategoriesViewModel: ObservableObject {
     }
     
     func loadGenres() {
+        state = .loading
         self.repository.fetchGenres()
     }
 }
 
-extension CategoriesViewModel: MovieRepositoryOutput {
+extension CategoriesScreenViewModel: MovieRepositoryOutput {
+    
     func didRetrieveGenres(result: Result<GenresResponse, Error>) {
         switch result {
         case .success(let response):
-            self.model = response.genres
-        case .failure(let error):
-            print(error)
+            state = .success(response.genres)
+        case .failure(_):
+            state = .error("toDo")
         }
     }
 }
