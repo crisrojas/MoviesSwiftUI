@@ -31,10 +31,9 @@ struct CategoryButton: View {
     }
     
     var destination: some View {
-        MoviesListView(
+        ListScreen(
             title: model.rawValue,
-            endpoint: .genre,
-            genreId: model.id
+            endpoint: .genre(id: model.id)
         )
     }
 }

@@ -38,14 +38,11 @@ extension CategoriesScreen {
     
     func successView(model: [Genre]) -> some View {
         
-        List {
-            
-            ForEach(model) { genre in
+        List(model) { genre in
                 
-                let destination = MoviesListView(
+                let destination = ListScreen(
                     title: genre.name,
-                    endpoint: .genre,
-                    genreId: genre.id
+                    endpoint: .genre(id: genre.id)
                 )
                 
                 Text(genre.name)
@@ -53,7 +50,7 @@ extension CategoriesScreen {
                     .foregroundColor(Color(K.textStrongColor!))
                     .height(60)
                     .onTap(navigateTo: destination)
-            }
+            
         }
         .top(24)
         /// @todo: Large Title not collapsing on scroll

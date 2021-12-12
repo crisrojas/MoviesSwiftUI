@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftUItilities
 
+// @todo: delete al LazyViews
 struct HomeCaroussel: View {
     
     let movies: [Movie]
@@ -19,7 +20,7 @@ struct HomeCaroussel: View {
             
             HomeSectionHeading(
                 title: "Popular Movies",
-                destination: LazyView { MoviesListView(title: "Popular", endpoint: .popular) }
+                destination: LazyView { ListScreen(title: "Popular", endpoint: .popular) }
             )
             
             CarouselView(model: movies, spacing: 15) { movie in

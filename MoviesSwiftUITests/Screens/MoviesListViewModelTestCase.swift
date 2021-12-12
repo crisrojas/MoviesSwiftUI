@@ -13,7 +13,7 @@ class MoviesListViewModelTestCase: XCTestCase {
 
     func testGivenMoviesArrayIsEmpty_WhenCallingLoadNowPlaying_ThenMoviesArrayShouldntBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         vm.loadNowPlaying()
         
@@ -22,7 +22,7 @@ class MoviesListViewModelTestCase: XCTestCase {
     
     func testGivenMoviesArrayIsEmpty_WhenCallingLoadNowPlayingWithError_ThenMoviesArrayShouldBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         repository.withError = true
         
@@ -33,7 +33,7 @@ class MoviesListViewModelTestCase: XCTestCase {
     
     func testGivenMoviesArrayIsEmpty_WhenCallingLoadPopular_ThenMoviesArrayShouldntBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         vm.loadPopular()
         
@@ -42,7 +42,7 @@ class MoviesListViewModelTestCase: XCTestCase {
     
     func testGivenMoviesArrayIssEmpty_WhenCallingloadPopularWithError_ThenMoviesArrayShoudlBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         repository.withError = true
         
@@ -53,7 +53,7 @@ class MoviesListViewModelTestCase: XCTestCase {
     
     func testGivenMoviesArrayIsEmpty_WhenCallingLoadGenre_ThenMoviesArrayShouldntBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         vm.loadGenre(id: 0)
         
@@ -62,7 +62,7 @@ class MoviesListViewModelTestCase: XCTestCase {
     
     func testGivenMoviesArrayIsEmpty_WhenCallingLoadGenreWithError_ThenMoviesArrayShoudlBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesListViewModel(movieRepository: repository)
+        let vm = ListScreenViewModel(movieRepository: repository)
         
         repository.withError = true
         

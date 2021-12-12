@@ -35,7 +35,7 @@ struct HomeMoviesGrid: View {
     
     private var destination: some View {
         
-        MoviesListView(
+        ListScreen(
             title: "Now playing",
             endpoint: .nowPlaying
         )
