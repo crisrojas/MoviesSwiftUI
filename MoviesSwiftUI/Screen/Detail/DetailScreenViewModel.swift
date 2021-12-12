@@ -9,7 +9,7 @@
 import Foundation
 
 
-class DetailScreenViewModel: ObservableObject {
+final class DetailScreenViewModel: ObservableObject {
     
     @Published var state: State = .idle
     

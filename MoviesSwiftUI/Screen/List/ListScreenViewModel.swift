@@ -8,7 +8,6 @@
 
 import Foundation
 
-// @todo: Add final keyword to all classes in project
 final class ListScreenViewModel: ObservableObject {
     
     @Published var state: State = .idle

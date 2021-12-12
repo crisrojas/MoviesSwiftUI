@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 import Foundation
 
-class MovieSearchViewModel: ObservableObject {
+final class MovieSearchViewModel: ObservableObject {
     
     @Published var query = ""
     @Published var movies: [Movie]?

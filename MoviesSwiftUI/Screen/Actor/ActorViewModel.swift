@@ -9,7 +9,7 @@
 import Foundation
 
 // @todo: model shoulwd be CreditsResponse.person
-class ActorViewModel: ObservableObject {
+final class ActorViewModel: ObservableObject {
   
     @Published var state: State = .idle
     

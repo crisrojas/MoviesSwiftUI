@@ -15,9 +15,11 @@ struct MovieResponse: Decodable {
 /// @todo:
 /// To many computed variables. Refacto
 /// Maybe use manual decoding
+/// Model is too fat
 /// Make model dumber (create methods for rating stars)
+///  Use struct instead of class
 // MARK: Movie Model
-class Movie: Decodable, Identifiable {
+struct Movie: Decodable, Identifiable {
     
     init(
         id: Int,
@@ -167,6 +169,9 @@ class Movie: Decodable, Identifiable {
     var crew: [MovieCrew]? {
         credits?.crew
     }
+    
+    /// @todo: Create an enum
+    /// Use this information to create two Carousels
     var directors: [MovieCrew]? {
         crew?.filter { $0.job.lowercased() == "director" }
     }
@@ -193,6 +198,7 @@ class Movie: Decodable, Identifiable {
 }
 
 
+/// @todo: why this needs to be hasable? don't remember... delete?
 extension Movie: Hashable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         if lhs.id == rhs.id {
@@ -207,6 +213,7 @@ extension Movie: Hashable {
     }
 }
 
+/// @todo: delete
 // MARK: Stubbs
 extension Movie {
     

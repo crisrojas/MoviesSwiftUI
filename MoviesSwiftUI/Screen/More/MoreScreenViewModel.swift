@@ -9,7 +9,7 @@
 import Moya
 import Foundation
 
-class MoreScreenViewModel: ObservableObject {
+final class MoreScreenViewModel: ObservableObject {
     
     // MARK: - State
     @Published var state: State = .idle

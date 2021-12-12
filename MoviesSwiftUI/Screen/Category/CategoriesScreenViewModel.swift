@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CategoriesScreenViewModel: ObservableObject {
+final class CategoriesScreenViewModel: ObservableObject {
     
     @Published var state: State = .idle
 

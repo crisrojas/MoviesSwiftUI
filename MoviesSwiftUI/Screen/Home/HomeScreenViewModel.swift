@@ -9,7 +9,7 @@
 import Foundation
 
 
-class HomeScreenViewModel: ObservableObject {
+final class HomeScreenViewModel: ObservableObject {
     
     // MARK: - State
     @Published var state: State = .idle

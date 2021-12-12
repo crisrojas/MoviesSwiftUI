@@ -47,7 +47,9 @@ extension MovieRepositoryOutput {
     func didRetrieveGenre(result: Result<MovieResponse, Error>) {}
 }
 
-class MovieRepository: MovieRepositoryInput {
+
+// @todo: Use dispatc queue
+final class MovieRepository: MovieRepositoryInput {
     
     weak var output: MovieRepositoryOutput?
     private let api: MovieDbApi
