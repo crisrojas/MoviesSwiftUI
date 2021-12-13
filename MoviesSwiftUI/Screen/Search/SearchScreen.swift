@@ -12,7 +12,6 @@ import SwiftUItilities
 struct SearchScreen: View {
     
     @StateObject var viewModel = SearchScreenViewModel()
-    @State var detailIsActive: Bool = false
     
     var body: some View {
         
@@ -37,10 +36,9 @@ struct SearchScreen: View {
     func successView(model: [Movie]) -> some View {
         List(model) { movie in
             MoviesRow(movie: movie)
-                .onTap(
-                    toggle: $detailIsActive,
-                    navigateTo: DetailScreen.init(id: movie.id),
-                    callback: UIApplication.dismissKeyboard
+                .onTap(navigateTo:
+                        DetailScreen.init(id: movie.id)
+                        .onAppear(perform: UIApplication.dismissKeyboard)
                 )
         }
     }
