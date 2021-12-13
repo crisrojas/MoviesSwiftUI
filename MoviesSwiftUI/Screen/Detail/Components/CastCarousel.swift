@@ -25,13 +25,13 @@ struct CastCarousel: View {
                 .leading(.horizontal)
             
             
-            CarouselView(model: model, spacing: 20) { actor in
+            CarouselView(model: model, spacing: 8) { actor in
                 actorAvatar(
                     url: actor.profileURL,
                     id: actor.creditId
                 )
-                    .leading(actor == model.first ? .horizontal : 0)
-                    .trailing(actor == model.last ? .horizontal : 0)
+                .leading(actor == model.first ? .horizontal : 0)
+                .trailing(actor == model.last ? .horizontal : 0)
             }
         }
     }
@@ -46,7 +46,7 @@ struct CastCarousel: View {
                 .aspectRatio(contentMode: .fill)
                 .width(60)
                 .height(60)
-                .cornerRadius(12)
+                .cornerRadius(8)
             
             
         } placeholder: {

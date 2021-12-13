@@ -39,7 +39,7 @@ extension CategoriesScreenViewModel: MovieRepositoryOutput {
         case .success(let response):
             state = .success(response.genres)
         case .failure(_):
-            state = .error("toDo")
+            state = .error("Error toDo")
         }
     }
 }

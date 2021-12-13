@@ -63,7 +63,12 @@ private extension MoreScreen {
         .bottom(.bottom)
         .scrollify()
         .navigationBarTitle("Discover")
-        .background(DefaultGradient())
+        .background(background)
+    }
+    
+    var background: some View {
+        DefaultGradient()
+            .fullScreen()
     }
 }
 

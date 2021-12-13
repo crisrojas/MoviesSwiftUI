@@ -21,14 +21,20 @@ struct CategoriesScreen: View {
             
             LoaderView()
                 .onAppear(perform: viewModel.loadGenres)
+                .navigationBarTitle("Categories", displayMode: .inline)
+                .background(background)
             
         case .success(let genres):
             
             successView(model: genres)
+                .navigationBarTitle("Categories", displayMode: .inline)
+                .background(background)
             
         case .error(let message):
             
             ErrorView(message: message)
+                .navigationBarTitle("Categories", displayMode: .inline)
+                .background(background)
         }
     }
 }
@@ -52,11 +58,15 @@ extension CategoriesScreen {
                     .onTap(navigateTo: destination)
             
         }
-        .top(24)
+//        .top(24)
         /// @todo: Large Title not collapsing on scroll
-        /// .background(DefaultGradient())
         /// https://www.reddit.com/r/SwiftUI/comments/hx20uw/navigationbar_wont_collapse_swiftui/
-        .navigationBarTitle("Categories")
+
+    }
+    
+    var background: some View {
+        DefaultGradient()
+            .fullScreen()
     }
 }
 

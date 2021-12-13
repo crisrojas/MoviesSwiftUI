@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ActorViewHeader: View {
     
-
     let name: String
     let pictureURL: URL?
     
@@ -27,7 +26,7 @@ struct ActorViewHeader: View {
                 
             }
             .clipShape(Circle())
-            .overlay(Circle().stroke(.white, lineWidth: 2))
+            .overlay(strokeView)
             .shadow(color: .black.opacity(0.05), radius: 10)
             .size(200)
             
@@ -37,6 +36,10 @@ struct ActorViewHeader: View {
                 .fontWeight(.black)
                 .foregroundColor(Color(K.textStrongColor!))
         }
+    }
+    
+    var strokeView: some View {
+        Circle().stroke(.white, lineWidth: 2)
     }
     
     var actorPicture: some View {

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EmptyView: View {
+struct EmptyStateView: View {
     var body: some View {
         Text("EmptyView")
     }

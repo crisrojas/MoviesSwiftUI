@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "SwiftUItilities",
-        "repositoryURL": "https://github.com/crisrojas/swiftuitilities",
+        "repositoryURL": "https://github.com/crisrojas/SwiftUItilities",
         "state": {
-          "branch": "main",
-          "revision": "c68642b34be8c6a2da645f9be73e010cd9dbad45",
-          "version": null
+          "branch": null,
+          "revision": "69cf55dcb1f4011bc517853382d5529d4c59dfc0",
+          "version": "0.1.7"
         }
       }
     ]

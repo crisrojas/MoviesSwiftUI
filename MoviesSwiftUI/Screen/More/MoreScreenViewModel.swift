@@ -62,7 +62,7 @@ extension MoreScreenViewModel: MovieRepositoryOutput {
             upcoming = response.results
             updateState()
         case .failure(_):
-            state = .error("toDo")
+            state = .error("Error toDo")
         }
     }
     
@@ -73,7 +73,7 @@ extension MoreScreenViewModel: MovieRepositoryOutput {
             topRated = response.results
             updateState()
         case .failure(_):
-            state = .error("toDo")
+            state = .error("Error toDo")
         }
     }
     

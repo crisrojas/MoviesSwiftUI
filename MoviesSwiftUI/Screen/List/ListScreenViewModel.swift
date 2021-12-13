@@ -127,7 +127,7 @@ extension ListScreenViewModel: MovieRepositoryOutput {
             self.page += 1
             
         case .failure(_):
-            state = .error("toDo")
+            state = .error("Error toDo")
         }
     }
 }

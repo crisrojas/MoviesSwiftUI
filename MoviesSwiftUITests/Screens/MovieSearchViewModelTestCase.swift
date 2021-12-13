@@ -13,7 +13,7 @@ class MovieSearchViewModelTestCase: XCTestCase {
 
     func testGivenThatMoviesIsNil_WhenCallingSearchWithNonEmptyQuery_ThenMoviesShouldntBeNil() {
         let repository = MockMovieRepository()
-        let vm = MovieSearchViewModel(movieRepository: repository)
+        let vm = SearchScreenViewModel(movieRepository: repository)
          
         vm.search(query: "non empty query")
         XCTAssertTrue(vm.movies != nil)
@@ -21,7 +21,7 @@ class MovieSearchViewModelTestCase: XCTestCase {
     
     func testGivenThatMoviesIsNil_WhenCallingSearchWithEmptyQuery_ThenMoviesShouldBeNil() {
         let repository = MockMovieRepository()
-        let vm = MovieSearchViewModel(movieRepository: repository)
+        let vm = SearchScreenViewModel(movieRepository: repository)
         
         vm.search(query: "")
         XCTAssertTrue(vm.movies == nil)
@@ -29,7 +29,7 @@ class MovieSearchViewModelTestCase: XCTestCase {
     
     func testGivenThatMoviesIsNil_WhenCallingSearchWithNonEmptyQueryWithError_ThenMoviesShouldBeNil() {
         let repository = MockMovieRepository()
-        let vm = MovieSearchViewModel(movieRepository: repository)
+        let vm = SearchScreenViewModel(movieRepository: repository)
         
         repository.withError = true
         

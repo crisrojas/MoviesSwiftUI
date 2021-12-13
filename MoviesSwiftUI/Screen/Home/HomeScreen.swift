@@ -63,5 +63,4 @@ private extension HomeScreen {
     var background: some View {
         DefaultGradient().fullScreen()
     }
-    
 }
