@@ -12,12 +12,12 @@ import XCTest
 class MoviesHomeViewModelTestCase: XCTestCase {
 
     var repository: MockMovieRepository!
-    var vm: MoviesHomeViewModel!
+    var vm: HomeScreenViewModel!
     
     override func setUp() {
        super.setUp()
        repository = MockMovieRepository()
-       vm = MoviesHomeViewModel(repository: repository)
+       vm = HomeScreenViewModel(repository: repository)
     }
 
    

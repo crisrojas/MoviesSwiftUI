@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MovieCast: Decodable, Identifiable {
+struct MovieCast: Decodable, Identifiable, Equatable {
     let id: Int
     let character: String
     let name: String
@@ -16,8 +16,8 @@ struct MovieCast: Decodable, Identifiable {
     let gender: Int?
     let creditId: String?
     
-    var profileURL: String? {
+    var profileURL: URL? {
         guard let profilePath = profilePath else { return nil }
-        return "https://image.tmdb.org/t/p/w500\(profilePath)"
+        return URL(string: "https://image.tmdb.org/t/p/w500\(profilePath)")
     }
 }

@@ -7,82 +7,103 @@
 //
 import SafariServices
 import SwiftUI
-import struct Kingfisher.KFImage
+import SwiftUItilities
 
 struct MovieDetailHeader: View {
     
-    let movie: Movie
-    @State var showingTrailer = false
+    let title: String
+    let averageVote: String
+    let ratingStars: String
+    let posterURL: URL?
+    let trailerURL: URL?
     
     var body: some View {
-        Group {
-            VStack {
-                ZStack {
-                    KFImage(self.movie.posterURL)
-                        .placeholder {
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color(K.primaryColor!))
-                                    .cornerRadius(8)
-                                    .shadow(radius: 8)
-                                Image(systemName: "arrow.2.circlepath.circle")
-                                    .font(.largeTitle)
-                                    .opacity(0.3)
-                            }
-                        }
-                        .resizable()
-                        .cornerRadius(8)
-                        .shadow(radius: 8)
-                    
-                    if self.movie.youtubeTrailers != nil && self.movie.youtubeTrailers!.count > 0 {
-                        
-                        Group {
-                            Button(action: {
-                                let safariVC = SFSafariViewController(url: self.movie.youtubeTrailers![0].youtubeURL!)
-                                UIApplication.shared.windows.first?.rootViewController?.present(safariVC, animated: true, completion: nil)
-                                
-                            }) {
-                                ZStack {
-                                    LinearGradient(gradient: Gradient(colors: [Color.orange, Color.yellow]), startPoint: .leading, endPoint: .trailing)
-                                    .clipShape(Circle())
-                                    .shadow(color: .orange, radius: 8)
-                                    Image(systemName: "play.fill")
-                                        .foregroundColor(.white)
-                                }.frame(width:70, height:70)
-                            }.sheet(isPresented: $showingTrailer) {
-                                SafariView(url: (self.movie.youtubeTrailers![0].youtubeURL!))
-                            }
-                        }.offset(x: 115, y: 155)
-                    }
-                    
-                }.frame(width:230, height: 310)
-                
-                Text(self.movie.title ?? "Unknown title")
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .font(.system(size: 24, weight: .heavy, design: .rounded))
-                    .foregroundColor(Color(K.textStrongColor!))
-                    .padding(.top, 20)
-                Text("\(self.movie.voteAverageRounded)")
-                    .font(.system(size:38, weight: .black, design: .rounded))
-                    .foregroundColor(Color(K.textSoftColor!))
-                    .padding(.top, 10)
-                Text(self.movie.ratingStarsOutOfFive)
-                    .padding(.top, 10)
-                    .foregroundColor(Color.orange)
-            }.padding(.top, 110)
-                .background(
-                    ZStack {
-                        KFImage(self.movie.backdropURL)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .opacity(0.7)
-                            .saturation(0.0)
-                        bgGradient()
-                    }
-            )
+        
+        VStack(spacing: 0) {
+            
+            posterView
+            
+            Text(title)
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                .foregroundColor(Color(K.textStrongColor!))
+                .top(28)
+            
+            Text(averageVote)
+                .font(.system(size: 38, weight: .black, design: .rounded))
+                .foregroundColor(Color(K.textSoftColor!))
+                .top(10)
+            
+            Text(ratingStars)
+                .foregroundColor(Color.orange)
+                .top(10)
         }
     }
+    
 }
 
 
+// MARK: - Sub Views
+private extension MovieDetailHeader {
+    
+    
+    var posterView: some View {
+
+        AsyncImage(url: posterURL) { image in
+            image.resizable()
+        } placeholder: {
+            Color(K.primaryColor!)
+                .overlay(ProgressView())
+        }
+        .cornerRadius(8)
+        .shadow(radius: 8)
+        .overlay(trailerButton)
+        .width(230)
+        .height(310)
+    }
+    
+    @ViewBuilder
+    var trailerButton: some View {
+        
+        if let url = trailerURL {
+            Image(systemName: "play.fill")
+                .foregroundColor(.white)
+                .width(70)
+                .height(70)
+                .onTap { presentVideoInSafari(url: url) }
+                .background(trailerButonBagckground)
+                .offset(x: 115)
+                .offset(y: 155)
+        } else { EmptyView() }
+    }
+    
+    var trailerButonBagckground: some View {
+        LinearGradient(
+            gradient: Gradient(
+                colors: [Color.orange, Color.yellow]),
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+            .clipShape(Circle())
+            .shadow(color: .orange, radius: 8)
+    }
+}
+
+// MARK: - View methods
+private extension MovieDetailHeader {
+    
+    func presentVideoInSafari(url: URL) {
+        
+        let safariVC = SFSafariViewController(url: url)
+        
+        UIApplication.shared.windows
+            .first?
+            .rootViewController?
+            .present(
+                safariVC,
+                animated: true,
+                completion: nil
+            )
+    }
+}

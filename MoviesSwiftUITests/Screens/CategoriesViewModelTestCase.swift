@@ -13,7 +13,7 @@ class CategoriesViewModelTestCase: XCTestCase {
 
     func testGivenModelIsNil_WhenCallingLoadGenres_ThenModelShouldntBeNil() {
             let repository = MockMovieRepository()
-            let vm = CategoriesViewModel(repository: repository)
+            let vm = CategoriesScreenViewModel(repository: repository)
 
             vm.loadGenres()
 
@@ -22,7 +22,7 @@ class CategoriesViewModelTestCase: XCTestCase {
     
     func testGivenModleIsNil_WhenCallingLoadGenresWithError_ThenModelShouldStillNil() {
         let repository = MockMovieRepository()
-        let vm = CategoriesViewModel(repository: repository)
+        let vm = CategoriesScreenViewModel(repository: repository)
         
         vm.loadGenres()
         repository.withError = true

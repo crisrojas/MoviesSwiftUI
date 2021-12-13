@@ -7,44 +7,43 @@
 //
 
 import SwiftUI
-import struct Kingfisher.KFImage
+import SwiftUItilities
 
 struct MoviesRow: View {
+    
     let movie: Movie
     var body: some View {
+        
         HStack(spacing: 24) {
-            ZStack {
-                KFImage(self.movie.posterURL)
-                    .placeholder {
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .cornerRadius(4)
-                            .frame(width: 66, height: 100)
-                           Image(systemName: "arrow.2.circlepath.circle")
-                               .font(.largeTitle)
-                               .opacity(0.3)
-                       }
-                    .cancelOnDisappear(true)
-                    .resizable()
-                    .cornerRadius(4)
-                    .frame(width: 66, height: 100)
-                    
-                    
+     
+            AsyncImage(url: movie.posterURL) { image in
+                image.resizable()
+            } placeholder: {
+                Color.gray.opacity(0.3)
+                    .overlay(ProgressView())
             }
+            .cornerRadius(4)
+            .width(66)
+            .height(100)
+            
             VStack(alignment: .leading, spacing: 4) {
+                
                 Text(movie.title ?? "Unknown title")
                     .foregroundColor(Color(K.textStrongColor!))
                     .fontWeight(.heavy)
                     .font(.system(.headline, design: .rounded))
 
                 VStack(alignment: .leading, spacing: 0) {
+                    
                     Text(movie.overview.prefix(90) + "...")
                         .fontWeight(.bold)
                     Text(movie.ratingText)
-                }.font(.system(.caption, design: .rounded))
-                    .foregroundColor(Color(K.textSoftColor!))
+                }
+                .font(.system(.caption, design: .rounded))
+                .foregroundColor(Color(K.textSoftColor!))
                 
             }
+            
             Spacer()
         }
     }

@@ -8,40 +8,48 @@
 
 import Foundation
 
-protocol ActorViewModelInput {
-    var model: CreditsResponse? { get set }
-    func loadCredits()
-}
-
-
-class ActorViewModel: ObservableObject {
-   
-    @Published var model: CreditsResponse?
-    @Published var error: NSError?
+// @todo: model shoulwd be CreditsResponse.person
+final class ActorViewModel: ObservableObject {
+  
+    @Published var state: State = .idle
+    
+    enum State {
+        case idle
+        case loading
+        case success(Person)
+        case error(String)
+    }
     
     private var repository: MovieRepositoryInput
-    private let creditId: String
-    
-    init(creditId: String, repository: MovieRepositoryInput = MovieRepository()) {
-        self.creditId = creditId
+
+    init(repository: MovieRepositoryInput = MovieRepository()) {
         self.repository = repository
         self.repository.output = self
     }
     
-    func loadCredits() {
-        self.repository.fetchCredits(id: creditId)
+    func loadCredits(id: String) {
+        self.repository.fetchCredits(id: id)
     }
 
 }
 
 extension ActorViewModel: MovieRepositoryOutput {
+    
      func didRetrieveCredits(result: Result<CreditsResponse, Error>) {
+        
         switch result {
         case .success(let response):
-            self.model = response
-        case .failure(let error):
-            self.error = error as NSError
-           
+            
+            guard let person = response.person else {
+                state = .error("@error")
+                return
+            }
+            
+            state = .success(person)
+            
+        case .failure(_):
+            
+            state = .error("@error")
         }
     }
 }

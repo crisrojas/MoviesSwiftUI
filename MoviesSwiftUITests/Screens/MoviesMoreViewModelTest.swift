@@ -13,7 +13,7 @@ class MoviesMoreViewModelTest: XCTestCase {
 
     func testGivenModelIsEmpty_WhenCallingLoadUpcomping_ThenModelShouldntBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesMoreViewModel(movieRepository: repository)
+        let vm = MoreScreenViewModel(movieRepository: repository)
         
         vm.loadUpcoming()
         
@@ -22,7 +22,7 @@ class MoviesMoreViewModelTest: XCTestCase {
     
     func testGivenModelIsEmpty_WhenCallingLoadTopRated_ThenModelShoudlntBeEmpty() {
         let repository = MockMovieRepository()
-        let vm = MoviesMoreViewModel(movieRepository: repository)
+        let vm = MoreScreenViewModel(movieRepository: repository)
         
         vm.loadTopRated()
         

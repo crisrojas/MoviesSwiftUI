@@ -7,34 +7,33 @@
 //
 
 import SwiftUI
+import SwiftUItilities
 
 struct CategoryButton: View {
-    let genreId: Int
-    let genre: String
-    let color: Color
+    
+    let model: Category
+    
     var body: some View {
-        NavigationLink(destination: LazyView { MoviesListView(title: genre, endpoint: .genre, genreId: genreId) }) {
-            
-            ZStack {
-                Rectangle()
-                    .fill(color)
-                    .cornerRadius(10)
-                    .shadow(color: color.opacity(0.5),radius: 10)
-                Text(genre)
-                    .font(.callout)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                
-            }.frame(height:55)
-            
-        }
+        
+        model.color
+            .cornerRadius(10)
+            .shadow(color: model.color.opacity(0.5), radius: 10)
+            .height(55)
+            .overlay(label)
+            .onTap(navigateTo: destination)
     }
-}
-
-struct GenreButton_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryButton(genreId: 28, genre: "Adventure", color: Color(#colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)))
-            .padding()
-            .previewLayout(.sizeThatFits)
+    
+    var label: Text {
+        Text(model.rawValue)
+            .font(.callout)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+    }
+    
+    var destination: some View {
+        ListScreen(
+            title: model.rawValue,
+            endpoint: .genre(id: model.id)
+        )
     }
 }

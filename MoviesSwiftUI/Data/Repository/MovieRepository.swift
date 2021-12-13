@@ -9,9 +9,10 @@
 import Foundation
 import Moya
 
+// @todo: Split Repository
 protocol MovieRepositoryInput {
     func fetchMovie(id: Int)
-    func searchMovie(query: String, completion: @escaping (Result<MovieResponse, Error>) -> ())
+    func searchMovie(query: String)
     func fetchNowPlaying(page: Int?)
     func fetchUpcoming()
     func fetchTopRated()
@@ -22,7 +23,7 @@ protocol MovieRepositoryInput {
     var output: MovieRepositoryOutput? { get set }
 }
 
-protocol MovieRepositoryOutput: class {
+protocol MovieRepositoryOutput: AnyObject {
     func didRetrieveSearch(result: Result<MovieResponse, Error>)
     func didRetrieveNowPlaying(result: Result<MovieResponse, Error>)
     func didRetrieveTopRated(result: Result<MovieResponse, Error>)
@@ -46,7 +47,9 @@ extension MovieRepositoryOutput {
     func didRetrieveGenre(result: Result<MovieResponse, Error>) {}
 }
 
-class MovieRepository: MovieRepositoryInput {
+
+// @todo: Use dispatch queue
+final class MovieRepository: MovieRepositoryInput {
     
     weak var output: MovieRepositoryOutput?
     private let api: MovieDbApi
@@ -84,7 +87,7 @@ class MovieRepository: MovieRepositoryInput {
         }
     }
     
-    func searchMovie(query: String, completion: @escaping (Result<MovieResponse, Error>) -> ()) {
+    func searchMovie(query: String) {
         api.getSearch(query: query) { [weak output]  (result) in
             output?.didRetrieveSearch(result: result)
         }

@@ -12,10 +12,30 @@ struct MovieResponse: Decodable {
     let results: [Movie]
 }
 
+/// @todo:
+/// To many computed variables. Refacto
+/// Maybe use manual decoding
+/// Model is too fat
+/// Make model dumber (create methods for rating stars)
+///  Use struct instead of class
 // MARK: Movie Model
-class Movie: Decodable, Identifiable {
+struct Movie: Decodable, Identifiable {
     
-    init(id: Int, title: String?, backdropPath: String?, posterPath: String?, overview: String, voteAverage: Double, voteCount: Int, runtime: Int?, releaseDate: String?, genres: [Genre]?, credits: MovieCredits?, videos: MovieVideoResponse?, originalLanguage: String) {
+    init(
+        id: Int,
+        title: String?,
+        backdropPath: String?,
+        posterPath: String?,
+        overview: String,
+        voteAverage: Double,
+        voteCount: Int,
+        runtime: Int?,
+        releaseDate: String?,
+        genres: [Genre]?,
+        credits: MovieCredits?,
+        videos: MovieVideoResponse?,
+        originalLanguage: String
+    ) {
         self.id = id
         self.title = title
         self.backdropPath = backdropPath
@@ -43,6 +63,14 @@ class Movie: Decodable, Identifiable {
     let originalLanguage: String?
     
     let genres: [Genre]?
+    
+    // @todo
+    // Created on init
+    var genresList: String? {
+        guard let genres = genres else { return nil }
+        return genres.map { $0.name }.joined(separator: ", ")
+    }
+    
     let credits: MovieCredits?
     let videos: MovieVideoResponse?
     
@@ -141,6 +169,9 @@ class Movie: Decodable, Identifiable {
     var crew: [MovieCrew]? {
         credits?.crew
     }
+    
+    /// @todo: Create an enum
+    /// Use this information to create two Carousels
     var directors: [MovieCrew]? {
         crew?.filter { $0.job.lowercased() == "director" }
     }
@@ -153,12 +184,21 @@ class Movie: Decodable, Identifiable {
         crew?.filter { $0.job.lowercased() == "story" }
     }
     
+    // @todo: delete
     var youtubeTrailers: [MovieVideo]? {
         videos?.results.filter { $0.youtubeURL != nil }
+    }
+    
+    var youtubeURL: URL? {
+        videos?.results
+            .filter { $0.youtubeURL != nil }
+            .first?
+            .youtubeURL
     }
 }
 
 
+/// @todo: why this needs to be hasable? don't remember... delete?
 extension Movie: Hashable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         if lhs.id == rhs.id {
@@ -173,6 +213,7 @@ extension Movie: Hashable {
     }
 }
 
+/// @todo: delete
 // MARK: Stubbs
 extension Movie {
     
